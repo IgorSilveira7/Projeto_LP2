@@ -16,7 +16,7 @@ public class Facade {
 							  "acceptance_tests/use_case4_exception.txt",
 							  "acceptance_tests/use_case4.txt" };
 		
-		EasyAccept.main(args);;
+		EasyAccept.main(args);
 		
 	}
 }
