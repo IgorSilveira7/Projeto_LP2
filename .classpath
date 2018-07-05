@@ -2,6 +2,10 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/home/josedas/Projeto_LP2/lib/easyaccept.jar"/>
+=======
+	<classpathentry kind="lib" path="/home/matheusgl/Projeto_LP2/lib/easyaccept.jar"/>
+>>>>>>> d09ba1cbec95f18beee3c6966910d91ed21935b8
 	<classpathentry kind="output" path="bin"/>
 </classpath>
