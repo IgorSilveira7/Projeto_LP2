@@ -3,9 +3,7 @@ package com.projeto;
 import easyaccept.EasyAccept;
 
 public class Facade {
-
 	public static void main(String[] args) {
-		
 		args = new String[] { "com.projeto.Facade",
 						      "acceptance_tests/use_case1_exception.txt",
 							  "acceptance_tests/use_case1.txt",	  
@@ -20,4 +18,3 @@ public class Facade {
 		
 	}
 }
-
