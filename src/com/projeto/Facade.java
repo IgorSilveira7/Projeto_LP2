@@ -1,5 +1,9 @@
 package com.projeto;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
 import easyaccept.EasyAccept;
 
 public class Facade {
