@@ -36,5 +36,19 @@ public class ProdutoNaoIndustrializado extends Item {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + ", " + this.toStringPrecos();
+	}
+	
+	private String toStringPrecos() {
+		String res = "Preco por quilo: <";
+		for (String key : super.mapaPrecos.keySet()) {
+			res += key + ", " + super.mapaPrecos.get(key) + ";";
+		}
+		res += ">";
+		return res;
+	}
 
 }

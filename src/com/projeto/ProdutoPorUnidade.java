@@ -37,4 +37,18 @@ public class ProdutoPorUnidade extends Item {
 		
 	}
 	
+	@Override
+	public String toString() {
+		return super.toString() + ", " + this.toStringPrecos();
+	}
+	
+	private String toStringPrecos() {
+		String res = "Preco: <";
+		for (String key : super.mapaPrecos.keySet()) {
+			res += key + ", " + super.mapaPrecos.get(key) + ";";
+		}
+		res += ">";
+		return res;
+	}
+	
 }
