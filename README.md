@@ -1,6 +1,9 @@
 # Projeto LP2
 #### Projeto final da disciplina de laboratório de LP2
+Lista pra mim é um aplicativo que gerencia o cadastrado, atualização, deletações e exibição de itens compraveis.
+
 ------------
+
 ## Equipe:
 ------------
 1 - Igor
