@@ -1,21 +1,21 @@
-package com.projeto;
+package com.projeto.entidades;
 
-public class ProdutoPorUnidade extends Item {
+public class ProdutoNaoIndustrializado extends Item {
 
-	private int unidade;
+	private double quilos;
 	
-	public ProdutoPorUnidade(int numero, String nome, String categoria, int unidade, String supermercado, double preco) {
+	public ProdutoNaoIndustrializado(int numero, String nome, String categoria, double quilos, String supermercado, double preco) {
 		
 		super(numero, nome, categoria, supermercado, preco);
 		
-		this.unidade = unidade;
+		this.quilos = quilos;
 		
 	}
 	
 	@Override
-	public void setUnidade(int novaUnidade) {
+	public void setQuilos(double novoQuilos) {
 		
-		this.unidade = novaUnidade;
+		this.quilos = novoQuilos;
 		
 	}
 
@@ -32,7 +32,7 @@ public class ProdutoPorUnidade extends Item {
 	}
 
 	@Override
-	public void setQuilos(double novoQuilos) {
+	public void setUnidade(int novaUnidade) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -43,12 +43,12 @@ public class ProdutoPorUnidade extends Item {
 	}
 	
 	private String toStringPrecos() {
-		String res = "Preco: <";
+		String res = "Preco por quilo: <";
 		for (String key : super.mapaPrecos.keySet()) {
 			res += key + ", R$ " + String.format("%.2f", super.mapaPrecos.get(key)) + ";";
 		}
 		res += ">";
 		return res;
 	}
-	
+
 }

@@ -1,8 +1,6 @@
-package com.projeto;
+package com.projeto.sistema;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import com.projeto.controllers.ControllerItem;
 
 import easyaccept.EasyAccept;
 
@@ -11,7 +9,7 @@ public class Facade {
 	private ControllerItem controllerItem;
 	
 	public static void main(String[] args) {
-		args = new String[] { "com.projeto.Facade",
+		args = new String[] { "com.projeto.sistema.Facade",
 							  "acceptance_tests/use_case1.txt",
 							  "acceptance_tests/use_case1_exception.txt",
 							  "acceptance_tests/use_case2_exception.txt",

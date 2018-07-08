@@ -1,4 +1,4 @@
-package com.projeto;
+package com.projeto.entidades;
 
 import java.util.*;
 
@@ -72,8 +72,4 @@ public abstract class Item {
 			return false;
 		return true;
 	}
-	
-	
-	
-
 }

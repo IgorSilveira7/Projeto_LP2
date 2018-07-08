@@ -1,7 +1,12 @@
-package com.projeto;
+package com.projeto.controllers;
 
 import java.util.*;
 import java.util.Map;
+
+import com.projeto.entidades.Item;
+import com.projeto.entidades.ProdutoNaoIndustrializado;
+import com.projeto.entidades.ProdutoPorUnidade;
+import com.projeto.entidades.ProdutoQuantidadeFixa;
 
 public class ControllerItem {
 	
@@ -64,7 +69,7 @@ public class ControllerItem {
 	}
 	
 	public void adicionaPrecoItem(int id, String supermercado, double preco) {
-		this.itens.get(id).mapaPrecos.put(supermercado, preco);
+		this.itens.get(id).adicionaPrecoItem(supermercado, preco);
 	}
 	
 	public void deletaItem(int id) {
