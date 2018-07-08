@@ -28,7 +28,7 @@ public abstract class Item {
 	
 	public abstract void setUnidade(int novaUnidade);
 	
-	public abstract void setQuilos(int novoQuilos);
+	public abstract void setQuilos(double novoQuilos);
 	
 	public String toString() {
 		return this.numero + ". " + this.nome + ", " + this.categoria + ",";
