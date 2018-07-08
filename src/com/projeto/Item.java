@@ -24,7 +24,7 @@ public abstract class Item {
 	
 	public abstract void setQuantidade(int novaquant);
 	
-	public abstract void setMedida(int novaMedida);
+	public abstract void setMedida(String novaMedida);
 	
 	public abstract void setUnidade(int novaUnidade);
 	
