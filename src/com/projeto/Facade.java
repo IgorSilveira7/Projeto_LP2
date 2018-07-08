@@ -48,4 +48,12 @@ public class Facade {
 	public void atualizaItem(int id, String atributo, String novoValor) {
 		this.controllerItem.atualizaItem(id, atributo, novoValor);
 	}
+	
+	public void adicionaPrecoItem(int id, String supermercado, double preco) {
+		this.controllerItem.adicionaPrecoItem(id, supermercado, preco);
+	}
+	
+	public void deletaItem(int id) {
+		this.controllerItem.deletaItem(id);
+	}
 }

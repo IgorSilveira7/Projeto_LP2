@@ -1,19 +1,19 @@
 package com.projeto;
 
-import java.util.TreeMap;
+import java.util.*;
 
 public abstract class Item {
 	
 	private int numero;
 	private String nome;
 	private String categoria;
-	protected TreeMap<String, Double> mapaPrecos;
+	protected Map<String, Double> mapaPrecos;
 	
 	public Item(int numero, String nome, String categoria, String supermercado, double preco) {
 		this.numero = numero;
 		this.nome = nome;
 		this.categoria = categoria;
-		this.mapaPrecos = new TreeMap<>();
+		this.mapaPrecos = new HashMap<>();
 		this.mapaPrecos.put(supermercado, preco);
 		
 	}

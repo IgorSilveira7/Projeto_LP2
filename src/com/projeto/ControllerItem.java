@@ -29,10 +29,16 @@ public class ControllerItem {
 	}
 	
 	public String exibeItem(int id) {
+		if (!this.itens.containsKey(id)) {
+			throw new IllegalArgumentException("Erro na listagem de item: item nao existe.");
+		}
 		return this.itens.get(id).toString();
 	}
 	
 	public void atualizaItem(int id, String atributo, String novoValor) {
+		if (!this.itens.containsKey(id)) {
+			throw new IllegalArgumentException("Erro na atualizacao de item: item nao existe.");
+		}
 		switch (atributo) {
 		case "nome":
 			this.itens.get(id).setNome(novoValor);
@@ -56,4 +62,13 @@ public class ControllerItem {
 			break;
 		}
 	}
+	
+	public void adicionaPrecoItem(int id, String supermercado, double preco) {
+		this.itens.get(id).mapaPrecos.put(supermercado, preco);
+	}
+	
+	public void deletaItem(int id) {
+		this.itens.remove(id);
+	}
+	
 }
