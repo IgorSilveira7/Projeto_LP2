@@ -15,14 +15,6 @@ public class ProdutoQuantidadeFixa extends Item {
 		this.medida = medida;
 	}
 	
-	public void setQuantidade(int novoValor) {
-		this.quantidade = novoValor;
-	}
-	
-	public void setMedida(String novoValor) {
-		this.medida = novoValor;
-	}
-	
 	@Override
 	public String toString() {
 		return super.toString() + " " + this.quantidade + " " + this.medida + ", " + this.toStringPrecos();
@@ -38,7 +30,13 @@ public class ProdutoQuantidadeFixa extends Item {
 	}
 
 	@Override
-	public void setMedida(int novaMedida) {
+	public void setMedida(String novaMedida) {
+		this.medida = novaMedida;
+	}
+	
+	@Override
+	public void setQuantidade(int novoValor) {
+		this.quantidade = novoValor;
 	}
 
 	@Override
