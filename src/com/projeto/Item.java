@@ -22,6 +22,14 @@ public abstract class Item {
 		this.mapaPrecos.put(localDeCompra, preco);
 	}
 	
+	public void setNome(String novoValor) {
+		this.nome = novoValor;
+	}
+	
+	public void setCategoria(String novoValor) {
+		this.categoria = novoValor;
+	}
+	
 	public abstract void setQuantidade(int novaquant);
 	
 	public abstract void setMedida(String novaMedida);

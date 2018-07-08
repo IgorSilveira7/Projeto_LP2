@@ -23,7 +23,7 @@ public class ProdutoQuantidadeFixa extends Item {
 	private String toStringPrecos() {
 		String res = "Preco: <";
 		for (String key : super.mapaPrecos.keySet()) {
-			res += key + ", " + super.mapaPrecos.get(key) + ";";
+			res += key + ", R$ " + String.format("%.2f", super.mapaPrecos.get(key)) + ";";
 		}
 		res += ">";
 		return res;

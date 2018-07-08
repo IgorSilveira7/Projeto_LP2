@@ -56,13 +56,13 @@ expect "4. Creme Dental Oral-D, higiene pessoal, Preco: <Mercadinho Bem Barato, 
 #  Adicionando novos preços  #
 ###############################
 
-adicionaPrecoItem id=10 localDeCompra="Supermercado UauMart" preco=3.69
-adicionaPrecoItem id=10 localDeCompra="Mercadinho Bem Barato" preco=3.99
-adicionaPrecoItem id=10 localDeCompra="Supermercado BuyMore" preco=4.09
+adicionaPrecoItem id=${id10} localDeCompra="Supermercado UauMart" preco=3.69
+adicionaPrecoItem id=${id10} localDeCompra="Mercadinho Bem Barato" preco=3.99
+adicionaPrecoItem id=${id10} localDeCompra="Supermercado BuyMore" preco=4.09
 
-adicionaPrecoItem id=8 localDeCompra="Supermercado Excepcional" preco=9.49
-adicionaPrecoItem id=8 localDeCompra="Mercadinho Bem Barato" preco=11.69
-adicionaPrecoItem id=8 localDeCompra="Supermercado UauMart" preco=10.89
+adicionaPrecoItem id=${id8} localDeCompra="Supermercado Excepcional" preco=9.49
+adicionaPrecoItem id=${id8} localDeCompra="Mercadinho Bem Barato" preco=11.69
+adicionaPrecoItem id=${id8} localDeCompra="Supermercado UauMart" preco=10.89
 
 expect ${id10}". Batata Tentacoes, alimento industrializado, Preco: <Supermercado UauMart, R$ 3,69;Mercadinho Bem Barato, R$ 3,99;Supermercado BuyMore, R$ 4,09;Supermercado Excepcional, R$ 3,79;>" exibeItem id=${id10}
 expect ${id8}". Capsula Dois Coracoes, alimento industrializado, 8 capsulas, Preco: <Mercadinho Bem Barato, R$ 11,69;Supermercado UauMart, R$ 10,89;Supermercado BuyMore, R$ 10,89;Supermercado Excepcional, R$ 9,49;>" exibeItem id=${id8}
