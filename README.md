@@ -1,9 +1,29 @@
-# Projeto_LP2
-Projeto final da disciplina de laboratório de LP2
+# Projeto LP2
+#### Projeto final da disciplina de laboratório de LP2
+------------
+## Equipe:
+------------
+1 - Igor
+
+2 - José Davi
+
+3 - Matheus
+
+4 - Rich Elton Carvalho Ramalho.
 
 Conceitos utilizados.
 ---------------
 
----------------
-# Sistema de listas de compras(Lista pra mim).
+- [X] Trabalhando em Equipe
 
+---------------
+# Sistema de listas de compras(Lista pra mim)
+
+- [X] Testes de aceitação case 1.
+- [ ] Testes de aceitação case 1 - Exception.
+- [ ] Testes de aceitação case 2.
+- [ ] Testes de aceitação case 2 - Exception.
+- [ ] Testes de aceitação case 3.
+- [ ] Testes de aceitação case 3 - Exception.
+- [ ] Testes de aceitação case 4.
+- [ ] Testes de aceitação case 4 - Exception.
