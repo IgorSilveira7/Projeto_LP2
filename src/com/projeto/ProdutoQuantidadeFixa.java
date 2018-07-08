@@ -44,6 +44,6 @@ public class ProdutoQuantidadeFixa extends Item {
 	}
 
 	@Override
-	public void setQuilos(int novoQuilos) {
+	public void setQuilos(double novoQuilos) {
 	}
 }
