@@ -25,16 +25,7 @@ public class ProdutoQuantidadeFixa extends Item {
 	
 	@Override
 	public String toString() {
-		return super.toString() + " " + this.quantidade + " " + this.medida + ", " + this.toStringPrecos();
-	}
-	
-	private String toStringPrecos() {
-		String res = "Preco: <";
-		for (String key : super.mapaPrecos.keySet()) {
-			res += key + ", R$ " + String.format("%.2f", super.mapaPrecos.get(key)) + ";";
-		}
-		res += ">";
-		return res;
+		return super.toString() + " " + this.quantidade + " " + this.medida + ", Preco: " + this.toStringPrecos();
 	}
 
 	@Override

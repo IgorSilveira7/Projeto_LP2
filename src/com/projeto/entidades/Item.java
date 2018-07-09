@@ -3,10 +3,10 @@ package com.projeto.entidades;
 import java.util.*;
 
 /**
- * Classe que representa um item no sistema. Cada item possui um numero, nome,
+ * Classe abstrata que representa um item no sistema. Cada item possui um numero, nome,
  * categoria e um mapa de precos.
  * 
- * @authores Igor, Rich
+ * @authors Igor, Rich
  * 
  *
  */
@@ -156,6 +156,21 @@ public abstract class Item {
 	 */
 	public String toString() {
 		return this.numero + ". " + this.nome + ", " + this.categoria + ",";
+	}
+	
+	/**
+	 * Método protegido que retorna a representacao textual do mapa de precos
+	 * cadastrado para esse item.
+	 * 
+	 * @return String representacao textual do mapa de precos.
+	 */
+	protected String toStringPrecos() {
+		String res = "<";
+		for (String key : mapaPrecos.keySet()) {
+			res += key + ", R$ " + String.format("%.2f", mapaPrecos.get(key)) + ";";
+		}
+		res += ">";
+		return res;
 	}
 
 	/**
