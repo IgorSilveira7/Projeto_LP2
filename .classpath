@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="F:/richr/Downloads/Projeto_LP2/lib/easyaccept.jar"/>
+	<classpathentry kind="lib" path="/home/richecr/Projeto_LP2/lib/easyaccept.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
