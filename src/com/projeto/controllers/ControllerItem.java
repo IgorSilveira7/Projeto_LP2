@@ -57,9 +57,17 @@ public class ControllerItem {
 		case "nome":
 			this.itens.get(id).setNome(novoValor);
 			break;
+		
 		case "categoria":
-			this.itens.get(id).setCategoria(novoValor);
+			if (novoValor.equals("alimento industrializado") || novoValor.equals("alimento nao industrializado")
+			|| novoValor.equals("limpeza") || novoValor.equals("higiene pessoal")) {
+				this.itens.get(id).setCategoria(novoValor);
+			}
+			else {
+				throw new IllegalArgumentException("Erro na atualizacao de item: categoria nao existe.");
+			}
 			break;
+		
 		case "unidade de medida":
 			this.itens.get(id).setMedida(novoValor);
 			break;
@@ -70,6 +78,9 @@ public class ControllerItem {
 			this.itens.get(id).setUnidade(Integer.parseInt(novoValor));
 			break;
 		case "kg":
+			if (Double.parseDouble(novoValor) < 0) {
+				throw new IllegalArgumentException("Erro na atualizacao de item: valor de quilos nao pode ser menor que zero.");
+			}
 			this.itens.get(id).setQuilos(Double.parseDouble(novoValor));
 			break;
 		default:
