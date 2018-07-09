@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="F:/richr/Documents/Projeto_LP2/lib/easyaccept.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/jd-da/Desktop/Projeto/Projeto_LP2/lib/easyaccept.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

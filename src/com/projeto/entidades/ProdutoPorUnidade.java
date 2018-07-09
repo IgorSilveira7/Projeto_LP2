@@ -8,12 +8,19 @@ public class ProdutoPorUnidade extends Item {
 		
 		super(numero, nome, categoria, supermercado, preco);
 		
+		if (unidade < 0) {
+			throw new IllegalArgumentException("Erro no cadastro de item: valor de unidade nao pode ser menor que zero.");
+		}
+		
 		this.unidade = unidade;
 		
 	}
 	
 	@Override
 	public void setUnidade(int novaUnidade) {
+		if (novaUnidade < 0) {
+			throw new IllegalArgumentException("Erro na atualizacao de item: valor de quantidade nao pode ser menor que zero.");
+		}
 		
 		this.unidade = novaUnidade;
 		

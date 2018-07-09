@@ -34,6 +34,9 @@ public class ControllerItem {
 	}
 	
 	public String exibeItem(int id) {
+		if (id <= 0) {
+			throw new IllegalArgumentException("Erro na listagem de item: id invalido.");
+		}
 		if (!this.itens.containsKey(id)) {
 			throw new IllegalArgumentException("Erro na listagem de item: item nao existe.");
 		}
@@ -41,6 +44,12 @@ public class ControllerItem {
 	}
 	
 	public void atualizaItem(int id, String atributo, String novoValor) {
+		if (atributo.trim().equals("")) {
+			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao pode ser vazio ou nulo.");
+		}
+		if (novoValor.trim().equals("")) {
+			throw new IllegalArgumentException("Erro na atualizacao de item: novo valor de atributo nao pode ser vazio ou nulo.");
+		}
 		if (!this.itens.containsKey(id)) {
 			throw new IllegalArgumentException("Erro na atualizacao de item: item nao existe.");
 		}
@@ -57,18 +66,24 @@ public class ControllerItem {
 		case "quantidade":
 			this.itens.get(id).setQuantidade(Integer.parseInt(novoValor));
 			break;
-		case "unidade":
+		case "unidades":
 			this.itens.get(id).setUnidade(Integer.parseInt(novoValor));
 			break;
 		case "kg":
 			this.itens.get(id).setQuilos(Double.parseDouble(novoValor));
 			break;
 		default:
-			break;
+			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
 		}
 	}
 	
 	public void adicionaPrecoItem(int id, String supermercado, double preco) {
+		if (id <= 0) {
+			throw new IllegalArgumentException("Erro no cadastro de preco: id de item invalido.");
+		}
+		if (!this.itens.containsKey(id)) {
+			throw new IllegalArgumentException("Erro no cadastro de preco: item nao existe.");
+		}
 		this.itens.get(id).adicionaPrecoItem(supermercado, preco);
 	}
 	

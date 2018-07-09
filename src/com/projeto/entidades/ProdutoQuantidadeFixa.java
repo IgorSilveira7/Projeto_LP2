@@ -11,6 +11,14 @@ public class ProdutoQuantidadeFixa extends Item {
 	public ProdutoQuantidadeFixa(int numero, String nome, String categoria, 
 								 int quantidade, String medida, String supermercado, double preco) {
 		super(numero, nome, categoria, supermercado, preco);
+		
+		if (quantidade < 0) {
+			throw new IllegalArgumentException("Erro no cadastro de item: valor de quantidade nao pode ser menor que zero.");
+		}
+		if (medida.trim().equals("")) {
+			throw new IllegalArgumentException("Erro no cadastro de item: unidade de medida nao pode ser vazia ou nula.");
+		}
+		
 		this.quantidade = quantidade;
 		this.medida = medida;
 	}

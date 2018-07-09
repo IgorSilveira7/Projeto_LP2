@@ -8,13 +8,19 @@ public class ProdutoNaoIndustrializado extends Item {
 		
 		super(numero, nome, categoria, supermercado, preco);
 		
+		if (quilos < 0.0) {
+			throw new IllegalArgumentException("Erro no cadastro de item: valor de quilos nao pode ser menor que zero.");
+		}
+		
 		this.quilos = quilos;
 		
 	}
 	
 	@Override
 	public void setQuilos(double novoQuilos) {
-		
+		if (novoQuilos < 0.0) {
+			throw new IllegalArgumentException("Erro na atualizacao de item: valor de quilos nao pode ser menor que zero.");
+		}
 		this.quilos = novoQuilos;
 		
 	}

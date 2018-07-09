@@ -10,15 +10,39 @@ public abstract class Item {
 	protected Map<String, Double> mapaPrecos;
 	
 	public Item(int numero, String nome, String categoria, String supermercado, double preco) {
+		if (nome.trim().equals("")) {
+			throw new IllegalArgumentException("Erro no cadastro de item: nome nao pode ser vazio ou nulo.");
+		}
+		if (categoria.trim().equals("")) {
+			throw new IllegalArgumentException("Erro no cadastro de item: categoria nao pode ser vazia ou nula.");
+		}
+		if (!(categoria.equals("alimento industrializado") || categoria.equals("alimento nao industrializado")
+				|| categoria.equals("limpeza") || categoria.equals("higiene pessoal"))) {
+			throw new IllegalArgumentException("Erro no cadastro de item: categoria nao existe.");
+		}
+		if (supermercado.trim().equals("")) {
+			throw new IllegalArgumentException("Erro no cadastro de item: local de compra nao pode ser vazio ou nulo.");
+		}
+		if (preco < 0.0) {
+			throw new IllegalArgumentException("Erro no cadastro de item: preco de item invalido.");
+		}
+		
 		this.numero = numero;
 		this.nome = nome;
 		this.categoria = categoria;
 		this.mapaPrecos = new HashMap<>();
 		this.mapaPrecos.put(supermercado, preco);
-		
+
 	}
 	
 	public void adicionaPrecoItem(String localDeCompra, double preco) {
+		if (localDeCompra.trim().equals("")) {
+			throw new IllegalArgumentException("Erro no cadastro de preco: local de compra nao pode ser vazio ou nulo.");
+		}
+		if (preco < 0.0) {
+			throw new IllegalArgumentException("Erro no cadastro de preco: preco de item invalido.");
+		}
+		
 		this.mapaPrecos.put(localDeCompra, preco);
 	}
 	
@@ -27,6 +51,10 @@ public abstract class Item {
 	}
 	
 	public void setCategoria(String novoValor) {
+		if (!(categoria.equals("alimento industrializado") || categoria.equals("alimento nao industrializado")
+				|| categoria.equals("limpeza") || categoria.equals("higiene pessoal"))) {
+			throw new IllegalArgumentException("Erro na atualizacao de item: categoria nao existe.");
+		}
 		this.categoria = novoValor;
 	}
 	
