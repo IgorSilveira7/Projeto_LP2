@@ -2,6 +2,8 @@ package com.projeto.entidades;
 
 import java.util.*;
 
+import com.projeto.validadores.Validador;
+
 /**
  * Classe abstrata que representa um item no sistema. Cada item possui um numero, nome,
  * categoria e um mapa de precos.
@@ -45,29 +47,13 @@ public abstract class Item {
 	 *            Double que representa o preco do item nesse supermercado.
 	 */
 	public Item(int numero, String nome, String categoria, String supermercado, double preco) {
-		if (nome.trim().equals("")) {
-			throw new IllegalArgumentException("Erro no cadastro de item: nome nao pode ser vazio ou nulo.");
+		if (Validador.validaItem(nome, categoria, supermercado, preco)) {
+			this.numero = numero;
+			this.nome = nome;
+			this.categoria = categoria;
+			this.mapaPrecos = new HashMap<>();
+			this.mapaPrecos.put(supermercado, preco);
 		}
-		if (categoria.trim().equals("")) {
-			throw new IllegalArgumentException("Erro no cadastro de item: categoria nao pode ser vazia ou nula.");
-		}
-		if (!(categoria.equals("alimento industrializado") || categoria.equals("alimento nao industrializado")
-				|| categoria.equals("limpeza") || categoria.equals("higiene pessoal"))) {
-			throw new IllegalArgumentException("Erro no cadastro de item: categoria nao existe.");
-		}
-		if (supermercado.trim().equals("")) {
-			throw new IllegalArgumentException("Erro no cadastro de item: local de compra nao pode ser vazio ou nulo.");
-		}
-		if (preco < 0.0) {
-			throw new IllegalArgumentException("Erro no cadastro de item: preco de item invalido.");
-		}
-
-		this.numero = numero;
-		this.nome = nome;
-		this.categoria = categoria;
-		this.mapaPrecos = new HashMap<>();
-		this.mapaPrecos.put(supermercado, preco);
-
 	}
 
 	/**
@@ -80,15 +66,9 @@ public abstract class Item {
 	 *            Double que representa o preco do item.
 	 */
 	public void adicionaPrecoItem(String localDeCompra, double preco) {
-		if (localDeCompra.trim().equals("")) {
-			throw new IllegalArgumentException(
-					"Erro no cadastro de preco: local de compra nao pode ser vazio ou nulo.");
+		if (Validador.validaAdicionarPrecoItem(localDeCompra, preco)) {
+			this.mapaPrecos.put(localDeCompra, preco);
 		}
-		if (preco < 0.0) {
-			throw new IllegalArgumentException("Erro no cadastro de preco: preco de item invalido.");
-		}
-
-		this.mapaPrecos.put(localDeCompra, preco);
 	}
 
 	/**
@@ -108,11 +88,9 @@ public abstract class Item {
 	 *            String que representa a nova categoria do item.
 	 */
 	public void setCategoria(String novoValor) {
-		if (!(categoria.equals("alimento industrializado") || categoria.equals("alimento nao industrializado")
-				|| categoria.equals("limpeza") || categoria.equals("higiene pessoal"))) {
-			throw new IllegalArgumentException("Erro na atualizacao de item: categoria nao existe.");
+		if (Validador.validaSetCategoria(novoValor)) {
+			this.categoria = novoValor;
 		}
-		this.categoria = novoValor;
 	}
 
 	/**

@@ -5,6 +5,7 @@ import com.projeto.entidades.Item;
 import com.projeto.entidades.ProdutoNaoIndustrializado;
 import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
+import com.projeto.validadores.Validador;
 
 /**
  * Classe que controla os itens cadastrados no sistema. Cadastrada, exibe, atualiza e deletar itens.
@@ -43,6 +44,8 @@ public class ControllerItem {
 	 * @return Inteiro que representa o id do item.
 	 */
 	public int adicionaItemPorQtd(String nome, String categoria, int quantidade, String medida, String supermercado, double preco) {
+		Validador.validaItem(nome, categoria, supermercado, preco);
+		Validador.validaProdutoQuantFixa(quantidade, medida);
 		this.itens.put(this.id, new ProdutoQuantidadeFixa(this.id, nome, categoria, quantidade, medida, supermercado, preco));
 		return this.id++;
 	}
@@ -58,6 +61,8 @@ public class ControllerItem {
 	 * @return Inteiro que representa o id do item.
 	 */
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String supermercado, double preco) {
+		Validador.validaItem(nome, categoria, supermercado, preco);
+		Validador.validaUnidade(unidade);
 		this.itens.put(this.id, new ProdutoPorUnidade(this.id, nome, categoria, unidade, supermercado, preco));
 		return this.id++;
 	}
@@ -73,6 +78,8 @@ public class ControllerItem {
 	 * @return Inteiro que representa o id do item.
 	 */
 	public int adicionaItemPorQuilo(String nome, String categoria, double quilos, String supermercado, double preco) {
+		Validador.validaItem(nome, categoria, supermercado, preco);
+		Validador.validaPeso(quilos);
 		this.itens.put(this.id, new ProdutoNaoIndustrializado(this.id, nome, categoria, quilos, supermercado, preco));
 		return this.id++;
 	}

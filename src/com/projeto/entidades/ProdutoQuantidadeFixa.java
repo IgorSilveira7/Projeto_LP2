@@ -1,5 +1,7 @@
 package com.projeto.entidades;
 
+import com.projeto.validadores.Validador;
+
 /**
  * Classe que representa um item com Produto por quantidade fixa que é filha da classe Item.
  * E possui a quantidade do item(quantidade) e a unidade de medida do item(medida).
@@ -40,15 +42,10 @@ public class ProdutoQuantidadeFixa extends Item {
 	public ProdutoQuantidadeFixa(int numero, String nome, String categoria, 
 								 int quantidade, String medida, String supermercado, double preco) {
 		super(numero, nome, categoria, supermercado, preco);
-		if (quantidade < 0) {
-			throw new IllegalArgumentException("Erro no cadastro de item: valor de quantidade nao pode ser menor que zero.");
+		if (Validador.validaProdutoQuantFixa(quantidade, medida)) {
+			this.quantidade = quantidade;
+			this.medida = medida;
 		}
-		if (medida.trim().equals("")) {
-			throw new IllegalArgumentException("Erro no cadastro de item: unidade de medida nao pode ser vazia ou nula.");
-		}
-		
-		this.quantidade = quantidade;
-		this.medida = medida;
 	}
 	
 	/**
@@ -66,7 +63,9 @@ public class ProdutoQuantidadeFixa extends Item {
 	 */
 	@Override
 	public void setMedida(String novaMedida) {
-		this.medida = novaMedida;
+		if (Validador.validaSetMedida(novaMedida)) {
+			this.medida = novaMedida;
+		}
 	}
 	
 	/**
@@ -74,7 +73,9 @@ public class ProdutoQuantidadeFixa extends Item {
 	 */
 	@Override
 	public void setQuantidade(int novoValor) {
-		this.quantidade = novoValor;
+		if (Validador.validaSetQuantidade(novoValor)) {
+			this.quantidade = novoValor;
+		}
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.projeto.entidades;
 
+import com.projeto.validadores.*;
+
 /**
  * Classe que representa um item com Produto por unidade que é filha da classe Item.
  * E possui a quantidade que o item possui(unidade).
@@ -34,12 +36,9 @@ public class ProdutoPorUnidade extends Item {
 	public ProdutoPorUnidade(int numero, String nome, String categoria, int unidade, String supermercado, double preco) {
 		
 		super(numero, nome, categoria, supermercado, preco);
-		if (unidade < 0) {
-			throw new IllegalArgumentException("Erro no cadastro de item: valor de unidade nao pode ser menor que zero.");
-		}
-		
-		this.unidade = unidade;
-		
+		if (Validador.validaUnidade(unidade)) {
+			this.unidade = unidade;
+		}	
 	}
 	
 	/**
@@ -47,11 +46,9 @@ public class ProdutoPorUnidade extends Item {
 	 */
 	@Override
 	public void setUnidade(int novaUnidade) {
-		if (novaUnidade < 0) {
-			throw new IllegalArgumentException("Erro na atualizacao de item: valor de quantidade nao pode ser menor que zero.");
+		if (Validador.validaSetUnidade(novaUnidade)) {
+			this.unidade = novaUnidade;
 		}
-		
-		this.unidade = novaUnidade;
 	}
 	
 	/**

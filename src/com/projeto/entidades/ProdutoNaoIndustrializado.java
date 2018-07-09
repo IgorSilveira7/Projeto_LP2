@@ -1,5 +1,7 @@
 package com.projeto.entidades;
 
+import com.projeto.validadores.*;
+
 /**
  * Classe que representa um item com Produto nao industrializado que é filha da classe Item.
  * E possui peso do item(peso).
@@ -33,12 +35,9 @@ public class ProdutoNaoIndustrializado extends Item {
 	 */
 	public ProdutoNaoIndustrializado(int numero, String nome, String categoria, double peso, String supermercado, double preco) {
 		super(numero, nome, categoria, supermercado, preco);
-		if (peso < 0.0) {
-			throw new IllegalArgumentException("Erro no cadastro de item: valor de quilos nao pode ser menor que zero.");
+		if (Validador.validaPeso(peso)) {
+			this.peso = peso;
 		}
-		
-		this.peso = peso;
-		
 	}
 	
 	/**
@@ -48,11 +47,9 @@ public class ProdutoNaoIndustrializado extends Item {
 	 */
 	@Override
 	public void setQuilos(double novoPeso) {
-		if (novoPeso < 0.0) {
-			throw new IllegalArgumentException("Erro na atualizacao de item: valor de quilos nao pode ser menor que zero.");
+		if (Validador.validaSetPeso(novoPeso)) {
+			this.peso = novoPeso;
 		}
-		this.peso = novoPeso;
-		
 	}
 	
 	/**
