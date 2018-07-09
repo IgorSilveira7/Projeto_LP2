@@ -101,14 +101,33 @@ public class Facade {
 		return this.controllerItem.exibeItem(id);
 	}
 	
+	/**
+	 * Metodo que atualiza um item cadastro no sistema.
+	 * 
+	 * @param id Inteiro que representa o id do item.
+	 * @param atributo String que representa o nome do atributo a ser alterado.
+	 * @param novoValor String que representa o novo valor.
+	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
 		this.controllerItem.atualizaItem(id, atributo, novoValor);
 	}
 	
+	/**
+	 * Metodo que adiciona um preco em um item ja cadastrado.
+	 * 
+	 * @param id Inteiro que representa o id do item.
+	 * @param supermercado String que representa o nome do supermercado.
+	 * @param preco Double que representa o preco do item no supermercado.
+	 */
 	public void adicionaPrecoItem(int id, String supermercado, double preco) {
 		this.controllerItem.adicionaPrecoItem(id, supermercado, preco);
 	}
 	
+	/**
+	 * Metodo que deleta um item ja cadastrado do sistema.
+	 * 
+	 * @param id Inteiro que representa o id do item.
+	 */
 	public void deletaItem(int id) {
 		this.controllerItem.deletaItem(id);
 	}
