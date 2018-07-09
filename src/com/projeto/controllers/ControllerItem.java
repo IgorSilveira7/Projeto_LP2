@@ -1,23 +1,47 @@
 package com.projeto.controllers;
 
 import java.util.*;
-import java.util.Map;
-
 import com.projeto.entidades.Item;
 import com.projeto.entidades.ProdutoNaoIndustrializado;
 import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
 
+/**
+ * Classe que controla os itens cadastrados no sistema. Cadastrada, exibe, atualiza e deletar itens.
+ * 
+ * @author Rich Elton
+ *
+ */
 public class ControllerItem {
 	
+	/**
+	 * Atributo que representa os itens cadastrado.
+	 */
 	private Map<Integer, Item> itens;
+	/**
+	 * Atributo que ira cuidar dos ids dos itens.
+	 */
 	private int id;
 	
+	/**
+	 * Construtor.
+	 */
 	public ControllerItem() {
 		this.itens = new TreeMap<>();
 		this.id = 1;
 	}
 	
+	/**
+	 * Metodo que adicionar item por quantidade fixa no sistema.
+	 * 
+	 * @param nome String que representa o nome do item.
+	 * @param categoria String que representa a categoria do item.
+	 * @param quantidade Inteiro que representa a quantidade do item.
+	 * @param medida String que representa a unidade de medida do item.
+	 * @param supermercado String que representa o nome do supermercado para o item.
+	 * @param preco Double que representa o preco do item nesse supermercado.
+	 * @return Inteiro que representa o id do item.
+	 */
 	public int adicionaItemPorQtd(String nome, String categoria, int quantidade, String medida, String supermercado, double preco) {
 		this.itens.put(this.id, new ProdutoQuantidadeFixa(this.id, nome, categoria, quantidade, medida, supermercado, preco));
 		return this.id++;
