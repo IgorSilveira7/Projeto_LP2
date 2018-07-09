@@ -1,13 +1,28 @@
 package com.projeto.sistema;
 
 import com.projeto.controllers.ControllerItem;
-
 import easyaccept.EasyAccept;
 
+/**
+ * Classe que ira se comunicar com os controllers(No caso apenas com um).
+ * E assim facilitando as implementações com a interface.
+ * 
+ * @author Rich
+ *
+ */
 public class Facade {
 	
+	/**
+	 * Atributo que representa o controlador de item.
+	 */
 	private ControllerItem controllerItem;
 	
+	/**
+	 * Metodo que ira verificar os testes de aceitacao.
+	 * 
+	 * @param args Array de String que guardara o caminho dos testes de aceitacao
+	 * e o caminho da Facade.
+	 */
 	public static void main(String[] args) {
 		args = new String[] { "com.projeto.sistema.Facade",
 							  "acceptance_tests/use_case1.txt",
@@ -20,25 +35,68 @@ public class Facade {
 							  "acceptance_tests/use_case4.txt" };
 		
 		EasyAccept.main(args);
-		
 	}
 	
+	/**
+	 * Construtor.
+	 */
 	public Facade() {
 		this.controllerItem = new ControllerItem();
 	}
 	
+	/**
+	 * Metodo que cadastra um item por quantidade fixa.
+	 * 
+	 * @param nome String Nome do item.
+	 * @param categoria String Categoria do item.
+	 * @param quantidade Inteiro Quantidade do item.
+	 * @param medida String unidade de medida do item.
+	 * @param supermercado String Nome do supermercado.
+	 * @param preco Double Preco do item.
+	 * 
+	 * @return Inteiro Id do item para ser recuperado..
+	 */
 	public int adicionaItemPorQtd(String nome, String categoria, int quantidade, String medida, String supermercado, double preco) {
 		return this.controllerItem.adicionaItemPorQtd(nome, categoria, quantidade, medida, supermercado, preco);
 	}
 	
+	/**
+	 * Metodo que cadastra um item por unidade.
+	 * 
+	 * @param nome String Nome do item.
+	 * @param categoria String Categoria do item.
+	 * @param unidade Inteiro unidade do item.
+	 * @param supermercado String Nome do supermercado.
+	 * @param preco Double Preco do item.
+	 * 
+	 * @return Inteiro Id do item para ser recuperado..
+	 */
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String supermercado, double preco) {
 		return this.controllerItem.adicionaItemPorUnidade(nome, categoria, unidade, supermercado, preco);
 	}
 	
+	/**
+	 * Metodo que cadastra um item por peso.
+	 * 
+	 * @param nome String Nome do item.
+	 * @param categoria String Categoria do item.
+	 * @param quilos Double Peso do item.
+	 * @param supermercado String Nome do supermercado.
+	 * @param preco Double Preco do item.
+	 * 
+	 * @return Inteiro Id do item para ser recuperado..
+	 */
 	public int adicionaItemPorQuilo(String nome, String categoria, double quilos, String supermercado, double preco) {
 		return this.controllerItem.adicionaItemPorQuilo(nome, categoria, quilos, supermercado, preco);
 	}
 	
+	/**
+	 * Metodo que exibe a representacao textual de um item.
+	 * 
+	 * @param id Inteiro que eh o id do item cadastrado.
+	 * 
+	 * @return String a representacao textual de um item.
+	 */
 	public String exibeItem(int id) {
 		return this.controllerItem.exibeItem(id);
 	}
