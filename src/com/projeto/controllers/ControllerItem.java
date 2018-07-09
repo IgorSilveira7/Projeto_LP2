@@ -47,16 +47,42 @@ public class ControllerItem {
 		return this.id++;
 	}
 	
+	/**
+	 * Metodo que adicionar item por quantidade fixa no sistema.
+	 * 
+	 * @param nome String que representa o nome do item.
+	 * @param categoria String que representa a categoria do item.
+	 * @param unidade Inteiro que representa a unidade do item.
+	 * @param supermercado String que representa o nome do supermercado para o item.
+	 * @param preco Double que representa o preco do item nesse supermercado.
+	 * @return Inteiro que representa o id do item.
+	 */
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String supermercado, double preco) {
 		this.itens.put(this.id, new ProdutoPorUnidade(this.id, nome, categoria, unidade, supermercado, preco));
 		return this.id++;
 	}
 	
+	/**
+	 * Metodo que adicionar item por quantidade fixa no sistema.
+	 * 
+	 * @param nome String que representa o nome do item.
+	 * @param categoria String que representa a categoria do item.
+	 * @param quilos Inteiro que representa o peso do item.
+	 * @param supermercado String que representa o nome do supermercado para o item.
+	 * @param preco Double que representa o preco do item nesse supermercado.
+	 * @return Inteiro que representa o id do item.
+	 */
 	public int adicionaItemPorQuilo(String nome, String categoria, double quilos, String supermercado, double preco) {
 		this.itens.put(this.id, new ProdutoNaoIndustrializado(this.id, nome, categoria, quilos, supermercado, preco));
 		return this.id++;
 	}
 	
+	/**
+	 * Metodo que exibe a representacao textual de um item.
+	 * 
+	 * @param id Inteiro que represneta o id do item a ser exibido.
+	 * @return String que eh a representacao textual do item.
+	 */
 	public String exibeItem(int id) {
 		if (id <= 0) {
 			throw new IllegalArgumentException("Erro na listagem de item: id invalido.");
@@ -67,6 +93,13 @@ public class ControllerItem {
 		return this.itens.get(id).toString();
 	}
 	
+	/**
+	 * Metodo que atualiza algum detalhe do item.
+	 * 
+	 * @param id Inteiro que representa o id do item.
+	 * @param atributo String que representa o nome do atributo a ser modificado.
+	 * @param novoValor String novo valor.
+	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
 		if (atributo.trim().equals("")) {
 			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao pode ser vazio ou nulo.");
@@ -78,40 +111,47 @@ public class ControllerItem {
 			throw new IllegalArgumentException("Erro na atualizacao de item: item nao existe.");
 		}
 		switch (atributo) {
-		case "nome":
-			this.itens.get(id).setNome(novoValor);
-			break;
-		
-		case "categoria":
-			if (novoValor.equals("alimento industrializado") || novoValor.equals("alimento nao industrializado")
-			|| novoValor.equals("limpeza") || novoValor.equals("higiene pessoal")) {
-				this.itens.get(id).setCategoria(novoValor);
-			}
-			else {
-				throw new IllegalArgumentException("Erro na atualizacao de item: categoria nao existe.");
-			}
-			break;
-		
-		case "unidade de medida":
-			this.itens.get(id).setMedida(novoValor);
-			break;
-		case "quantidade":
-			this.itens.get(id).setQuantidade(Integer.parseInt(novoValor));
-			break;
-		case "unidades":
-			this.itens.get(id).setUnidade(Integer.parseInt(novoValor));
-			break;
-		case "kg":
-			if (Double.parseDouble(novoValor) < 0) {
-				throw new IllegalArgumentException("Erro na atualizacao de item: valor de quilos nao pode ser menor que zero.");
-			}
-			this.itens.get(id).setQuilos(Double.parseDouble(novoValor));
-			break;
-		default:
-			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
+			case "nome":
+				this.itens.get(id).setNome(novoValor);
+				break;
+			
+			case "categoria":
+				if (novoValor.equals("alimento industrializado") || novoValor.equals("alimento nao industrializado")
+				|| novoValor.equals("limpeza") || novoValor.equals("higiene pessoal")) {
+					this.itens.get(id).setCategoria(novoValor);
+				}
+				else {
+					throw new IllegalArgumentException("Erro na atualizacao de item: categoria nao existe.");
+				}
+				break;
+			
+			case "unidade de medida":
+				this.itens.get(id).setMedida(novoValor);
+				break;
+			case "quantidade":
+				this.itens.get(id).setQuantidade(Integer.parseInt(novoValor));
+				break;
+			case "unidades":
+				this.itens.get(id).setUnidade(Integer.parseInt(novoValor));
+				break;
+			case "kg":
+				if (Double.parseDouble(novoValor) < 0) {
+					throw new IllegalArgumentException("Erro na atualizacao de item: valor de quilos nao pode ser menor que zero.");
+				}
+				this.itens.get(id).setQuilos(Double.parseDouble(novoValor));
+				break;
+			default:
+				throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
 		}
 	}
 	
+	/**
+	 * Metodo que adiciona um novo preco ao mapa de precos de um item.
+	 * 
+	 * @param id Inteiro que representa o id do item.
+	 * @param supermercado String que representa o nome do supermercado.
+	 * @param preco Double que representa o preco do item.
+	 */
 	public void adicionaPrecoItem(int id, String supermercado, double preco) {
 		if (id <= 0) {
 			throw new IllegalArgumentException("Erro no cadastro de preco: id de item invalido.");
@@ -122,8 +162,12 @@ public class ControllerItem {
 		this.itens.get(id).adicionaPrecoItem(supermercado, preco);
 	}
 	
+	/**
+	 * Metodo que deleta um item da lista.
+	 * 
+	 * @param id Inteiro que representa o id do item a ser deletado.
+	 */
 	public void deletaItem(int id) {
 		this.itens.remove(id);
-	}
-	
+	}	
 }
