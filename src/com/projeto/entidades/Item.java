@@ -6,7 +6,7 @@ import java.util.*;
  * Classe abstrata que representa um item no sistema. Cada item possui um numero, nome,
  * categoria e um mapa de precos.
  * 
- * @authors Igor, Rich
+ * @authors Igor, Rich, Davi
  * 
  *
  */

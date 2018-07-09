@@ -4,7 +4,7 @@ package com.projeto.entidades;
  * Classe que representa um item com Produto nao industrializado que é filha da classe Item.
  * E possui peso do item(peso).
  * 
- * @authors Matheus, Rich
+ * @authors Matheus, Rich, Davi
  *
  */
 public class ProdutoNaoIndustrializado extends Item {

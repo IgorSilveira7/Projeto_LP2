@@ -4,7 +4,7 @@ package com.projeto.entidades;
  * Classe que representa um item com Produto por unidade que é filha da classe Item.
  * E possui a quantidade que o item possui(unidade).
  * 
- * @authors Matheus, Rich
+ * @authors Matheus, Rich, Davi
  *
  */
 public class ProdutoPorUnidade extends Item {
