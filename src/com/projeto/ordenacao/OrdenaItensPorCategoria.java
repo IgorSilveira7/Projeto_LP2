@@ -9,10 +9,7 @@ public class OrdenaItensPorCategoria implements Comparator<Item> {
 	/**
 	 * Classe responsavel por ordenar dois objetos por meio de sua categoria.
 	 * 
-	 * @author  Igor Silveira
-	 * 			Jose Davi
-	 * 			Matheus Gusmao
-	 * 			Rich Ramalho
+	 * @author Matheus Gusmao
 	 */
 	@Override
 	public int compare(Item o1, Item o2) {

@@ -6,6 +6,12 @@ import com.projeto.entidades.Item;
 
 public class OrdenarItensPorMenorPreco implements Comparator<Item> {
 
+	/**
+	 * Classe responsavel por ordenar itens em favor do seu preco.
+	 * 
+	 * @authors Jose Davi
+	 * 			Matheus Gusmao
+	 */
 	@Override
 	public int compare(Item o1, Item o2) {
 		if (o1.getMenorPreco() > o2.getMenorPreco()) {

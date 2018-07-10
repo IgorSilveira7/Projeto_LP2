@@ -10,7 +10,6 @@ public class OrdenaItensPorNome implements Comparator<Item> {
 	 * Classe responsavel por comparar dois objetos por meio do nome.
 	 * 
 	 * @author  Igor Silveira
-	 * 			Jose Davi
 	 * 			Matheus Gusmao
 	 * 			Rich Ramalho
 	 */
