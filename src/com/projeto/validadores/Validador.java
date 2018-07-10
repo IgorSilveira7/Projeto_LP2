@@ -25,6 +25,13 @@ public class Validador {
 		return true;
 	}
 	
+	public static boolean validarSetNome(String novo) {
+		if (novo.trim().equals("")) {
+			throw new EntradaInvalidaException("Erro na atualizacao de item: nome nao pode ser vazio ou nulo.");
+		}
+		return true;
+	}
+	
 	public static boolean validaAdicionarPrecoItem(String localDeCompra, double preco) {
 		if (localDeCompra.trim().equals("")) {
 			throw new EntradaInvalidaException("Erro no cadastro de preco: local de compra nao pode ser vazio ou nulo.");
@@ -73,24 +80,24 @@ public class Validador {
 	
 	public static boolean validaProdutoQuantFixa(int quantidade, String medida) {
 		if (quantidade < 0) {
-			throw new IllegalArgumentException("Erro no cadastro de item: valor de quantidade nao pode ser menor que zero.");
+			throw new EntradaInvalidaException("Erro no cadastro de item: valor de quantidade nao pode ser menor que zero.");
 		}
 		if (medida.trim().equals("")) {
-			throw new IllegalArgumentException("Erro no cadastro de item: unidade de medida nao pode ser vazia ou nula.");
+			throw new EntradaInvalidaException("Erro no cadastro de item: unidade de medida nao pode ser vazia ou nula.");
 		}
 		return true;
 	}
 	
 	public static boolean validaSetQuantidade(int quantidade) {
 		if (quantidade < 0) {
-			throw new IllegalArgumentException("Erro na atualizacao de item: valor de quantidade nao pode ser menor que zero.");
+			throw new EntradaInvalidaException("Erro na atualizacao de item: valor de quantidade nao pode ser menor que zero.");
 		}
 		return true;
 	}
 	
 	public static boolean validaSetMedida(String medida) {
 		if (medida.trim().equals("")) {
-			throw new IllegalArgumentException("Erro na atualizacao de item: unidade de medida nao pode ser vazia ou nula.");
+			throw new EntradaInvalidaException("Erro na atualizacao de item: unidade de medida nao pode ser vazia ou nula.");
 		}
 		return true;
 	}

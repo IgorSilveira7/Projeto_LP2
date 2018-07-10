@@ -78,7 +78,9 @@ public abstract class Item {
 	 *            String que represnta o novo nome do item.
 	 */
 	public void setNome(String novoValor) {
-		this.nome = novoValor;
+		if (Validador.validarSetNome(novoValor)) {
+			this.nome = novoValor;
+		}
 	}
 
 	/**
