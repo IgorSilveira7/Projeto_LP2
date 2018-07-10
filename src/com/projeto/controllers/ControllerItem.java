@@ -5,6 +5,7 @@ import com.projeto.entidades.Item;
 import com.projeto.entidades.ProdutoNaoIndustrializado;
 import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
+import com.projeto.ordenacao.OrdenaItensPorNome;
 import com.projeto.validadores.Validador;
 
 /**
@@ -24,12 +25,15 @@ public class ControllerItem {
 	 */
 	private int id;
 	
+	private List<Item> itensOrdenados;
+	
 	/**
 	 * Construtor.
 	 */
 	public ControllerItem() {
 		this.itens = new TreeMap<>();
 		this.id = 1;
+		this.itensOrdenados = new ArrayList<>();
 	}
 	
 	/**
@@ -176,5 +180,15 @@ public class ControllerItem {
 	 */
 	public void deletaItem(int id) {
 		this.itens.remove(id);
-	}	
+	}
+	
+	public String getItem(int id) {
+		this.ordenarPorNome();
+		return this.itensOrdenados.get(id).toString();
+	}
+	
+	private void ordenarPorNome() {
+		this.itensOrdenados = new ArrayList<>(this.itens.values());
+		Collections.sort(this.itensOrdenados, new OrdenaItensPorNome());
+	}
 }

@@ -6,7 +6,7 @@
 # 	 Listagem de itens  	  #
 ###############################
 
-expect 1". Agua Sanitaria Viserion, limpeza, 500 ml, Preco: <Supermercado Excepcional, R$ 2,19;>" getItem posicao=0
+expect "1. Agua Sanitaria Viserion, limpeza, 500 ml, Preco: <Supermercado Excepcional, R$ 2,19;>" getItem posicao=0
 expect "10. Batata Tentacoes, alimento industrializado, Preco: <Supermercado UauMart, R$ 3,69;Mercadinho Bem Barato, R$ 3,99;Supermercado BuyMore, R$ 4,09;Supermercado Excepcional, R$ 3,79;>" getItem posicao=1
 expect "8. Capsula Dois Coracoes, alimento industrializado, 8 capsulas, Preco: <Mercadinho Bem Barato, R$ 11,69;Supermercado UauMart, R$ 10,89;Supermercado BuyMore, R$ 10,89;Supermercado Excepcional, R$ 9,49;>" getItem posicao=2
 expect "7. Coentro, alimento nao industrializado, Preco: <Mercadinho Bem Barato, R$ 1,39;>" getItem posicao=3

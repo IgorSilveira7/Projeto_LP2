@@ -82,6 +82,10 @@ public abstract class Item {
 			this.nome = novoValor;
 		}
 	}
+	
+	public String getNome() {
+		return this.nome;
+	}
 
 	/**
 	 * Metodo que altera o tipo da categoria.
