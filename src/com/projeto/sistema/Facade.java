@@ -139,4 +139,8 @@ public class Facade {
 	public String getItemPorCategoria(String categoria, int id) {
 		return this.controllerItem.getItemPorCategoria(categoria, id);
 	}
+	
+	public String getItemPorMenorPreco(int posicao) {
+		return this.controllerItem.getItemPorMenorPreco(posicao);
+	}
 }

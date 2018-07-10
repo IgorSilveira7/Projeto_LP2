@@ -198,4 +198,8 @@ public abstract class Item {
 			return false;
 		return true;
 	}
+	
+	public double getMenorPreco() {		
+		return Collections.min(this.mapaPrecos.values());
+	}
 }
