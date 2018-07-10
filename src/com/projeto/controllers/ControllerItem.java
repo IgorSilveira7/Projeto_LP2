@@ -5,6 +5,7 @@ import com.projeto.entidades.Item;
 import com.projeto.entidades.ProdutoNaoIndustrializado;
 import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
+import com.projeto.ordenacao.OrdenaItensPorCategoria;
 import com.projeto.ordenacao.OrdenaItensPorNome;
 import com.projeto.validadores.Validador;
 
@@ -191,4 +192,27 @@ public class ControllerItem {
 		this.itensOrdenados = new ArrayList<>(this.itens.values());
 		Collections.sort(this.itensOrdenados, new OrdenaItensPorNome());
 	}
+	
+	private void ordenarPorCategoria() {
+		this.itensOrdenados = new ArrayList<>(this.itens.values());
+		Collections.sort(this.itensOrdenados, new OrdenaItensPorCategoria());
+	}
+	
+	public String getItemPorCategoria(String categoria, int id) {
+		this.ordenarPorNome();
+		int contador = -1;
+		
+		for(Item i: itensOrdenados) {
+			if(i.getCategoria().equalsIgnoreCase(categoria)) {
+				contador += 1;
+				
+				if(contador == id) {
+					return i.toString();
+				}
+			}
+		}
+		
+		return "";
+	}
+	
 }
