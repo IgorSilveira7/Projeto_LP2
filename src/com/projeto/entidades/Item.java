@@ -98,6 +98,10 @@ public abstract class Item {
 			this.categoria = novoValor;
 		}
 	}
+	
+	public String getCategoria() {
+		return this.categoria;
+	}
 
 	/**
 	 * Metodo abstrato que será implementado nas classes filhas(Altera a
