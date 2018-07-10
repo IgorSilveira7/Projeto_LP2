@@ -184,31 +184,59 @@ public class ControllerItem {
 		this.itens.remove(id);
 	}
 	
+	/** 
+	 * Metodo que retorna uma String.
+	 * 
+	 * @param id Inteiro correspondente ao item que sera retornado.
+	 * @return String correspondente a o determinado item.
+	 */
 	public String getItem(int id) {
 		this.ordenarPorNome();
 		return this.itensOrdenados.get(id).toString();
 	}
 	
+	/**
+	 * Metodo responsavel por ordenar os itens atraves do nome.
+	 */
 	private void ordenarPorNome() {
 		this.itensOrdenados = new ArrayList<>(this.itens.values());
 		Collections.sort(this.itensOrdenados, new OrdenaItensPorNome());
 	}
 	
+	/**
+	 * Metodo responsavel por ordenar os itens atraves da categoria.
+	 */
 	private void ordenarPorCategoria() {
 		this.itensOrdenados = new ArrayList<>(this.itens.values());
 		Collections.sort(this.itensOrdenados, new OrdenaItensPorCategoria());
 	}
 	
+	/**
+	 * Metodo responsavel por ordenar os itens atraves do preco.
+	 */
 	private void ordenarPorMenorPreco() {
 		this.itensOrdenados = new ArrayList<>(this.itens.values());
 		Collections.sort(itensOrdenados, new OrdenarItensPorMenorPreco());
 	}
 	
+	/**
+	 * Metodo que retorna a representacao textual do item de menor preco.
+	 * 
+	 * @param posicao Inteiro correspondente a posicao do item na ordem de menores precos.
+	 * @return String contendo a representacao textual correspondente a este item.
+	 */
 	public String getItemPorMenorPreco(int posicao) {
 		this.ordenarPorMenorPreco();
 		return this.itensOrdenados.get(posicao).toString();
 	}
 	
+	/**
+	 * Metodo que retorna a representacao textual de um item dependente de sua categoria.
+	 * 
+	 * @param categoria String que define de qual categoria se trata o item.
+	 * @param id Inteiro que representa ao item que sera retornado.
+	 * @return String que contem a representacao textual do item dada sua determinada categoria.
+	 */
 	public String getItemPorCategoria(String categoria, int id) {
 		this.ordenarPorNome();
 		int contador = -1;
@@ -226,10 +254,20 @@ public class ControllerItem {
 		return "";
 	}
 	
+	/**
+	 * Metodo que retorna a representacao textual de um item pesquisado.
+	 * 
+	 * @param strPesquisada String correspondente ao item pesquisado.
+	 * @param posicao Inteiro correspondente a posicao do item que sera pesquisado.
+	 * @return String contendo a representacao textual do item pesquisado.
+	 */
 	public String getItemPorPesquisa(String strPesquisada, int posicao) {
 		this.ordenarPorNome();
 		int contador = -1;
 		
+		/**
+		 *  Estrutura de repeticao usada pra percorrer a lista dos itens ordenados.
+		 */
 		for (Item i : this.itensOrdenados) {
 			if (i.toString().toLowerCase().indexOf(strPesquisada.toLowerCase()) >= 0) {
 				contador += 1;

@@ -10,7 +10,6 @@ import com.projeto.validadores.Validador;
  * 			Matheus Gusmao	
  * 			Rich Ramalho
  * 			
- *
  */
 public class ProdutoQuantidadeFixa extends Item {
 	

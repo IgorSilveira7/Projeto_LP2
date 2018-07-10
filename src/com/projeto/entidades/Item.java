@@ -13,7 +13,6 @@ import com.projeto.validadores.Validador;
  * 			Matheus Gusmao
  * 			Rich Ramalho
  * 
- *
  */
 public abstract class Item {
 
