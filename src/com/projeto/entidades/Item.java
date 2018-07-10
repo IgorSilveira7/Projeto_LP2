@@ -8,7 +8,10 @@ import com.projeto.validadores.Validador;
  * Classe abstrata que representa um item no sistema. Cada item possui um numero, nome,
  * categoria e um mapa de precos.
  * 
- * @authors Igor, Rich, Davi
+ * @authors Igor Silveira
+ * 			Jose Davi
+ * 			Matheus Gusmao
+ * 			Rich Ramalho
  * 
  *
  */
@@ -83,6 +86,11 @@ public abstract class Item {
 		}
 	}
 	
+	/**
+	 * Metodo que retona o nome do item.
+	 * 
+	 * @return nome do item.
+	 */
 	public String getNome() {
 		return this.nome;
 	}
@@ -199,6 +207,11 @@ public abstract class Item {
 		return true;
 	}
 	
+	/**
+	 * Metodo que retorna o menor preco do item.
+	 * 
+	 * @return valor minimo do mapa de precos correspondente ao menor preco do item.
+	 */
 	public double getMenorPreco() {		
 		return Collections.min(this.mapaPrecos.values());
 	}

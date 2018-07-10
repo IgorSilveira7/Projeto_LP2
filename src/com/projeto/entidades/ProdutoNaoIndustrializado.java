@@ -6,7 +6,9 @@ import com.projeto.validadores.*;
  * Classe que representa um item com Produto nao industrializado que é filha da classe Item.
  * E possui peso do item(peso).
  * 
- * @authors Matheus, Rich, Davi
+ * @authors Jose Davi
+ * 			Matheus Gusmao
+ * 			Rich Ramalho
  *
  */
 public class ProdutoNaoIndustrializado extends Item {

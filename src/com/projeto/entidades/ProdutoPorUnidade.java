@@ -6,7 +6,9 @@ import com.projeto.validadores.*;
  * Classe que representa um item com Produto por unidade que é filha da classe Item.
  * E possui a quantidade que o item possui(unidade).
  * 
- * @authors Matheus, Rich, Davi
+ * @authors Jose Davi
+ * 			Matheus Gusmao
+ * 			Rich Ramalho
  *
  */
 public class ProdutoPorUnidade extends Item {
