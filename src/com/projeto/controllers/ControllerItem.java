@@ -213,7 +213,7 @@ public class ControllerItem {
 		this.ordenarPorNome();
 		int contador = -1;
 		
-		for(Item i: itensOrdenados) {
+		for(Item i: this.itensOrdenados) {
 			if(i.getCategoria().equalsIgnoreCase(categoria)) {
 				contador += 1;
 				
@@ -223,6 +223,21 @@ public class ControllerItem {
 			}
 		}
 		
+		return "";
+	}
+	
+	public String getItemPorPesquisa(String strPesquisada, int posicao) {
+		this.ordenarPorNome();
+		int contador = -1;
+		
+		for (Item i : this.itensOrdenados) {
+			if (i.toString().toLowerCase().indexOf(strPesquisada.toLowerCase()) >= 0) {
+				contador += 1;
+				
+				if (contador == posicao) {
+					return i.toString();				}
+			}
+		}
 		return "";
 	}
 	

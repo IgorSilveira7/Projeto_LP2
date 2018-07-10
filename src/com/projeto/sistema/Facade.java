@@ -143,4 +143,8 @@ public class Facade {
 	public String getItemPorMenorPreco(int posicao) {
 		return this.controllerItem.getItemPorMenorPreco(posicao);
 	}
+	
+	public String getItemPorPesquisa(String strPesquisada, int posicao) {
+		return this.controllerItem.getItemPorPesquisa(strPesquisada, posicao);
+	}
 }
