@@ -53,7 +53,7 @@ public class ValidadorItem {
 		return true;
 	}
 	
-	public static boolean validarSetNome(String novo) {
+	public static boolean validaSetNome(String novo) {
 		if (novo.trim().equals("")) {
 			throw new EntradaInvalidaException("Erro na atualizacao de item: nome nao pode ser vazio ou nulo.");
 		}
@@ -66,6 +66,14 @@ public class ValidadorItem {
 		}
 		if (preco < 0.0) {
 			throw new EntradaInvalidaException("Erro no cadastro de preco: preco de item invalido.");
+		}
+		return true;
+	}
+	
+	public static boolean validaCategoria(String categoria) {
+		if (!(categoria.equals("alimento industrializado") || categoria.equals("alimento nao industrializado")
+				|| categoria.equals("limpeza") || categoria.equals("higiene pessoal"))) {
+			throw new EntradaInvalidaException("Erro na listagem de item: categoria nao existe.");
 		}
 		return true;
 	}
@@ -99,13 +107,6 @@ public class ValidadorItem {
 		return true;
 	}
 	
-	public static boolean validaSetPeso(double peso) {
-		if (peso < 0) {
-			throw new EntradaInvalidaException("Erro na atualizacao de item: valor de quilos nao pode ser menor que zero.");
-		}
-		return true;
-	}
-	
 	public static boolean validaProdutoQuantFixa(int quantidade, String medida) {
 		if (quantidade < 0) {
 			throw new EntradaInvalidaException("Erro no cadastro de item: valor de quantidade nao pode ser menor que zero.");
@@ -126,6 +127,13 @@ public class ValidadorItem {
 	public static boolean validaSetMedida(String medida) {
 		if (medida.trim().equals("")) {
 			throw new EntradaInvalidaException("Erro na atualizacao de item: unidade de medida nao pode ser vazia ou nula.");
+		}
+		return true;
+	}
+	
+	public static boolean validaSetQuilos(double novoValor) {
+		if (novoValor < 0) {
+			throw new IllegalArgumentException("Erro na atualizacao de item: valor de quilos nao pode ser menor que zero.");
 		}
 		return true;
 	}

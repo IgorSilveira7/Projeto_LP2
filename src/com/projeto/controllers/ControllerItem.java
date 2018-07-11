@@ -131,28 +131,41 @@ public class ControllerItem {
 		}
 		switch (atributo) {
 			case "nome":
-				this.itens.get(id).setNome(novoValor);
+				if (ValidadorItem.validaSetNome(novoValor)) {
+					this.itens.get(id).setNome(novoValor);
+				}
 				break;
 			
 			case "categoria":
-				this.itens.get(id).setCategoria(novoValor);
+				if (ValidadorItem.validaSetCategoria(novoValor)) {
+					this.itens.get(id).setCategoria(novoValor);
+				}
 				break;
 			
 			case "unidade de medida":
-				this.itens.get(id).setMedida(novoValor);
-				break;
-			case "quantidade":
-				this.itens.get(id).setQuantidade(Integer.parseInt(novoValor));
-				break;
-			case "unidades":
-				this.itens.get(id).setUnidade(Integer.parseInt(novoValor));
-				break;
-			case "kg":
-				if (Double.parseDouble(novoValor) < 0) {
-					throw new IllegalArgumentException("Erro na atualizacao de item: valor de quilos nao pode ser menor que zero.");
+				if (ValidadorItem.validaSetMedida(novoValor)) {
+					this.itens.get(id).setMedida(novoValor);
 				}
-				this.itens.get(id).setQuilos(Double.parseDouble(novoValor));
 				break;
+				
+			case "quantidade":
+				if (ValidadorItem.validaSetQuantidade(Integer.parseInt(novoValor))) {
+					this.itens.get(id).setQuantidade(Integer.parseInt(novoValor));
+				}
+				break;
+				
+			case "unidades":
+				if (ValidadorItem.validaSetUnidade(Integer.parseInt(novoValor))) {
+					this.itens.get(id).setUnidade(Integer.parseInt(novoValor));
+				}
+				break;
+				
+			case "kg":
+				if (ValidadorItem.validaSetQuilos(Double.parseDouble(novoValor))) {
+					this.itens.get(id).setQuilos(Double.parseDouble(novoValor));
+				}
+				break;
+				
 			default:
 				throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
 		}
@@ -227,19 +240,20 @@ public class ControllerItem {
 	 * @return String que contem a representacao textual do item dada sua determinada categoria.
 	 */
 	public String getItemPorCategoria(String categoria, int id) {
-		this.ordenarPorNome();
-		int contador = -1;
+		if (ValidadorItem.validaCategoria(categoria)) {
+			this.ordenarPorNome();
+			int contador = -1;
 		
-		for(Item i: this.itensOrdenados) {
-			if(i.getCategoria().equalsIgnoreCase(categoria)) {
-				contador += 1;
+			for(Item i: this.itensOrdenados) {
+				if(i.getCategoria().equalsIgnoreCase(categoria)) {
+					contador += 1;
 				
-				if(contador == id) {
-					return i.toString();
+					if(contador == id) {
+						return i.toString();
+					}
 				}
 			}
 		}
-		
 		return "";
 	}
 	
@@ -262,7 +276,8 @@ public class ControllerItem {
 				contador += 1;
 				
 				if (contador == posicao) {
-					return i.toString();				}
+					return i.toString();
+				}
 			}
 		}
 		return "";

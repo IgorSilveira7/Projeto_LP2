@@ -76,12 +76,12 @@ public abstract class Item {
 	/**
 	 * Metodo que altera o nome do item.
 	 * 
-	 * @param novoValor
+	 * @param novoNome
 	 *            String que represnta o novo nome do item.
 	 */
-	public void setNome(String novoValor) {
-		if (ValidadorItem.validarSetNome(novoValor)) {
-			this.nome = novoValor;
+	public void setNome(String novoNome) {
+		if (ValidadorItem.validaSetNome(novoNome)) {
+			this.nome = novoNome;
 		}
 	}
 	
@@ -97,12 +97,12 @@ public abstract class Item {
 	/**
 	 * Metodo que altera o tipo da categoria.
 	 * 
-	 * @param novoValor
+	 * @param novaCategoria
 	 *            String que representa a nova categoria do item.
 	 */
-	public void setCategoria(String novoValor) {
-		if (ValidadorItem.validaSetCategoria(novoValor)) {
-			this.categoria = novoValor;
+	public void setCategoria(String novaCategoria) {
+		if (ValidadorItem.validaSetCategoria(novaCategoria)) {
+			this.categoria = novaCategoria;
 		}
 	}
 	
@@ -132,7 +132,7 @@ public abstract class Item {
 	 * Metodo abstrato que seŕa implementado nas classes filhas(Altera a unidade do
 	 * item).
 	 * 
-	 * @param novaMedida
+	 * @param novaUnidade
 	 *            Inteiro que representa a nova unidade do item.
 	 */
 	public abstract void setUnidade(int novaUnidade);
@@ -141,10 +141,10 @@ public abstract class Item {
 	 * Metodo abstrato que seŕa implementado nas classes filhas(Altera o peso do
 	 * item).
 	 * 
-	 * @param novaMedida
+	 * @param novoQuilo
 	 *            String que representa o novo peso do item.
 	 */
-	public abstract void setQuilos(double novoQuilos);
+	public abstract void setQuilos(double novoQuilo);
 
 	/**
 	 * Metodo que dar a representacao textual do item.
