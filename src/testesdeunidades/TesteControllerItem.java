@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.projeto.controllers.ControllerItem;
 import com.projeto.excecoes.EntradaInvalidaException;
+import com.projeto.excecoes.ItemJaExisteException;
 
 public class TesteControllerItem {
 	
@@ -15,6 +16,24 @@ public class TesteControllerItem {
 	@Before
 	public void before() {
 		this.c = new ControllerItem();
+	}
+	
+	@Test(expected=ItemJaExisteException.class)
+	public void testItemJaExisteQuantFixa() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 15, "uc", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "um", "Alfredo plus", 2.58);
+	}
+	
+	@Test(expected=ItemJaExisteException.class)
+	public void testItemJaExisteUni() {
+		this.c.adicionaItemPorUnidade("Pao", "alimento industrializado", 5, "Alfredo plus", 2.58);
+		this.c.adicionaItemPorUnidade("Pao", "alimento industrializado", 4, "Alfredo menos", 2.58);
+	}
+
+	@Test(expected=ItemJaExisteException.class)
+	public void testItemJaExisteProQuilo() {
+		this.c.adicionaItemPorQuilo("Pao", "alimento industrializado", 1, "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Pao", "alimento industrializado", 2, "Alfredo +", 2.58);
 	}
 	
 	@Test(expected=EntradaInvalidaException.class)

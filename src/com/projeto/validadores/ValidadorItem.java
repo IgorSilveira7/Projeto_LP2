@@ -1,9 +1,16 @@
 package com.projeto.validadores;
 
+import java.util.Map;
+
+import com.projeto.entidades.Item;
+import com.projeto.entidades.ProdutoNaoIndustrializado;
+import com.projeto.entidades.ProdutoPorUnidade;
+import com.projeto.entidades.ProdutoQuantidadeFixa;
 import com.projeto.excecoes.EntradaInvalidaException;
+import com.projeto.excecoes.ItemJaExisteException;
 import com.projeto.validadores.*;
 
-public class Validador {
+public class ValidadorItem {
 	
 	public static boolean validaItem(String nome, String categoria, String supermercado, double preco) {
 		if (nome.trim().equals("")) {
@@ -21,6 +28,27 @@ public class Validador {
 		}
 		if (preco < 0.0) {
 			throw new EntradaInvalidaException("Erro no cadastro de item: preco de item invalido.");
+		}
+		return true;
+	}
+	
+	public static boolean validaItemProQuantJaExiste(Map<Integer, Item> itens, String nome, String categoria) {
+		if (itens.containsValue(new ProdutoQuantidadeFixa(5, nome, categoria, 2, "u.m", "Baratao", 2.58))) {
+			throw new ItemJaExisteException("Erro no cadastro do item: item ja existe.");
+		}
+		return true;
+	}
+	
+	public static boolean validaItemProUnidJaExiste(Map<Integer, Item> itens, String nome, String categoria) {
+		if (itens.containsValue(new ProdutoPorUnidade(5, nome, categoria, 1, "Baratao", 2.58))) {
+			throw new ItemJaExisteException("Erro no cadastro do item: item ja existe.");
+		}
+		return true;
+	}
+	
+	public static boolean validaItemProNaoIndusJaExiste(Map<Integer, Item> itens, String nome, String categoria) {
+		if (itens.containsValue(new ProdutoNaoIndustrializado(5, nome, categoria, 1, "Baratao", 2.58))) {
+			throw new ItemJaExisteException("Erro no cadastro do item: item ja existe.");
 		}
 		return true;
 	}

@@ -37,7 +37,7 @@ public class ProdutoNaoIndustrializado extends Item {
 	 */
 	public ProdutoNaoIndustrializado(int numero, String nome, String categoria, double peso, String supermercado, double preco) {
 		super(numero, nome, categoria, supermercado, preco);
-		if (Validador.validaPeso(peso)) {
+		if (ValidadorItem.validaPeso(peso)) {
 			this.peso = peso;
 		}
 	}
@@ -49,7 +49,7 @@ public class ProdutoNaoIndustrializado extends Item {
 	 */
 	@Override
 	public void setQuilos(double novoPeso) {
-		if (Validador.validaSetPeso(novoPeso)) {
+		if (ValidadorItem.validaSetPeso(novoPeso)) {
 			this.peso = novoPeso;
 		}
 	}

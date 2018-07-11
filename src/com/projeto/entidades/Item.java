@@ -2,7 +2,7 @@ package com.projeto.entidades;
 
 import java.util.*;
 
-import com.projeto.validadores.Validador;
+import com.projeto.validadores.ValidadorItem;
 
 /**
  * Classe abstrata que representa um item no sistema. Cada item possui um numero, nome,
@@ -49,7 +49,7 @@ public abstract class Item {
 	 *            Double que representa o preco do item nesse supermercado.
 	 */
 	public Item(int numero, String nome, String categoria, String supermercado, double preco) {
-		if (Validador.validaItem(nome, categoria, supermercado, preco)) {
+		if (ValidadorItem.validaItem(nome, categoria, supermercado, preco)) {
 			this.numero = numero;
 			this.nome = nome;
 			this.categoria = categoria;
@@ -68,7 +68,7 @@ public abstract class Item {
 	 *            Double que representa o preco do item.
 	 */
 	public void adicionaPrecoItem(String localDeCompra, double preco) {
-		if (Validador.validaAdicionarPrecoItem(localDeCompra, preco)) {
+		if (ValidadorItem.validaAdicionarPrecoItem(localDeCompra, preco)) {
 			this.mapaPrecos.put(localDeCompra, preco);
 		}
 	}
@@ -80,7 +80,7 @@ public abstract class Item {
 	 *            String que represnta o novo nome do item.
 	 */
 	public void setNome(String novoValor) {
-		if (Validador.validarSetNome(novoValor)) {
+		if (ValidadorItem.validarSetNome(novoValor)) {
 			this.nome = novoValor;
 		}
 	}
@@ -101,7 +101,7 @@ public abstract class Item {
 	 *            String que representa a nova categoria do item.
 	 */
 	public void setCategoria(String novoValor) {
-		if (Validador.validaSetCategoria(novoValor)) {
+		if (ValidadorItem.validaSetCategoria(novoValor)) {
 			this.categoria = novoValor;
 		}
 	}

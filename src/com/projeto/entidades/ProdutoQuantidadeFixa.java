@@ -1,6 +1,6 @@
 package com.projeto.entidades;
 
-import com.projeto.validadores.Validador;
+import com.projeto.validadores.ValidadorItem;
 
 /**
  * Classe que representa um item com Produto por quantidade fixa que é filha da classe Item.
@@ -44,7 +44,7 @@ public class ProdutoQuantidadeFixa extends Item {
 	public ProdutoQuantidadeFixa(int numero, String nome, String categoria, 
 								 int quantidade, String medida, String supermercado, double preco) {
 		super(numero, nome, categoria, supermercado, preco);
-		if (Validador.validaProdutoQuantFixa(quantidade, medida)) {
+		if (ValidadorItem.validaProdutoQuantFixa(quantidade, medida)) {
 			this.quantidade = quantidade;
 			this.medida = medida;
 		}
@@ -65,7 +65,7 @@ public class ProdutoQuantidadeFixa extends Item {
 	 */
 	@Override
 	public void setMedida(String novaMedida) {
-		if (Validador.validaSetMedida(novaMedida)) {
+		if (ValidadorItem.validaSetMedida(novaMedida)) {
 			this.medida = novaMedida;
 		}
 	}
@@ -75,7 +75,7 @@ public class ProdutoQuantidadeFixa extends Item {
 	 */
 	@Override
 	public void setQuantidade(int novoValor) {
-		if (Validador.validaSetQuantidade(novoValor)) {
+		if (ValidadorItem.validaSetQuantidade(novoValor)) {
 			this.quantidade = novoValor;
 		}
 	}
