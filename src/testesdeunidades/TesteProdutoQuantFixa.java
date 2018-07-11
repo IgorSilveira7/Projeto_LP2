@@ -1,4 +1,4 @@
-package com.projeto.testedeunidades;
+package testesdeunidades;
 
 import static org.junit.Assert.*;
 import org.junit.Before;

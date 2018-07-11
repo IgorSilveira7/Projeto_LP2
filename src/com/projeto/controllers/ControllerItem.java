@@ -26,7 +26,10 @@ public class ControllerItem {
 	 * Atributo que ira cuidar dos ids dos itens.
 	 */
 	private int id;
-	
+	/**
+	 * Atributo que representa os itens cadastrado no sistema em um dos tipos
+	 * de ordenacao.
+	 */
 	private List<Item> itensOrdenados;
 	
 	/**
@@ -129,13 +132,7 @@ public class ControllerItem {
 				break;
 			
 			case "categoria":
-				if (novoValor.equals("alimento industrializado") || novoValor.equals("alimento nao industrializado")
-				|| novoValor.equals("limpeza") || novoValor.equals("higiene pessoal")) {
-					this.itens.get(id).setCategoria(novoValor);
-				}
-				else {
-					throw new IllegalArgumentException("Erro na atualizacao de item: categoria nao existe.");
-				}
+				this.itens.get(id).setCategoria(novoValor);
 				break;
 			
 			case "unidade de medida":
@@ -166,6 +163,7 @@ public class ControllerItem {
 	 * @param preco Double que representa o preco do item.
 	 */
 	public void adicionaPrecoItem(int id, String supermercado, double preco) {
+		Validador.validaAdicionarPrecoItem(supermercado, preco);
 		if (id <= 0) {
 			throw new IllegalArgumentException("Erro no cadastro de preco: id de item invalido.");
 		}
@@ -181,7 +179,11 @@ public class ControllerItem {
 	 * @param id Inteiro que representa o id do item a ser deletado.
 	 */
 	public void deletaItem(int id) {
-		this.itens.remove(id);
+		if (this.itens.containsKey(id)) {
+			this.itens.remove(id);
+		} else {
+			throw new IllegalArgumentException("Erro na deletacao de item: item nao existe.");
+		}
 	}
 	
 	/** 
@@ -191,32 +193,12 @@ public class ControllerItem {
 	 * @return String correspondente a o determinado item.
 	 */
 	public String getItem(int id) {
-		this.ordenarPorNome();
-		return this.itensOrdenados.get(id).toString();
-	}
-	
-	/**
-	 * Metodo responsavel por ordenar os itens atraves do nome.
-	 */
-	private void ordenarPorNome() {
-		this.itensOrdenados = new ArrayList<>(this.itens.values());
-		Collections.sort(this.itensOrdenados, new OrdenaItensPorNome());
-	}
-	
-	/**
-	 * Metodo responsavel por ordenar os itens atraves da categoria.
-	 */
-	private void ordenarPorCategoria() {
-		this.itensOrdenados = new ArrayList<>(this.itens.values());
-		Collections.sort(this.itensOrdenados, new OrdenaItensPorCategoria());
-	}
-	
-	/**
-	 * Metodo responsavel por ordenar os itens atraves do preco.
-	 */
-	private void ordenarPorMenorPreco() {
-		this.itensOrdenados = new ArrayList<>(this.itens.values());
-		Collections.sort(itensOrdenados, new OrdenarItensPorMenorPreco());
+		if (this.itensOrdenados.size() >= id) {
+			this.ordenarPorNome();
+			return this.itensOrdenados.get(id).toString();
+		} else {
+			throw new IllegalArgumentException("Erro nao exibicao do item: item nao existe.");
+		}
 	}
 	
 	/**
@@ -226,8 +208,12 @@ public class ControllerItem {
 	 * @return String contendo a representacao textual correspondente a este item.
 	 */
 	public String getItemPorMenorPreco(int posicao) {
-		this.ordenarPorMenorPreco();
-		return this.itensOrdenados.get(posicao).toString();
+		if (this.itensOrdenados.size() >= posicao) {
+			this.ordenarPorMenorPreco();
+			return this.itensOrdenados.get(posicao).toString();
+		} else {
+			throw new IllegalArgumentException("Erro na exibicao do item: item nao existe.");
+		}
 	}
 	
 	/**
@@ -279,4 +265,19 @@ public class ControllerItem {
 		return "";
 	}
 	
+	/**
+	 * Metodo responsavel por ordenar os itens atraves do nome.
+	 */
+	private void ordenarPorNome() {
+		this.itensOrdenados = new ArrayList<>(this.itens.values());
+		Collections.sort(this.itensOrdenados, new OrdenaItensPorNome());
+	}
+	
+	/**
+	 * Metodo responsavel por ordenar os itens atraves do preco.
+	 */
+	private void ordenarPorMenorPreco() {
+		this.itensOrdenados = new ArrayList<>(this.itens.values());
+		Collections.sort(itensOrdenados, new OrdenarItensPorMenorPreco());
+	}
 }
