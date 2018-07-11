@@ -47,7 +47,7 @@ private ProdutoNaoIndustrializado p;
 		new ProdutoNaoIndustrializado(1, "Semente dos deuses", "alimento nao industrializado", 1, "Torre Karim", -10.01);
 	}
 	
-	@Test(expected=EntradaInvalidaException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testSetPesoInvalido() {
 		this.p.setQuilos(-1);
 	}

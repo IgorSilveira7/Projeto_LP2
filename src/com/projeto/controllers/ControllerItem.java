@@ -209,12 +209,13 @@ public class ControllerItem {
 	 * @return String correspondente a o determinado item.
 	 */
 	public String getItem(int id) {
+		this.ordenarPorNome();
 		if (this.itensOrdenados.size() >= id) {
-			this.ordenarPorNome();
 			return this.itensOrdenados.get(id).toString();
 		} else {
-			throw new IllegalArgumentException("Erro nao exibicao do item: item nao existe.");
+			return "";
 		}
+		
 	}
 	
 	/**
@@ -224,11 +225,11 @@ public class ControllerItem {
 	 * @return String contendo a representacao textual correspondente a este item.
 	 */
 	public String getItemPorMenorPreco(int posicao) {
+		this.ordenarPorMenorPreco();
 		if (this.itensOrdenados.size() >= posicao) {
-			this.ordenarPorMenorPreco();
 			return this.itensOrdenados.get(posicao).toString();
 		} else {
-			throw new IllegalArgumentException("Erro na exibicao do item: item nao existe.");
+			return "";
 		}
 	}
 	

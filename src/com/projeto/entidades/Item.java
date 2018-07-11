@@ -214,4 +214,8 @@ public abstract class Item {
 	public double getMenorPreco() {		
 		return Collections.min(this.mapaPrecos.values());
 	}
+
+	public String getDescricao() {
+		return this.nome + this.categoria;
+	}
 }

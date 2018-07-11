@@ -24,8 +24,8 @@ Conceitos utilizados.
 
 - [X] Testes de aceitação case 1.
 - [X] Testes de aceitação case 1 - Exception.
-- [ ] Testes de aceitação case 2.
-- [ ] Testes de aceitação case 2 - Exception.
+- [X] Testes de aceitação case 2.
+- [X] Testes de aceitação case 2 - Exception.
 - [ ] Testes de aceitação case 3.
 - [ ] Testes de aceitação case 3 - Exception.
 - [ ] Testes de aceitação case 4.
