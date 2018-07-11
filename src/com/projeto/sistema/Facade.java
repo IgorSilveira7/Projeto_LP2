@@ -132,19 +132,49 @@ public class Facade {
 		this.controllerItem.deletaItem(id);
 	}
 	
+	/**
+	 * Metodo que retorna a representacao textual de um Item que esta ordenado
+	 * por ordem alfabetica.
+	 * 
+	 * @param id Inteiro que representa o id do item a ser buscado.
+	 * @return String a representacao textual do item.
+	 */
 	public String getItem(int id) {
 		return this.controllerItem.getItem(id);
 	}
 	
+	/**
+	 * Metodo que retorna a representacao textual de um Item que esta ordenado
+	 * por ordem alfabetica de uma dada categoria.
+	 * 
+	 * @param categoria String que representa a categoria a ser buscada.
+	 * @param id Inteiro que representa o id do item.
+	 * @return String a representacao textual do item. 
+	 */
 	public String getItemPorCategoria(String categoria, int id) {
 		return this.controllerItem.getItemPorCategoria(categoria, id);
 	}
 	
-	public String getItemPorMenorPreco(int posicao) {
-		return this.controllerItem.getItemPorMenorPreco(posicao);
+	/**
+	 * Metodo que retorna a representacao textual de um Item que esta ordenado
+	 * por de menor preco.
+	 * 
+	 * @param id Inteiro que representa o id do item a ser buscado.
+	 * @return String a representacao textual do item.
+	 */
+	public String getItemPorMenorPreco(int id) {
+		return this.controllerItem.getItemPorMenorPreco(id);
 	}
 	
-	public String getItemPorPesquisa(String strPesquisada, int posicao) {
-		return this.controllerItem.getItemPorPesquisa(strPesquisada, posicao);
+	/**
+	 * Metodo que retorna a representacao textual de um Item que esta ordenado
+	 * por ordem alfabetica a partir de uma pesquisa.
+	 * 
+	 * @param strPesquisada String que representa o nome a ser buscada.
+	 * @param id Inteiro que representa o id do item.
+	 * @return String a representacao textual do item. 
+	 */
+	public String getItemPorPesquisa(String strPesquisada, int id) {
+		return this.controllerItem.getItemPorPesquisa(strPesquisada, id);
 	}
 }
