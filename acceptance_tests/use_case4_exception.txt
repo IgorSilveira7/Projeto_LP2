@@ -15,6 +15,8 @@ id8=adicionaItemPorQuilo nome="Carne moida extra light" categoria="alimento nao 
 id9=adicionaItemPorQuilo nome="Chuchu" categoria="alimento nao industrializado" kg=0.5 localDeCompra="Extra" precoItem=4
 id10=adicionaItemPorUnidade nome="Iogurte Lactivia" categoria="alimento industrializado" unidade=2 localDeCompra="Extra" precoItem=2.99
 
+id20=adicionaItemPorUnidade nome="Leite em po" categoria="alimento industrializado" unidade=1 localDeCompra="Mercadinho" precoItem=10
+
 ## Criar Lista de Compra ##
 
 expect "Hiper shopping" adicionaListaDeCompras descritorLista="Hiper shopping"
@@ -43,11 +45,9 @@ expectError "Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo." 
 
 ## Pesquisa por data de criacao ##
 
-expectError "Erro na pesquisa de compra: lista de compras nao existe." pesquisaListasDeComprasPorData data="01/01/2000"
 expectError "Erro na pesquisa de compra: data em formato invalido, tente dd/MM/yyyy" pesquisaListasDeComprasPorData data="01012000"
 expectError "Erro na pesquisa de compra: data nao pode ser vazia ou nula." pesquisaListasDeComprasPorData data=""
 
 ## Pesquisa lista por id item ##
 
 expectError "Erro na pesquisa de compra: compra nao encontrada na lista." pesquisaListasDeComprasPorItem id=200
-expectError "Erro na pesquisa de compra: compra nao encontrada na lista." pesquisaListasDeComprasPorItem id=${id10}

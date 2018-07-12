@@ -95,7 +95,7 @@ public class ValidadorItem {
 	
 	public static boolean validaSetUnidade(int unidade) {
 		if (unidade < 0) {
-			throw new EntradaInvalidaException("Erro na atualizacao de item: valor de quantidade nao pode ser menor que zero.");
+			throw new EntradaInvalidaException("Erro na atualizacao de item: valor de unidade nao pode ser menor que zero.");
 		}
 		return true;
 	}

@@ -154,7 +154,7 @@ public class ControllerItem {
 				}
 				break;
 				
-			case "unidades":
+			case "unidade":
 				if (ValidadorItem.validaSetUnidade(Integer.parseInt(novoValor))) {
 					this.itens.get(id).setUnidade(Integer.parseInt(novoValor));
 				}
