@@ -48,9 +48,7 @@ public class ProdutoPorUnidade extends Item {
 	 */
 	@Override
 	public void setUnidade(int novaUnidade) {
-		if (ValidadorItem.validaSetUnidade(novaUnidade)) {
-			this.unidade = novaUnidade;
-		}
+		this.unidade = novaUnidade;
 	}
 	
 	/**
