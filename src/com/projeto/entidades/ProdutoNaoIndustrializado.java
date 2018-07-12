@@ -63,16 +63,4 @@ public class ProdutoNaoIndustrializado extends Item {
 	public String toString() {
 		return super.toString() + " Preco por quilo: " + super.toStringPrecos();
 	}
-
-	@Override
-	public void setQuantidade(int novaquant) {
-	}
-
-	@Override
-	public void setMedida(String novaMedida) {
-	}
-
-	@Override
-	public void setUnidade(int novaUnidade) {
-	}
 }

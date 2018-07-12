@@ -62,16 +62,4 @@ public class ProdutoPorUnidade extends Item {
 	public String toString() {
 		return super.toString() + " Preco: " + super.toStringPrecos();
 	}
-	
-	@Override
-	public void setQuantidade(int novaquant) {
-	}
-
-	@Override
-	public void setMedida(String novaMedida) {
-	}
-
-	@Override
-	public void setQuilos(double novoQuilos) {
-	}
 }

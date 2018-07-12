@@ -14,7 +14,7 @@ import com.projeto.validadores.ValidadorItem;
  * 			Rich Ramalho
  * 
  */
-public abstract class Item {
+public abstract class Item implements AtualizarItem {
 
 	/**
 	 * Atributo que representa o id do item.
@@ -109,42 +109,6 @@ public abstract class Item {
 	public String getCategoria() {
 		return this.categoria;
 	}
-
-	/**
-	 * Metodo abstrato que será implementado nas classes filhas(Altera a
-	 * quantidadidade de um item Por quantidade).
-	 * 
-	 * @param novaQuant
-	 *            Inteiro que representa a nova quantidade do item.
-	 */
-	public abstract void setQuantidade(int novaQuant);
-
-	/**
-	 * Metodo abstrato que seŕa implementado nas classes filhas(Altera a unidade de
-	 * medida do item).
-	 * 
-	 * @param novaMedida
-	 *            String que representa a nova unidade de medida do item.
-	 */
-	public abstract void setMedida(String novaMedida);
-
-	/**
-	 * Metodo abstrato que seŕa implementado nas classes filhas(Altera a unidade do
-	 * item).
-	 * 
-	 * @param novaUnidade
-	 *            Inteiro que representa a nova unidade do item.
-	 */
-	public abstract void setUnidade(int novaUnidade);
-
-	/**
-	 * Metodo abstrato que seŕa implementado nas classes filhas(Altera o peso do
-	 * item).
-	 * 
-	 * @param novoQuilo
-	 *            String que representa o novo peso do item.
-	 */
-	public abstract void setQuilos(double novoQuilo);
 
 	/**
 	 * Metodo que dar a representacao textual do item.

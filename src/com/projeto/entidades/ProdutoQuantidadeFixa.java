@@ -79,12 +79,4 @@ public class ProdutoQuantidadeFixa extends Item {
 			this.quantidade = novoValor;
 		}
 	}
-
-	@Override
-	public void setUnidade(int novaUnidade) {
-	}
-
-	@Override
-	public void setQuilos(double novoQuilos) {
-	}
 }
