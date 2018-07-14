@@ -2,11 +2,13 @@ package com.projeto.controllers;
 
 import java.util.*;
 import com.projeto.entidades.Item;
+import com.projeto.entidades.ListaDeCompras;
 import com.projeto.entidades.ProdutoNaoIndustrializado;
 import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
 import com.projeto.ordenacao.OrdenaItensPorNome;
 import com.projeto.ordenacao.OrdenarItensPorMenorPreco;
+import com.projeto.ordenacao.OrdenarPorCategoria;
 import com.projeto.validadores.ValidadorItem;
 
 /**
@@ -31,6 +33,8 @@ public class ControllerItem {
 	 */
 	private List<Item> itensOrdenados;
 	
+	private Map<String, ListaDeCompras> listasDeCompras;
+	
 	/**
 	 * Construtor.
 	 */
@@ -38,6 +42,7 @@ public class ControllerItem {
 		this.itens = new TreeMap<>();
 		this.id = 1;
 		this.itensOrdenados = new ArrayList<>();
+		this.listasDeCompras = new TreeMap<>();
 	}
 	
 	/**
@@ -55,7 +60,7 @@ public class ControllerItem {
 								  String medida, String supermercado, double preco) {
 		ValidadorItem.validaItem(nome, categoria, supermercado, preco);
 		ValidadorItem.validaProdutoQuantFixa(quantidade, medida);
-		ValidadorItem.validaItemProQuantJaExiste(this.itens, nome, categoria);
+		//ValidadorItem.validaItemProQuantJaExiste(this.itens, nome, categoria);
 		this.itens.put(this.id, new ProdutoQuantidadeFixa(this.id, nome, categoria, quantidade, medida, supermercado, preco));
 		return this.id++;
 	}
@@ -73,7 +78,7 @@ public class ControllerItem {
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String supermercado, double preco) {
 		ValidadorItem.validaItem(nome, categoria, supermercado, preco);
 		ValidadorItem.validaUnidade(unidade);
-		ValidadorItem.validaItemProUnidJaExiste(this.itens, nome, categoria);
+		//ValidadorItem.validaItemProUnidJaExiste(this.itens, nome, categoria);
 		this.itens.put(this.id, new ProdutoPorUnidade(this.id, nome, categoria, unidade, supermercado, preco));
 		return this.id++;
 	}
@@ -91,7 +96,7 @@ public class ControllerItem {
 	public int adicionaItemPorQuilo(String nome, String categoria, double quilos, String supermercado, double preco) {
 		ValidadorItem.validaItem(nome, categoria, supermercado, preco);
 		ValidadorItem.validaPeso(quilos);
-		ValidadorItem.validaItemProNaoIndusJaExiste(this.itens, nome, categoria);
+		//ValidadorItem.validaItemProNaoIndusJaExiste(this.itens, nome, categoria);
 		this.itens.put(this.id, new ProdutoNaoIndustrializado(this.id, nome, categoria, quilos, supermercado, preco));
 		return this.id++;
 	}

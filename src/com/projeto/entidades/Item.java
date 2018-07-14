@@ -14,7 +14,7 @@ import com.projeto.validadores.ValidadorItem;
  * 			Rich Ramalho
  * 
  */
-public abstract class Item implements AtualizarItem {
+public abstract class Item implements AtualizarItem, Comparable<Item> {
 
 	/**
 	 * Atributo que representa o id do item.
@@ -27,7 +27,7 @@ public abstract class Item implements AtualizarItem {
 	/**
 	 * Atributo que representa a categoria que o item esta classificado.
 	 */
-	private String categoria;
+	private Categoria categoria;
 	/**
 	 * Atributo que representa o mapa de precos desse item.
 	 */
@@ -52,9 +52,24 @@ public abstract class Item implements AtualizarItem {
 		if (ValidadorItem.validaItem(nome, categoria, supermercado, preco)) {
 			this.numero = numero;
 			this.nome = nome;
-			this.categoria = categoria;
+			this.categoria = escolheCategoria(categoria);
 			this.mapaPrecos = new HashMap<>();
 			this.mapaPrecos.put(supermercado, preco);
+		}
+	}
+	
+	private Categoria escolheCategoria(String c) {
+		switch (c.toLowerCase()) {
+			case "higiene pessoal":
+				return Categoria.higiene;
+			case "limpeza":
+				return Categoria.limpeza;
+			case "alimento industrializado":
+				return Categoria.industrializado;
+			case "alimento nao industrializado":
+				return Categoria.N_industrializado;
+			default:
+				return null;
 		}
 	}
 
@@ -102,11 +117,23 @@ public abstract class Item implements AtualizarItem {
 	 */
 	public void setCategoria(String novaCategoria) {
 		if (ValidadorItem.validaSetCategoria(novaCategoria)) {
-			this.categoria = novaCategoria;
+			this.categoria = escolheCategoria(novaCategoria);
 		}
 	}
 	
 	public String getCategoria() {
+		if (this.categoria.equals(Categoria.higiene)) {
+			return "higiene pessoal";
+		} else  if (this.categoria.equals(Categoria.limpeza)) {
+			return "limpeza";
+		} else if (this.categoria.equals(Categoria.industrializado)) {
+			return "alimento industrializado";
+		} else {
+			return "alimento nao industrializado";
+		}
+	}
+	
+	public Categoria cat() {
 		return this.categoria;
 	}
 
@@ -114,7 +141,7 @@ public abstract class Item implements AtualizarItem {
 	 * Metodo que dar a representacao textual do item.
 	 */
 	public String toString() {
-		return this.numero + ". " + this.nome + ", " + this.categoria + ",";
+		return this.numero + ". " + this.nome + ", " + this.getCategoria() + ",";
 	}
 	
 	/**

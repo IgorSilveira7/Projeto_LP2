@@ -61,4 +61,14 @@ public class ProdutoNaoIndustrializado extends Item {
 	public String toString() {
 		return super.toString() + " Preco por quilo: " + super.toStringPrecos();
 	}
+
+	@Override
+	public String getToStringEmLista(double quant) {
+		return String.format("%.1f", quant) + " kg " + this.getNome() + ", " + this.getCategoria();
+	}
+
+	@Override
+	public int compareTo(Item o) {
+		return super.getNome().compareTo(o.getNome());
+	}
 }

@@ -3,6 +3,8 @@ package com.projeto.entidades;
 import com.projeto.validadores.ValidadorItem;
 
 public interface AtualizarItem {
+	
+	public String getToStringEmLista(double quant);
 
 	/**
 	 * Metodo default que será implementado nas classes filhas(Altera a

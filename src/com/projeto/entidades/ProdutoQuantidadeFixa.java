@@ -6,9 +6,9 @@ import com.projeto.validadores.ValidadorItem;
  * Classe que representa um item com Produto por quantidade fixa que é filha da classe Item.
  * E possui a quantidade do item(quantidade) e a unidade de medida do item(medida).
  * 
- * @authors Jose Davi
- * 			Matheus Gusmao	
- * 			Rich Ramalho
+ * @authors Rich Ramalho
+ * 			Jose Davi
+ * 			Matheus Gusmao
  * 			
  */
 public class ProdutoQuantidadeFixa extends Item {
@@ -74,5 +74,16 @@ public class ProdutoQuantidadeFixa extends Item {
 	@Override
 	public void setQuantidade(int novoValor) {
 		this.quantidade = novoValor;
+	}
+	
+	@Override
+	public String getToStringEmLista(double quant) {
+		return ((int) quant) + " " + this.getNome() + ", " + this.getCategoria() + ", "+
+						     this.quantidade + " " + this.medida;
+	}
+
+	@Override
+	public int compareTo(Item o) {
+		return super.getNome().compareTo(o.getNome());
 	}
 }

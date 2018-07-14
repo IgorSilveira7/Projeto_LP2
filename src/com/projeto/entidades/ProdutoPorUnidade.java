@@ -60,4 +60,14 @@ public class ProdutoPorUnidade extends Item {
 	public String toString() {
 		return super.toString() + " Preco: " + super.toStringPrecos();
 	}
+	
+	@Override
+	public String getToStringEmLista(double quant) {
+		return ((int) quant) + " " + this.getNome() + ", " + this.getCategoria();
+	}
+
+	@Override
+	public int compareTo(Item o) {
+		return super.getNome().compareTo(o.getNome());
+	}
 }
