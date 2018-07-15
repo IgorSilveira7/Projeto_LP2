@@ -2,11 +2,12 @@ package com.projeto.entidades;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
-
-
+import com.projeto.ordenacao.OrdenaItensPorNome;
+import com.projeto.ordenacao.OrdenarPorCategoria;
 
 public class ListaDeCompras {
 	
@@ -51,4 +52,23 @@ public class ListaDeCompras {
 		this.valorTotal = valorFinal;
 	}
 	
+	public String getItemLista(int id) {
+		if (this.itens.size() <= id) {
+			return "";
+		}
+		this.ordenarPorNomeCategoria();
+		Item i = this.itens.get(id);
+		double quant = this.qntdItens.get(i);
+		return i.getToStringEmLista(quant);
+	}
+	
+	private void ordenarPorNomeCategoria() {
+		Collections.sort(this.itens, new OrdenaItensPorNome());
+		Collections.sort(this.itens, new OrdenarPorCategoria());
+	}
+
+	public void deletaCompraDeLista(Item i) {
+		this.itens.remove(i);
+		this.qntdItens.remove(i);
+	}
 }

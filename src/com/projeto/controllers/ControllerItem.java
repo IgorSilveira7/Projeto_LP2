@@ -335,8 +335,12 @@ public class ControllerItem {
 		
 	}
 	
-	
-	
-	
-	
+	public String getItemLista(String descritor, int id) {
+		return this.listasDeCompras.get(descritor).getItemLista(id);
+	}
+
+	public void deletaCompraDeLista(String descritor, int id) {
+		Item i = this.itens.get(id);
+		this.listasDeCompras.get(descritor).deletaCompraDeLista(i);
+	}
 }

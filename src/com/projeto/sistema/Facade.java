@@ -203,4 +203,12 @@ public class Facade {
 	public void finalizarListaDeCompras(String descritor, String localDeCompra, double valorFinal) {
 		this.controllerItem.finalizarListaDeCompras(descritor, localDeCompra, valorFinal);
 	}
+	
+	public String getItemLista(String descritor, int id) {
+		return this.controllerItem.getItemLista(descritor, id);
+	}
+	
+	public void deletaCompraDeLista(String descritor, int id) {
+		this.controllerItem.deletaCompraDeLista(descritor, id);
+	}
 }
