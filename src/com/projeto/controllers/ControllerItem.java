@@ -304,4 +304,27 @@ public class ControllerItem {
 		this.itensOrdenados = new ArrayList<>(this.itens.values());
 		Collections.sort(itensOrdenados, new OrdenarItensPorMenorPreco());
 	}
+	
+	public String criaListaDeCompra(String descritor) {
+		this.listasDeCompras.put(descritor, new ListaDeCompras(descritor));
+		
+		return descritor;
+	}
+	
+	public void adicionaCompraALista(String descritor, double qntd, int id) {
+		Item i = this.itens.get(id);
+		this.listasDeCompras.get(descritor).adicionaCompraALista(qntd, i);
+	}
+	
+	public String pesquisaCompraEmLista(String descritor, int id) {
+		Item i = this.itens.get(id);
+		return this.listasDeCompras.get(descritor).pesquisaCompraEmLista(i);
+	}
+	
+	
+	
+	
+	
+	
+	
 }

@@ -177,4 +177,16 @@ public class Facade {
 	public String getItemPorPesquisa(String strPesquisada, int id) {
 		return this.controllerItem.getItemPorPesquisa(strPesquisada, id);
 	}
+	
+	public String adicionaListaDeCompras(String descritor) {
+		return this.controllerItem.criaListaDeCompra(descritor);
+	}
+	
+	public void adicionaCompraALista(String descritor, double qntd, int id) {
+		this.controllerItem.adicionaCompraALista(descritor, qntd, id);
+	}
+	
+	public String pesquisaCompraEmLista(String descritor, int id) {
+		return this.controllerItem.pesquisaCompraEmLista(descritor, id);
+	}
 }
