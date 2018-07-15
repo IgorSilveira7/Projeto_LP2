@@ -321,7 +321,19 @@ public class ControllerItem {
 		return this.listasDeCompras.get(descritor).pesquisaCompraEmLista(i);
 	}
 	
-	
+	public void atualizaCompraDeLista(String descritor, int id, double novaQuantidade) {
+		Item i = this.itens.get(id);
+		this.listasDeCompras.get(descritor).atualizaCompraDeLista(i, novaQuantidade);
+	}
+
+	public String pesquisaListaDeCompras(String descritor) {
+		return this.listasDeCompras.get(descritor).toString();
+	}
+
+	public void finalizarListaDeCompras(String descritor, String localDeCompra, double valorFinal) {
+		this.listasDeCompras.get(descritor).finalizarListaDeCompras(localDeCompra, valorFinal);
+		
+	}
 	
 	
 	

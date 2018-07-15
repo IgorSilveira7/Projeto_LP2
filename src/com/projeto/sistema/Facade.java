@@ -1,6 +1,8 @@
 package com.projeto.sistema;
 
 import com.projeto.controllers.ControllerItem;
+import com.projeto.entidades.Item;
+
 import easyaccept.EasyAccept;
 
 /**
@@ -188,5 +190,17 @@ public class Facade {
 	
 	public String pesquisaCompraEmLista(String descritor, int id) {
 		return this.controllerItem.pesquisaCompraEmLista(descritor, id);
+	}
+	
+	public void atualizaCompraDeLista(String descritor, int id, double novaQuantidade) {
+		this.controllerItem.atualizaCompraDeLista(descritor, id, novaQuantidade);
+	}
+	
+	public String pesquisaListaDeCompras(String descritor) {
+		return this.controllerItem.pesquisaListaDeCompras(descritor);
+	}
+	
+	public void finalizarListaDeCompras(String descritor, String localDeCompra, double valorFinal) {
+		this.controllerItem.finalizarListaDeCompras(descritor, localDeCompra, valorFinal);
 	}
 }

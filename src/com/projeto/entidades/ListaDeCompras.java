@@ -35,4 +35,20 @@ public class ListaDeCompras {
 		return item.getToStringEmLista(this.qntdItens.get(item));
 	}
 	
+	public void atualizaCompraDeLista(Item item, double novaquantidade) {
+		if (this.qntdItens.containsKey(item)) {
+			this.qntdItens.replace(item, novaquantidade);
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return this.descritor;
+	}
+
+	public void finalizarListaDeCompras(String localDeCompra, double valorFinal) {
+		this.localDeCompra = localDeCompra;
+		this.valorTotal = valorFinal;
+	}
+	
 }
