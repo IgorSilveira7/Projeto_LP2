@@ -6,8 +6,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
+
+import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.ordenacao.OrdenaItensPorNome;
 import com.projeto.ordenacao.OrdenarPorCategoria;
+import com.projeto.validadores.ValidadorListaDeCompras;
 
 /**
  * Classe reposavel por uma lista de compras.
@@ -50,10 +53,12 @@ public class ListaDeCompras {
 	 * @param descritor do tipo String, que e referente a descricao de uma lista de compras.
 	 */
 	public ListaDeCompras(String descritor) {
-		this.descritor = descritor;
-		this.itens = new ArrayList<>();
-		this.qntdItens = new TreeMap<>();
-		this.data = new Date();
+		if (ValidadorListaDeCompras.testeDescritor(descritor)) {
+			this.descritor = descritor;
+			this.itens = new ArrayList<>();
+			this.qntdItens = new TreeMap<>();
+			this.data = new Date();
+		}
 	}
 	
 	/**
@@ -77,6 +82,9 @@ public class ListaDeCompras {
 	 * @return a representacao textual do item comprado que sera pesquisado.
 	 */
 	public String pesquisaCompraEmLista(Item item) {
+		if (!this.itens.contains(item)) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: compra nao encontrada na lista.");
+		}
 		return item.getToStringEmLista(this.qntdItens.get(item));
 	}
 	
@@ -88,17 +96,10 @@ public class ListaDeCompras {
 	 * devera ser atualizado.
 	 */
 	public void atualizaCompraDeLista(Item item, double novaquantidade) {
-		if (this.qntdItens.containsKey(item)) {
-			this.qntdItens.replace(item, novaquantidade);
+		if (!this.qntdItens.containsKey(item)) {
+			throw new EntradaInvalidaException("Erro na atualizacao de compra: compra nao encontrada na lista.");
 		}
-	}
-	
-	/**
-	 * Metodo que retorna a descricao textual de uma lista de compras.
-	 */
-	@Override
-	public String toString() {
-		return this.descritor;
+		this.qntdItens.replace(item, novaquantidade);
 	}
 
 	/**
@@ -108,6 +109,7 @@ public class ListaDeCompras {
 	 * @param valorFinal do tipo Double, referente ao valor final da lista em questao.
 	 */
 	public void finalizarListaDeCompras(String localDeCompra, double valorFinal) {
+		ValidadorListaDeCompras.testeFinalizarCompra(localDeCompra, valorFinal);
 		this.localDeCompra = localDeCompra;
 		this.valorTotal = valorFinal;
 	}
@@ -140,10 +142,21 @@ public class ListaDeCompras {
 	/**
 	 * Metodo que deleta uma compra de uma lista de compras.
 	 * 
-	 * @param i referente ao item a ser removido da lista.
+	 * @param item referente ao item a ser removido da lista.
 	 */
-	public void deletaCompraDeLista(Item i) {
-		this.itens.remove(i);
-		this.qntdItens.remove(i);
+	public void deletaCompraDeLista(Item item) {
+		if (!this.itens.contains(item)) {
+			throw new EntradaInvalidaException("Erro na exclusao de compra: compra nao encontrada na lista.");
+		}
+		this.itens.remove(item);
+		this.qntdItens.remove(item);
+	}
+	
+	/**
+	 * Metodo que retorna a descricao textual de uma lista de compras.
+	 */
+	@Override
+	public String toString() {
+		return this.descritor;
 	}
 }

@@ -6,10 +6,12 @@ import com.projeto.entidades.ListaDeCompras;
 import com.projeto.entidades.ProdutoNaoIndustrializado;
 import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
+import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.ordenacao.OrdenaItensPorNome;
 import com.projeto.ordenacao.OrdenarItensPorMenorPreco;
 import com.projeto.ordenacao.OrdenarPorCategoria;
 import com.projeto.validadores.ValidadorItem;
+import com.projeto.validadores.ValidadorListaDeCompras;
 
 /**
  * Classe que controla os itens cadastrados no sistema. Cadastrada, exibe, atualiza e deletar itens.
@@ -218,7 +220,7 @@ public class ControllerItem {
 	 */
 	public String getItem(int id) {
 		this.ordenarPorNome();
-		if (this.itensOrdenados.size() >= id) {
+		if (this.itensOrdenados.size() > id) {
 			return this.itensOrdenados.get(id).toString();
 		} else {
 			return "";
@@ -315,8 +317,8 @@ public class ControllerItem {
 	 * @return o descritor referente a lista de compras criada.
 	 */
 	public String criaListaDeCompra(String descritor) {
+		ValidadorListaDeCompras.testeDescritor(descritor);
 		this.listasDeCompras.put(descritor, new ListaDeCompras(descritor));
-		
 		return descritor;
 	}
 	
@@ -328,6 +330,9 @@ public class ControllerItem {
 	 * @param id do tipo Inteiro, referente a identificacao do item.
 	 */
 	public void adicionaCompraALista(String descritor, double qntd, int id) {
+		if (!this.itens.containsKey(id)) {
+			throw new EntradaInvalidaException("Erro na compra de item: item nao existe no sistema.");
+		}
 		Item i = this.itens.get(id);
 		this.listasDeCompras.get(descritor).adicionaCompraALista(qntd, i);
 	}
@@ -340,6 +345,15 @@ public class ControllerItem {
 	 * @return String contendo a pesquisa do item em determinada lista de compras.
 	 */
 	public String pesquisaCompraEmLista(String descritor, int id) {
+		if (descritor == null) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
+		}
+		if (descritor.trim().isEmpty()) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
+		}
+		if (!this.itens.containsKey(id)) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: item id invalido.");
+		}
 		Item i = this.itens.get(id);
 		return this.listasDeCompras.get(descritor).pesquisaCompraEmLista(i);
 	}
@@ -374,6 +388,13 @@ public class ControllerItem {
 	 * @param valorFinal do tipo Double, referente ao ultimo valor do item.
 	 */
 	public void finalizarListaDeCompras(String descritor, String localDeCompra, double valorFinal) {
+		if (descritor == null) {
+			throw new EntradaInvalidaException("Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
+		}
+		if (descritor.trim().isEmpty()) {
+			throw new EntradaInvalidaException("Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
+		}
+		ValidadorListaDeCompras.testeFinalizarCompra(localDeCompra, valorFinal);
 		this.listasDeCompras.get(descritor).finalizarListaDeCompras(localDeCompra, valorFinal);
 		
 	}
@@ -396,6 +417,15 @@ public class ControllerItem {
 	 * @param id do tipo Inteiro, responsavel pela identificacao do item.
 	 */
 	public void deletaCompraDeLista(String descritor, int id) {
+		if (descritor == null) {
+			throw new EntradaInvalidaException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
+		}
+		if (descritor.trim().isEmpty()) {
+			throw new EntradaInvalidaException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
+		}
+		if (!this.itens.containsKey(id)) {
+			throw new EntradaInvalidaException("Erro na exclusao de compra: item nao existe no sistema.");
+		}
 		Item i = this.itens.get(id);
 		this.listasDeCompras.get(descritor).deletaCompraDeLista(i);
 	}

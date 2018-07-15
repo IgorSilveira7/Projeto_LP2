@@ -16,24 +16,7 @@ public class TesteControllerItem {
 	@Before
 	public void before() {
 		this.c = new ControllerItem();
-	}
-	
-	@Test(expected=ItemJaExisteException.class)
-	public void testItemJaExisteQuantFixa() {
-		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 15, "uc", "Alfredo +", 2.58);
-		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "um", "Alfredo plus", 2.58);
-	}
-	
-	@Test(expected=ItemJaExisteException.class)
-	public void testItemJaExisteUni() {
-		this.c.adicionaItemPorUnidade("Pao", "alimento industrializado", 5, "Alfredo plus", 2.58);
-		this.c.adicionaItemPorUnidade("Pao", "alimento industrializado", 4, "Alfredo menos", 2.58);
-	}
-
-	@Test(expected=ItemJaExisteException.class)
-	public void testItemJaExisteProQuilo() {
-		this.c.adicionaItemPorQuilo("Pao", "alimento industrializado", 1, "Alfredo +", 2.58);
-		this.c.adicionaItemPorQuilo("Pao", "alimento industrializado", 2, "Alfredo +", 2.58);
+		this.c.criaListaDeCompra("feira");
 	}
 	
 	@Test(expected=EntradaInvalidaException.class)
@@ -218,12 +201,11 @@ public class TesteControllerItem {
 		assertEquals(res, this.c.getItem(0));
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testGetItemNaoExiste() {
 		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
 		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
-		String res = "2. Arroz, alimento industrializado, Preco por quilo: <Baratao, R$ 2,10;>";
-		assertEquals(res, this.c.getItem(2));
+		assertEquals("", this.c.getItem(2));
 	}
 	
 	@Test
@@ -235,11 +217,11 @@ public class TesteControllerItem {
 		assertEquals(res, this.c.getItemPorMenorPreco(0));
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testGetItemMenorPrecoNaoExiste() {
 		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
 		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
-		this.c.getItemPorMenorPreco(4);
+		assertEquals("", this.c.getItemPorMenorPreco(4));
 	}
 	
 	@Test
@@ -258,5 +240,117 @@ public class TesteControllerItem {
 		this.c.adicionaItemPorUnidade("Arroz bom", "alimento nao industrializado", 2, "Alfredo plus", 2.4);
 		String res = "3. Arroz bom, alimento nao industrializado, Preco: <Alfredo plus, R$ 2,40;>";
 		assertEquals(res, this.c.getItemPorPesquisa("arroz", 0));
+	}
+	
+	@Test
+	public void testCriaListaDeCompras() {
+		assertEquals("feira 1", this.c.criaListaDeCompra("feira 1"));
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testCriaListaDeComprasDescritorNulo() {
+		this.c.criaListaDeCompra(null);
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testCriaListaDeComprasDescritorVazio() {
+		this.c.criaListaDeCompra("  ");
+	}
+	
+	@Test
+	public void testAddItemListaDeCompras() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 2, 1);
+		assertEquals("2 Pao, alimento industrializado, 5 u.m", this.c.pesquisaCompraEmLista("feira", 1));
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testAddItemListaDeComprasIdInvalido() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 2, 5);
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testPesquisarCompraListaDeComprasDescritorInvalido() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 2, 1);
+		this.c.pesquisaCompraEmLista(" ", 1);
+	}
+	
+	@Test
+	public void testAtualizarCompraListaDeCompras() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 2, 1);
+		this.c.atualizaCompraDeLista("feira", 1, 4);
+		assertEquals("4 Pao, alimento industrializado, 5 u.m", this.c.pesquisaCompraEmLista("feira", 1));
+	}
+	
+	@Test
+	public void testPesquisaListaDeCompras() {
+		assertEquals("feira", this.c.pesquisaListaDeCompras("feira"));
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testFinalizarListaDeComprasInvalido() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 2, 1);
+		this.c.finalizarListaDeCompras("", "Alfredo", 500);
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testFinalizarListaDeComprasLocalInvalido() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 2, 1);
+		this.c.finalizarListaDeCompras("feira", " ", 500);
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testFinalizarListaDeComprasValorInvalido() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 2, 1);
+		this.c.finalizarListaDeCompras("feira", "Alfredo", 0);
+	}
+	
+	@Test
+	public void testGetItemLista() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 3, 1);
+		this.c.adicionaCompraALista("feira", 3, 2);
+		assertEquals("3,0 kg Arroz, alimento industrializado", this.c.getItemLista("feira", 0));
+	}
+	
+	@Test
+	public void testDeletaCompraDeLista() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 3, 1);
+		this.c.adicionaCompraALista("feira", 3, 2);
+		this.c.deletaCompraDeLista("feira", 1);
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testDeletaCompraDeListaDescritorInvalido() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 3, 1);
+		this.c.adicionaCompraALista("feira", 3, 2);
+		this.c.deletaCompraDeLista("  ", 1);
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testDeletaCompraDeListaIdInvalido() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaCompraALista("feira", 3, 1);
+		this.c.adicionaCompraALista("feira", 3, 2);
+		this.c.deletaCompraDeLista("feira", 4);
 	}
 }

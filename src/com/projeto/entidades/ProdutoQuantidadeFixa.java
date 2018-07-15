@@ -65,6 +65,7 @@ public class ProdutoQuantidadeFixa extends Item {
 	 */
 	@Override
 	public void setMedida(String novaMedida) {
+		ValidadorItem.validaSetMedida(novaMedida);
 		this.medida = novaMedida;
 	}
 	
@@ -73,6 +74,7 @@ public class ProdutoQuantidadeFixa extends Item {
 	 */
 	@Override
 	public void setQuantidade(int novoValor) {
+		ValidadorItem.validaSetQuantidade(novoValor);
 		this.quantidade = novoValor;
 	}
 	

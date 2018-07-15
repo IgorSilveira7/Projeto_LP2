@@ -2,6 +2,7 @@ package com.projeto.entidades;
 
 import java.util.*;
 
+import com.projeto.enums.Categoria;
 import com.projeto.validadores.ValidadorItem;
 
 /**
@@ -55,27 +56,6 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 			this.categoria = escolheCategoria(categoria);
 			this.mapaPrecos = new HashMap<>();
 			this.mapaPrecos.put(supermercado, preco);
-		}
-	}
-	
-	/**
-	 * Metodo privado que dado um tipo de produto relaciona-o com uma categoria e a retorna.
-	 * 
-	 * @param c do tipo String, referente a o tipo do produto em questao.
-	 * @return a categoria do item.
-	 */
-	private Categoria escolheCategoria(String c) {
-		switch (c.toLowerCase()) {
-			case "higiene pessoal":
-				return Categoria.higiene;
-			case "limpeza":
-				return Categoria.limpeza;
-			case "alimento industrializado":
-				return Categoria.industrializado;
-			case "alimento nao industrializado":
-				return Categoria.N_industrializado;
-			default:
-				return null;
 		}
 	}
 
@@ -224,5 +204,26 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 	 */
 	public String getDescricao() {
 		return this.nome + this.categoria;
+	}
+	
+	/**
+	 * Metodo privado que dado um tipo de produto relaciona-o com uma categoria e a retorna.
+	 * 
+	 * @param categoria String que representa a categoria do item.
+	 * @return A categoria do item(Enum).
+	 */
+	private Categoria escolheCategoria(String categoria) {
+		switch (categoria.toLowerCase()) {
+			case "higiene pessoal":
+				return Categoria.higiene;
+			case "limpeza":
+				return Categoria.limpeza;
+			case "alimento industrializado":
+				return Categoria.industrializado;
+			case "alimento nao industrializado":
+				return Categoria.N_industrializado;
+			default:
+				return null;
+		}
 	}
 }

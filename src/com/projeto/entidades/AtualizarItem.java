@@ -12,6 +12,12 @@ import com.projeto.validadores.ValidadorItem;
  */
 public interface AtualizarItem {
 	
+	/**
+	 * Metodo que será implementado nas classes que implementar a interface.
+	 * 
+	 * @param quant Double que representa a quantidade do item em uma lista.
+	 * @return String que representa a representacao textual do item.
+	 */
 	public String getToStringEmLista(double quant);
 
 	/**

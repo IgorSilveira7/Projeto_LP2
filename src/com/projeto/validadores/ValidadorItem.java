@@ -8,7 +8,6 @@ import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
 import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.excecoes.ItemJaExisteException;
-import com.projeto.validadores.*;
 
 /**
  * Classe referente a validar um item.

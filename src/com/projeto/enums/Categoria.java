@@ -1,4 +1,4 @@
-package com.projeto.entidades;
+package com.projeto.enums;
 
 /**
  * Classe responsavel por configuraar categoria como enum.

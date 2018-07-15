@@ -49,6 +49,7 @@ public class ProdutoNaoIndustrializado extends Item {
 	 */
 	@Override
 	public void setQuilos(double novoPeso) {
+		ValidadorItem.validaSetQuilos(novoPeso);
 		this.peso = novoPeso;
 	}
 	

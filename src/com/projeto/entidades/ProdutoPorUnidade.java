@@ -36,7 +36,6 @@ public class ProdutoPorUnidade extends Item {
 	 *            Double que representa o preco do item nesse supermercado.
 	 */
 	public ProdutoPorUnidade(int numero, String nome, String categoria, int unidade, String supermercado, double preco) {
-		
 		super(numero, nome, categoria, supermercado, preco);
 		if (ValidadorItem.validaUnidade(unidade)) {
 			this.unidade = unidade;
@@ -48,6 +47,7 @@ public class ProdutoPorUnidade extends Item {
 	 */
 	@Override
 	public void setUnidade(int novaUnidade) {
+		ValidadorItem.validaSetUnidade(novaUnidade);
 		this.unidade = novaUnidade;
 	}
 	
