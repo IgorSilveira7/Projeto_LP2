@@ -7,7 +7,7 @@ import com.projeto.entidades.Item;
 public class OrdenaItensPorNome implements Comparator<Item> {
 	
 	/** 
-	 * Classe responsavel por comparar dois objetos por meio do nome.
+	 * Metodo responsavel por comparar dois objetos por meio do nome.
 	 * 
 	 * @author  Igor Silveira
 	 * 			Matheus Gusmao

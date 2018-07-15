@@ -76,12 +76,19 @@ public class ProdutoQuantidadeFixa extends Item {
 		this.quantidade = novoValor;
 	}
 	
+	/**
+	 * Metodo spbrescrito da classe pai(Item) que ira retornar uma String contendo informacoes_
+	 * _sobre a quantidade, nome, categoria e medida de um item. 
+	 */
 	@Override
 	public String getToStringEmLista(double quant) {
 		return ((int) quant) + " " + this.getNome() + ", " + this.getCategoria() + ", "+
 						     this.quantidade + " " + this.medida;
 	}
 
+	/**
+	 * Metodo de comparacao de dois item, utilizando compareTO.
+	 */
 	@Override
 	public int compareTo(Item o) {
 		return super.getNome().compareTo(o.getNome());

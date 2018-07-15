@@ -6,11 +6,11 @@ LINK PARA O DIAGRAMA: https://go.gliffy.com/go/share/sowxjyxggtu2uvppob94
 
 ## Equipe:
 ------------
-1 - Igor
+1 - Igor Silveira
 
-2 - José Davi
+2 - Jose Davi
 
-3 - Matheus
+3 - Matheus Gusmao
 
 4 - Rich Elton Carvalho Ramalho.
 
@@ -26,7 +26,7 @@ Conceitos utilizados.
 - [X] Testes de aceitação case 1 - Exception.
 - [X] Testes de aceitação case 2.
 - [X] Testes de aceitação case 2 - Exception.
-- [ ] Testes de aceitação case 3.
+- [X] Testes de aceitação case 3.
 - [ ] Testes de aceitação case 3 - Exception.
 - [ ] Testes de aceitação case 4.
 - [ ] Testes de aceitação case 4 - Exception.

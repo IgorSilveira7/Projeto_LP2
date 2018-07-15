@@ -9,7 +9,10 @@ import easyaccept.EasyAccept;
  * Classe que ira se comunicar com os controllers(No caso apenas com um).
  * E assim facilitando as implementações com a interface.
  * 
- * @author Rich
+ * @author  Igor Silveira
+ * 			Jose Davi
+ *          Matheus Gusmao	
+ * 			Rich Ramalho
  *
  */
 public class Facade {
@@ -180,34 +183,88 @@ public class Facade {
 		return this.controllerItem.getItemPorPesquisa(strPesquisada, id);
 	}
 	
+	/**
+	 * Metodo que retorna a descricao da lista de compras recem criada.
+	 * 
+	 * @param descritor do tipo String, que descreve a lista de compras.
+	 * @return a criacao de uma lista de compras.
+	 */
 	public String adicionaListaDeCompras(String descritor) {
 		return this.controllerItem.criaListaDeCompra(descritor);
 	}
 	
+	/**
+	 * Metodo sem retorno que adiciona uma compra a lista de compras.
+	 * 
+	 * @param descritor do tipo String, que descreve uma lista de compras.
+	 * @param qntd do tipo Double, que e referente a quantidade de itens.
+	 * @param id do tipo Inteiro, referente a identificacao do item.
+	 */
 	public void adicionaCompraALista(String descritor, double qntd, int id) {
 		this.controllerItem.adicionaCompraALista(descritor, qntd, id);
 	}
 	
+	/**
+	 * Metodo responsavel por pesquisar uma determinada compra na lista de compras.
+	 * 
+	 * @param descritor do tipo String, referente a descricao da lista de compras.
+	 * @param id do tipo inteiro, referente a identificacao do item.
+	 * @return uma String contendo a pesquisa feita na lista.
+	 */
 	public String pesquisaCompraEmLista(String descritor, int id) {
 		return this.controllerItem.pesquisaCompraEmLista(descritor, id);
 	}
 	
+	/**
+	 * Metodo que atualiza uma compra na lista de compras.
+	 * 
+	 * @param descritor do tipo String, responsavel por descrever uma lista de compras.
+	 * @param id do tipo Inteiro, responsavel pela identificacao de um item.
+	 * @param novaQuantidade do tipo Double, responsavel por dar a nova quantidade do item_
+	 * _que sera atualizado na lista de compras.
+	 */
 	public void atualizaCompraDeLista(String descritor, int id, double novaQuantidade) {
 		this.controllerItem.atualizaCompraDeLista(descritor, id, novaQuantidade);
 	}
 	
+	/**
+	 * Metodo que permite a pesquisa de uma lista de compras.
+	 * 
+	 * @param descritor do tipo String, que descreve uma lista de compras.
+	 * @return a String contendo a pesquisa referente a lista de compras.
+	 */
 	public String pesquisaListaDeCompras(String descritor) {
 		return this.controllerItem.pesquisaListaDeCompras(descritor);
 	}
 	
+	/**
+	 * Metodo que tem funcao finalizar uma lista de compras.
+	 * 
+	 * @param descritor do tipo String, referente a descricao de uma lista de compras.
+	 * @param localDeCompra do tipo String, referente ao local da compra.
+	 * @param valorFinal do tipo Double, referente ao ultimo valor do item a ser comprado.
+	 */
 	public void finalizarListaDeCompras(String descritor, String localDeCompra, double valorFinal) {
 		this.controllerItem.finalizarListaDeCompras(descritor, localDeCompra, valorFinal);
 	}
 	
+	/**
+	 * Metodo que retorna o item na lista.
+	 * 
+	 * @param descritor do tipo String, referente a descricao da lista de compras.
+	 * @param id do tipo Inteiro, referente a identificacao do item.
+	 * @return uma String contendo a representacao textual do item em determinada lista de compras.
+	 */
 	public String getItemLista(String descritor, int id) {
 		return this.controllerItem.getItemLista(descritor, id);
 	}
 	
+	/**
+	 * Metodo referente a delecao de uma compra na lista de compras.
+	 * 
+	 * @param descritor do tipo String, referente a descricao de uma lista de compras.
+	 * @param id do tipo Inteiro, referente a identificacao do item na lista de compras.
+	 */
 	public void deletaCompraDeLista(String descritor, int id) {
 		this.controllerItem.deletaCompraDeLista(descritor, id);
 	}

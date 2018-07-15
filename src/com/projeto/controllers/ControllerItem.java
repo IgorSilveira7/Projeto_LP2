@@ -14,7 +14,10 @@ import com.projeto.validadores.ValidadorItem;
 /**
  * Classe que controla os itens cadastrados no sistema. Cadastrada, exibe, atualiza e deletar itens.
  * 
- * @author Rich Elton
+ * @author  Igor Silveira
+ * 			Jose Davi
+ * 			Matheus Gusmao	
+ * 			Rich Ramalho
  *
  */
 public class ControllerItem {
@@ -305,40 +308,93 @@ public class ControllerItem {
 		Collections.sort(itensOrdenados, new OrdenarItensPorMenorPreco());
 	}
 	
+	/**
+	 * Metodo responsavel por criar a lista de compras.
+	 * 
+	 * @param descritor do tipo String, referente a descricao da lista de compras.
+	 * @return o descritor referente a lista de compras criada.
+	 */
 	public String criaListaDeCompra(String descritor) {
 		this.listasDeCompras.put(descritor, new ListaDeCompras(descritor));
 		
 		return descritor;
 	}
 	
+	/**
+	 * Metodo responsavel por adicionar compras a lista de compras criada.
+	 * 
+	 * @param descritor do tipo String, referente a descricao da lista de compras.
+	 * @param qntd do tipo Double, referente a quantidade do item.
+	 * @param id do tipo Inteiro, referente a identificacao do item.
+	 */
 	public void adicionaCompraALista(String descritor, double qntd, int id) {
 		Item i = this.itens.get(id);
 		this.listasDeCompras.get(descritor).adicionaCompraALista(qntd, i);
 	}
 	
+	/**
+	 * Metodo responsavel por pesquisar uma compra na lista de compras.
+	 * 
+	 * @param descritor do tipo String, referente a descricao da lista de compras.
+	 * @param id do tipo Inteiro, referente a identificacao do item.
+	 * @return String contendo a pesquisa do item em determinada lista de compras.
+	 */
 	public String pesquisaCompraEmLista(String descritor, int id) {
 		Item i = this.itens.get(id);
 		return this.listasDeCompras.get(descritor).pesquisaCompraEmLista(i);
 	}
 	
+	/**
+	 * Metodo responsavel por atualizar a lista de compras.
+	 * 
+	 * @param descritor do tipo String, referente a descricao da lista de compras.
+	 * @param id do tipo Inteiro, referente a identificacao do item.
+	 * @param novaQuantidade do tipo Double, referente a nova quantidade do item, atualizando assim a lista.
+	 */
 	public void atualizaCompraDeLista(String descritor, int id, double novaQuantidade) {
 		Item i = this.itens.get(id);
 		this.listasDeCompras.get(descritor).atualizaCompraDeLista(i, novaQuantidade);
 	}
 
+	/**
+	 * Metodo responsavel por pesquisar uma lista de compra especifica.
+	 * 
+	 * @param descritor do tipo String, referente a descricao da lista de compras.
+	 * @return a lista de compras pesquisada, da forma String.
+	 */
 	public String pesquisaListaDeCompras(String descritor) {
 		return this.listasDeCompras.get(descritor).toString();
 	}
 
+	/**
+	 * Metodo responsavel por finalizar uma lista de compras.
+	 * 
+	 * @param descritor do tipo String, responsavel pela descricao da lista de compras.
+	 * @param localDeCompra do tipo String, referente ao local de compra do item.
+	 * @param valorFinal do tipo Double, referente ao ultimo valor do item.
+	 */
 	public void finalizarListaDeCompras(String descritor, String localDeCompra, double valorFinal) {
 		this.listasDeCompras.get(descritor).finalizarListaDeCompras(localDeCompra, valorFinal);
 		
 	}
 	
+	/**
+	 * Metodo que retorna o item da lista.
+	 * 
+	 * @param descritor do tipo String, referente a decricao da lista de compras.
+	 * @param id do tipo inteiro, referente a identificacao do item.
+	 * @return a String contendo a lista de compras e o item.
+	 */
 	public String getItemLista(String descritor, int id) {
 		return this.listasDeCompras.get(descritor).getItemLista(id);
 	}
 
+	/**
+	 * Metodo que deleta uma lista de compras.
+	 * 
+	 * @param descritor do tipo String, responsavel por descrever a lista de compras.
+	 * @param id do tipo Inteiro, responsavel pela identificacao do item.
+	 */
 	public void deletaCompraDeLista(String descritor, int id) {
 		Item i = this.itens.get(id);
 		this.listasDeCompras.get(descritor).deletaCompraDeLista(i);

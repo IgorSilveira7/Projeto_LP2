@@ -62,11 +62,21 @@ public class ProdutoNaoIndustrializado extends Item {
 		return super.toString() + " Preco por quilo: " + super.toStringPrecos();
 	}
 
+	/**
+	 * Metodo sobrescrito da classe pai(Item) que retorna a representacao textual do item.
+	 * 
+	 * @return String contendo a quantidade em kg do item, seu nome e sua categoria.
+	 */
 	@Override
 	public String getToStringEmLista(double quant) {
 		return String.format("%.1f", quant) + " kg " + this.getNome() + ", " + this.getCategoria();
 	}
 
+	/**
+	 * Metodo de comparacao de dois itens, usando compareTo.
+	 * 
+	 * @return inteiro referente a o uso do compareTo.
+	 */
 	@Override
 	public int compareTo(Item o) {
 		return super.getNome().compareTo(o.getNome());

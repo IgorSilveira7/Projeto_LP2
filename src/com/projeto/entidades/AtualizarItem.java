@@ -2,6 +2,14 @@ package com.projeto.entidades;
 
 import com.projeto.validadores.ValidadorItem;
 
+/**
+ * Criacao de uma interface, relacionada a Item.
+ * 
+ * @author  Igor Silveira
+ * 			Jose Davi
+ * 			Matheus Gusmao
+ * 			Rich Ramalho
+ */
 public interface AtualizarItem {
 	
 	public String getToStringEmLista(double quant);

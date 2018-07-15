@@ -7,7 +7,7 @@ import com.projeto.entidades.Item;
 public class OrdenarItensPorMenorPreco implements Comparator<Item> {
 
 	/**
-	 * Classe responsavel por ordenar itens em favor do seu preco.
+	 * Metodo responsavel por ordenar itens em favor do seu preco.
 	 * 
 	 * @authors Jose Davi
 	 * 			Matheus Gusmao

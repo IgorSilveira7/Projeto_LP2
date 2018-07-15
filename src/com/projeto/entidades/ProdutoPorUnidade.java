@@ -61,11 +61,21 @@ public class ProdutoPorUnidade extends Item {
 		return super.toString() + " Preco: " + super.toStringPrecos();
 	}
 	
+	/**
+	 * Metodo sobrescrito da classe pai(Item) que retorna a representacao textual de um item.
+	 * 
+	 * @return String contendo a quantidade, nome e categoria de um item.
+	 */
 	@Override
 	public String getToStringEmLista(double quant) {
 		return ((int) quant) + " " + this.getNome() + ", " + this.getCategoria();
 	}
 
+	/**
+	 * Metodo sobrescrito da classe pai(Item) que retorna um inteiro referente a comparacao.
+	 * 
+	 * @return inteiro referente a comparacao de dois itens pelo compareTo.
+	 */
 	@Override
 	public int compareTo(Item o) {
 		return super.getNome().compareTo(o.getNome());

@@ -58,6 +58,12 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 		}
 	}
 	
+	/**
+	 * Metodo privado que dado um tipo de produto relaciona-o com uma categoria e a retorna.
+	 * 
+	 * @param c do tipo String, referente a o tipo do produto em questao.
+	 * @return a categoria do item.
+	 */
 	private Categoria escolheCategoria(String c) {
 		switch (c.toLowerCase()) {
 			case "higiene pessoal":
@@ -121,6 +127,11 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 		}
 	}
 	
+	/**
+	 * Metodo que retorna a representacao textual de de um tipo de produto.
+	 * 
+	 * @return uma String que contem a categoria do item.
+	 */
 	public String getCategoria() {
 		if (this.categoria.equals(Categoria.higiene)) {
 			return "higiene pessoal";
@@ -206,6 +217,11 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 		return Collections.min(this.mapaPrecos.values());
 	}
 
+	/**
+	 * Metodo que retorna a representacao textual do nome e categoria de um item;.
+	 * 
+	 * @return String correspondente a nome e categoria de determinado item.
+	 */
 	public String getDescricao() {
 		return this.nome + this.categoria;
 	}
