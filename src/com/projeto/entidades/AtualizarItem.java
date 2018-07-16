@@ -5,17 +5,18 @@ import com.projeto.validadores.ValidadorItem;
 /**
  * Criacao de uma interface, relacionada a Item.
  * 
- * @author  Igor Silveira
- * 			Jose Davi
- * 			Matheus Gusmao
- * 			Rich Ramalho
+ * @author Igor Silveira
+ * @author Jose Davi
+ * @author Matheus Gusmao
+ * @author Rich Ramalho
  */
 public interface AtualizarItem {
-	
+
 	/**
 	 * Metodo que será implementado nas classes que implementar a interface.
 	 * 
-	 * @param quant Double que representa a quantidade do item em uma lista.
+	 * @param quant
+	 *            Double que representa a quantidade do item em uma lista.
 	 * @return String que representa a representacao textual do item.
 	 */
 	public String getToStringEmLista(double quant);
@@ -30,6 +31,7 @@ public interface AtualizarItem {
 	public default void setQuantidade(int quantidade) {
 		ValidadorItem.validaSetQuantidade(quantidade);
 	}
+
 	/**
 	 * Metodo default que seŕa implementado nas classes filhas(Altera a unidade de
 	 * medida do item).
@@ -40,6 +42,7 @@ public interface AtualizarItem {
 	public default void setMedida(String novaMedida) {
 		ValidadorItem.validaSetMedida(novaMedida);
 	}
+
 	/**
 	 * Metodo default que seŕa implementado nas classes filhas(Altera a unidade do
 	 * item).
@@ -50,6 +53,7 @@ public interface AtualizarItem {
 	public default void setUnidade(int novaUnidade) {
 		ValidadorItem.validaSetUnidade(novaUnidade);
 	}
+
 	/**
 	 * Metodo default que seŕa implementado nas classes filhas(Altera o peso do
 	 * item).
@@ -60,5 +64,5 @@ public interface AtualizarItem {
 	public default void setQuilos(double novoQuilo) {
 		ValidadorItem.validaSetQuilos(novoQuilo);
 	}
-	
+
 }

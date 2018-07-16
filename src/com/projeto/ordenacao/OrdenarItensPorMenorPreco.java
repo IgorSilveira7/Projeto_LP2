@@ -9,16 +9,16 @@ public class OrdenarItensPorMenorPreco implements Comparator<Item> {
 	/**
 	 * Metodo responsavel por ordenar itens em favor do seu preco.
 	 * 
-	 * @authors Jose Davi
-	 * 			Matheus Gusmao
+	 * @author Jose Davi
+	 * @author Matheus Gusmao
 	 */
 	@Override
 	public int compare(Item o1, Item o2) {
 		if (o1.getMenorPreco() > o2.getMenorPreco()) {
 			return 1;
-		}else if (o1.getMenorPreco() == o2.getMenorPreco()) {
+		} else if (o1.getMenorPreco() == o2.getMenorPreco()) {
 			return 0;
-		}else {
+		} else {
 			return -1;
 		}
 	}

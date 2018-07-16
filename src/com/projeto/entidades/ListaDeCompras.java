@@ -1,6 +1,5 @@
 package com.projeto.entidades;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -15,10 +14,10 @@ import com.projeto.validadores.ValidadorListaDeCompras;
 /**
  * Classe reposavel por uma lista de compras.
  * 
- * @author  Igor Silveira
- * 			Jose Davi
- * 			Matheus Gusmao
- * 			Rich Ramalho
+ * @author Igor Silveira
+ * @author Jose Davi
+ * @author Matheus Gusmao
+ * @author Rich Ramalho
  *
  */
 public class ListaDeCompras {
@@ -46,11 +45,13 @@ public class ListaDeCompras {
 	 * Atributo do tipo String referente ao Local de compra.
 	 */
 	private String localDeCompra;
-	
+
 	/**
 	 * Construtor de uma Lista de compras.
 	 * 
-	 * @param descritor do tipo String, que e referente a descricao de uma lista de compras.
+	 * @param descritor
+	 *            do tipo String, que e referente a descricao de uma lista de
+	 *            compras.
 	 */
 	public ListaDeCompras(String descritor) {
 		if (ValidadorListaDeCompras.testeDescritor(descritor)) {
@@ -60,25 +61,29 @@ public class ListaDeCompras {
 			this.data = new Date();
 		}
 	}
-	
+
 	/**
 	 * Metodo responsavel por adicionr uma compra a lista de compras.
 	 * 
-	 * @param qntd do tipo Double, referente a quantidade de determinada compra.
-	 * @param item referente ao Item que esta sendo adquirido.
+	 * @param qntd
+	 *            do tipo Double, referente a quantidade de determinada compra.
+	 * @param item
+	 *            referente ao Item que esta sendo adquirido.
 	 * @return o tamanho da lista itens, apos adicionar a o item comprado.
 	 */
 	public int adicionaCompraALista(double qntd, Item item) {
 		this.qntdItens.put(item, qntd);
 		this.itens.add(item);
-		
+
 		return this.itens.size();
 	}
-	
+
 	/**
-	 * Metodo responsavel por pesquisar determinado item comprado em uma lista de compras.
+	 * Metodo responsavel por pesquisar determinado item comprado em uma lista de
+	 * compras.
 	 * 
-	 * @param item referente ao Item que foi comprado.
+	 * @param item
+	 *            referente ao Item que foi comprado.
 	 * @return a representacao textual do item comprado que sera pesquisado.
 	 */
 	public String pesquisaCompraEmLista(Item item) {
@@ -87,13 +92,15 @@ public class ListaDeCompras {
 		}
 		return item.getToStringEmLista(this.qntdItens.get(item));
 	}
-	
+
 	/**
 	 * Metodo que atualiza uma lista de compra com os itens comprados.
 	 * 
-	 * @param item referente ao item que devera ser atualizado na lista.
-	 * @param novaquantidade do tipo Double referente a nova quantidade daquele item, que_
-	 * devera ser atualizado.
+	 * @param item
+	 *            referente ao item que devera ser atualizado na lista.
+	 * @param novaquantidade
+	 *            do tipo Double referente a nova quantidade daquele item, que_
+	 *            devera ser atualizado.
 	 */
 	public void atualizaCompraDeLista(Item item, double novaquantidade) {
 		if (!this.qntdItens.containsKey(item)) {
@@ -105,19 +112,22 @@ public class ListaDeCompras {
 	/**
 	 * Metodo referente a finalizar uma lista de compras.
 	 * 
-	 * @param localDeCompra do tipo String referente ao local de compra da lista.
-	 * @param valorFinal do tipo Double, referente ao valor final da lista em questao.
+	 * @param localDeCompra
+	 *            do tipo String referente ao local de compra da lista.
+	 * @param valorFinal
+	 *            do tipo Double, referente ao valor final da lista em questao.
 	 */
 	public void finalizarListaDeCompras(String localDeCompra, double valorFinal) {
 		ValidadorListaDeCompras.testeFinalizarCompra(localDeCompra, valorFinal);
 		this.localDeCompra = localDeCompra;
 		this.valorTotal = valorFinal;
 	}
-	
+
 	/**
 	 * Metodo responsavel por emitir a representacao textual do item na lista.
 	 * 
-	 * @param id do tipo Inteiro, referente a identificacao do item.
+	 * @param id
+	 *            do tipo Inteiro, referente a identificacao do item.
 	 * @return a representacao textual do item em determinada lista de compras.
 	 */
 	public String getItemLista(int id) {
@@ -129,10 +139,10 @@ public class ListaDeCompras {
 		double quant = this.qntdItens.get(i);
 		return i.getToStringEmLista(quant);
 	}
-	
+
 	/**
-	 * Metodo responsavel por ordenar os itens pelo nome de suas categorias.
-	 * Metodo sem retorno.
+	 * Metodo responsavel por ordenar os itens pelo nome de suas categorias. Metodo
+	 * sem retorno.
 	 */
 	private void ordenarPorNomeCategoria() {
 		Collections.sort(this.itens, new OrdenaItensPorNome());
@@ -142,7 +152,8 @@ public class ListaDeCompras {
 	/**
 	 * Metodo que deleta uma compra de uma lista de compras.
 	 * 
-	 * @param item referente ao item a ser removido da lista.
+	 * @param item
+	 *            referente ao item a ser removido da lista.
 	 */
 	public void deletaCompraDeLista(Item item) {
 		if (!this.itens.contains(item)) {
@@ -151,7 +162,7 @@ public class ListaDeCompras {
 		this.itens.remove(item);
 		this.qntdItens.remove(item);
 	}
-	
+
 	/**
 	 * Metodo que retorna a descricao textual de uma lista de compras.
 	 */

@@ -6,13 +6,13 @@ import com.projeto.enums.Categoria;
 import com.projeto.validadores.ValidadorItem;
 
 /**
- * Classe abstrata que representa um item no sistema. Cada item possui um numero, nome,
- * categoria e um mapa de precos.
+ * Classe abstrata que representa um item no sistema. Cada item possui um
+ * numero, nome, categoria e um mapa de precos.
  * 
- * @authors Igor Silveira
- * 			Jose Davi
- * 			Matheus Gusmao
- * 			Rich Ramalho
+ * @author Igor Silveira
+ * @author Jose Davi
+ * @author Matheus Gusmao
+ * @author Rich Ramalho
  * 
  */
 public abstract class Item implements AtualizarItem, Comparable<Item> {
@@ -85,7 +85,7 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 			this.nome = novoNome;
 		}
 	}
-	
+
 	/**
 	 * Metodo que retona o nome do item.
 	 * 
@@ -106,7 +106,7 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 			this.categoria = escolheCategoria(novaCategoria);
 		}
 	}
-	
+
 	/**
 	 * Metodo que retorna a representacao textual de de um tipo de produto.
 	 * 
@@ -115,7 +115,7 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 	public String getCategoria() {
 		if (this.categoria.equals(Categoria.higiene)) {
 			return "higiene pessoal";
-		} else  if (this.categoria.equals(Categoria.limpeza)) {
+		} else if (this.categoria.equals(Categoria.limpeza)) {
 			return "limpeza";
 		} else if (this.categoria.equals(Categoria.industrializado)) {
 			return "alimento industrializado";
@@ -123,7 +123,7 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 			return "alimento nao industrializado";
 		}
 	}
-	
+
 	public Categoria cat() {
 		return this.categoria;
 	}
@@ -134,7 +134,7 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 	public String toString() {
 		return this.numero + ". " + this.nome + ", " + this.getCategoria() + ",";
 	}
-	
+
 	/**
 	 * Método protegido que retorna a representacao textual do mapa de precos
 	 * cadastrado para esse item.
@@ -187,13 +187,13 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 			return false;
 		return true;
 	}
-	
+
 	/**
 	 * Metodo que retorna o menor preco do item.
 	 * 
 	 * @return valor minimo do mapa de precos correspondente ao menor preco do item.
 	 */
-	public double getMenorPreco() {		
+	public double getMenorPreco() {
 		return Collections.min(this.mapaPrecos.values());
 	}
 
@@ -205,25 +205,27 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 	public String getDescricao() {
 		return this.nome + this.categoria;
 	}
-	
+
 	/**
-	 * Metodo privado que dado um tipo de produto relaciona-o com uma categoria e a retorna.
+	 * Metodo privado que dado um tipo de produto relaciona-o com uma categoria e a
+	 * retorna.
 	 * 
-	 * @param categoria String que representa a categoria do item.
+	 * @param categoria
+	 *            String que representa a categoria do item.
 	 * @return A categoria do item(Enum).
 	 */
 	private Categoria escolheCategoria(String categoria) {
 		switch (categoria.toLowerCase()) {
-			case "higiene pessoal":
-				return Categoria.higiene;
-			case "limpeza":
-				return Categoria.limpeza;
-			case "alimento industrializado":
-				return Categoria.industrializado;
-			case "alimento nao industrializado":
-				return Categoria.N_industrializado;
-			default:
-				return null;
+		case "higiene pessoal":
+			return Categoria.higiene;
+		case "limpeza":
+			return Categoria.limpeza;
+		case "alimento industrializado":
+			return Categoria.industrializado;
+		case "alimento nao industrializado":
+			return Categoria.N_industrializado;
+		default:
+			return null;
 		}
 	}
 }
