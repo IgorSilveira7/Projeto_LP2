@@ -15,7 +15,7 @@ import com.projeto.validadores.ValidadorItem;
  * @author Rich Ramalho
  * 
  */
-public abstract class Item implements AtualizarItem, Comparable<Item> {
+public abstract class Item implements Comparable<Item> {
 
 	/**
 	 * Atributo que representa o id do item.
@@ -124,10 +124,6 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 		}
 	}
 
-	public Categoria cat() {
-		return this.categoria;
-	}
-
 	/**
 	 * Metodo que dar a representacao textual do item.
 	 */
@@ -228,4 +224,12 @@ public abstract class Item implements AtualizarItem, Comparable<Item> {
 			return null;
 		}
 	}
+	
+	public Categoria getCategoriaEnum() {
+		return this.categoria;
+	}
+	
+	public abstract void AtualizarItem(String atributo, String novoValor);
+	
+	public abstract String getToStringEmLista(double quant);
 }

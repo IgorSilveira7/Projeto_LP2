@@ -46,7 +46,6 @@ public class ProdutoPorUnidade extends Item {
 	/**
 	 * Metodo sobrescrito da classe pai(Item) que ira alterar a unidade do item.
 	 */
-	@Override
 	public void setUnidade(int novaUnidade) {
 		ValidadorItem.validaSetUnidade(novaUnidade);
 		this.unidade = novaUnidade;
@@ -84,5 +83,22 @@ public class ProdutoPorUnidade extends Item {
 	@Override
 	public int compareTo(Item o) {
 		return super.getNome().compareTo(o.getNome());
+	}
+
+	@Override
+	public void AtualizarItem(String atributo, String novoValor) {
+		switch (atributo.toLowerCase()) {
+		case "nome":
+			this.setNome(novoValor);
+			break;
+		case "categoria":
+			this.setCategoria(novoValor);
+			break;
+		case "unidade":
+			this.setUnidade(Integer.parseInt(novoValor));
+			break;
+		default:
+			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
+		}
 	}
 }

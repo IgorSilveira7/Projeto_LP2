@@ -9,6 +9,7 @@ import com.projeto.entidades.ProdutoQuantidadeFixa;
 import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.ordenacao.OrdenaItensPorNome;
 import com.projeto.ordenacao.OrdenarItensPorMenorPreco;
+import com.projeto.ordenacao.OrdenarListaDeComprasPorDescritor;
 import com.projeto.ordenacao.OrdenarPorCategoria;
 import com.projeto.validadores.ValidadorItem;
 import com.projeto.validadores.ValidadorListaDeCompras;
@@ -162,46 +163,7 @@ public class ControllerItem {
 		if (!this.itens.containsKey(id)) {
 			throw new IllegalArgumentException("Erro na atualizacao de item: item nao existe.");
 		}
-		switch (atributo) {
-		case "nome":
-			if (ValidadorItem.validaSetNome(novoValor)) {
-				this.itens.get(id).setNome(novoValor);
-			}
-			break;
-
-		case "categoria":
-			if (ValidadorItem.validaSetCategoria(novoValor)) {
-				this.itens.get(id).setCategoria(novoValor);
-			}
-			break;
-
-		case "unidade de medida":
-			if (ValidadorItem.validaSetMedida(novoValor)) {
-				this.itens.get(id).setMedida(novoValor);
-			}
-			break;
-
-		case "quantidade":
-			if (ValidadorItem.validaSetQuantidade(Integer.parseInt(novoValor))) {
-				this.itens.get(id).setQuantidade(Integer.parseInt(novoValor));
-			}
-			break;
-
-		case "unidade":
-			if (ValidadorItem.validaSetUnidade(Integer.parseInt(novoValor))) {
-				this.itens.get(id).setUnidade(Integer.parseInt(novoValor));
-			}
-			break;
-
-		case "kg":
-			if (ValidadorItem.validaSetQuilos(Double.parseDouble(novoValor))) {
-				this.itens.get(id).setQuilos(Double.parseDouble(novoValor));
-			}
-			break;
-
-		default:
-			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
-		}
+		this.itens.get(id).AtualizarItem(atributo, novoValor);
 	}
 
 	/**
@@ -484,5 +446,34 @@ public class ControllerItem {
 		}
 		Item i = this.itens.get(id);
 		this.listasDeCompras.get(descritor).deletaCompraDeLista(i);
+	}
+	
+	public String getItemListaPorData(String data, int posicao) {
+		List<ListaDeCompras> ordenado = new ArrayList<>(this.listasDeCompras.values());
+		Collections.sort(ordenado, new OrdenarListaDeComprasPorDescritor());
+		System.out.println(ordenado.toString());
+		
+		int cont = 0;
+		for (ListaDeCompras listaDeCompras : ordenado) {
+			if (listaDeCompras.getData().equals(data)){
+				if (cont == posicao) {
+					return listaDeCompras.getDescritor();
+				}
+				cont += 1;
+			}
+		}
+		return "";
+	}
+
+	public String getItemListaPorItem(int id, int posicao) {
+		Item i = this.itens.get(id);
+		int cont = 0;
+		for (String key : listasDeCompras.keySet()) {
+			if (cont == posicao) {
+				return this.listasDeCompras.get(key).verificarItemEmLista(i);
+			}
+			cont += 1;
+		}
+		return "";
 	}
 }

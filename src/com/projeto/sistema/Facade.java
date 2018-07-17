@@ -314,4 +314,12 @@ public class Facade {
 	public void deletaCompraDeLista(String descritor, int id) {
 		this.controllerItem.deletaCompraDeLista(descritor, id);
 	}
+	
+	public String getItemListaPorData(String data, int posicao) {
+		return this.controllerItem.getItemListaPorData(data, posicao);
+	}
+	
+	public String getItemListaPorItem(int id, int posicao) {
+		return this.controllerItem.getItemListaPorItem(id, posicao);
+	}
 }

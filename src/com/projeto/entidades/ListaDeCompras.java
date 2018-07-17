@@ -1,9 +1,10 @@
 package com.projeto.entidades;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TreeMap;
 
 import com.projeto.excecoes.EntradaInvalidaException;
@@ -36,7 +37,7 @@ public class ListaDeCompras {
 	/**
 	 * Atributo do tipo Date, referente a data da lista de compras.
 	 */
-	private Date data;
+	private LocalDate data;
 	/**
 	 * Atributo do tipo Double referente ao Valor total da lista de compras.
 	 */
@@ -58,7 +59,7 @@ public class ListaDeCompras {
 			this.descritor = descritor;
 			this.itens = new ArrayList<>();
 			this.qntdItens = new TreeMap<>();
-			this.data = new Date();
+			this.data = LocalDate.now();
 		}
 	}
 
@@ -168,6 +169,21 @@ public class ListaDeCompras {
 	 */
 	@Override
 	public String toString() {
+		return this.getData() + " - " + this.descritor;
+	}
+	
+	public String getDescritor() {
 		return this.descritor;
+	}
+	
+	public String getData() {
+		return data.getDayOfMonth() + "/0" + data.getMonthValue() + "/" + data.getYear();
+	}
+	
+	public String verificarItemEmLista(Item i) {
+		if (this.qntdItens.containsKey(i)) {
+			return this.toString();
+		}
+		return "";
 	}
 }

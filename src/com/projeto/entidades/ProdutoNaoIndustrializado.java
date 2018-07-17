@@ -49,7 +49,6 @@ public class ProdutoNaoIndustrializado extends Item {
 	 * @param novoPeso
 	 *            Double o novo peso do item.
 	 */
-	@Override
 	public void setQuilos(double novoPeso) {
 		ValidadorItem.validaSetQuilos(novoPeso);
 		this.peso = novoPeso;
@@ -86,5 +85,22 @@ public class ProdutoNaoIndustrializado extends Item {
 	@Override
 	public int compareTo(Item o) {
 		return super.getNome().compareTo(o.getNome());
+	}
+
+	@Override
+	public void AtualizarItem(String atributo, String novoValor) {
+		switch (atributo.toLowerCase()) {
+		case "nome":
+			this.setNome(novoValor);
+			break;
+		case "categoria":
+			this.setCategoria(novoValor);
+			break;
+		case "kg":
+			this.setQuilos(Double.parseDouble(novoValor));
+			break;
+		default:
+			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
+		}
 	}
 }

@@ -14,6 +14,6 @@ public class OrdenarPorCategoria implements Comparator<Item> {
 	 */
 	@Override
 	public int compare(Item i1, Item i2) {
-		return i1.cat().compareTo(i2.cat());
+		return i1.getCategoriaEnum().compareTo(i2.getCategoriaEnum());
 	}
 }
