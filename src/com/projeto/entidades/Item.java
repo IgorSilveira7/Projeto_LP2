@@ -10,9 +10,9 @@ import com.projeto.validadores.ValidadorItem;
  * numero, nome, categoria e um mapa de precos.
  * 
  * @author Igor Silveira
- * @author Jose Davi
- * @author Matheus Gusmao
  * @author Rich Ramalho
+ * @author Matheus Gusmao
+ * @author Jose Davi
  * 
  */
 public abstract class Item implements Comparable<Item> {
@@ -75,6 +75,56 @@ public abstract class Item implements Comparable<Item> {
 	}
 
 	/**
+	 * Metodo que retorna o menor preco do item.
+	 * 
+	 * @return valor minimo do mapa de precos correspondente ao menor preco do item.
+	 */
+	public double getMenorPreco() {
+		return Collections.min(this.mapaPrecos.values());
+	}
+
+	/**
+	 * Metodo que retorna a representacao textual do nome e categoria de um item;.
+	 * 
+	 * @return String correspondente a nome e categoria de determinado item.
+	 */
+	public String getDescricao() {
+		return this.nome + this.categoria;
+	}
+
+	/**
+	 * Metodo que retorna a categoria no tipo Enum.
+	 * 
+	 * @return Categoria Enum
+	 */
+	public Categoria getCategoriaEnum() {
+		return this.categoria;
+	}
+
+	/**
+	 * Metodo privado que dado um tipo de produto relaciona-o com uma categoria e a
+	 * retorna.
+	 * 
+	 * @param categoria
+	 *            String que representa a categoria do item.
+	 * @return A categoria do item(Enum).
+	 */
+	private Categoria escolheCategoria(String categoria) {
+		switch (categoria.toLowerCase()) {
+		case "higiene pessoal":
+			return Categoria.higiene;
+		case "limpeza":
+			return Categoria.limpeza;
+		case "alimento industrializado":
+			return Categoria.industrializado;
+		case "alimento nao industrializado":
+			return Categoria.N_industrializado;
+		default:
+			return null;
+		}
+	}
+
+	/**
 	 * Metodo que altera o nome do item.
 	 * 
 	 * @param novoNome
@@ -125,7 +175,7 @@ public abstract class Item implements Comparable<Item> {
 	}
 
 	/**
-	 * Metodo que dar a representacao textual do item.
+	 * Metodo que retorna a representacao textual do item.
 	 */
 	public String toString() {
 		return this.numero + ". " + this.nome + ", " + this.getCategoria() + ",";
@@ -185,51 +235,23 @@ public abstract class Item implements Comparable<Item> {
 	}
 
 	/**
-	 * Metodo que retorna o menor preco do item.
+	 * Metodo abstrato que sera implementado nas classes filhas para atualizar seus
+	 * atributos.
 	 * 
-	 * @return valor minimo do mapa de precos correspondente ao menor preco do item.
+	 * @param atributo
+	 *            String que representa o atributo a ser modificado.
+	 * @param novoValor
+	 *            String que representa o novo valor do atributo.
 	 */
-	public double getMenorPreco() {
-		return Collections.min(this.mapaPrecos.values());
-	}
-
-	/**
-	 * Metodo que retorna a representacao textual do nome e categoria de um item;.
-	 * 
-	 * @return String correspondente a nome e categoria de determinado item.
-	 */
-	public String getDescricao() {
-		return this.nome + this.categoria;
-	}
-
-	/**
-	 * Metodo privado que dado um tipo de produto relaciona-o com uma categoria e a
-	 * retorna.
-	 * 
-	 * @param categoria
-	 *            String que representa a categoria do item.
-	 * @return A categoria do item(Enum).
-	 */
-	private Categoria escolheCategoria(String categoria) {
-		switch (categoria.toLowerCase()) {
-		case "higiene pessoal":
-			return Categoria.higiene;
-		case "limpeza":
-			return Categoria.limpeza;
-		case "alimento industrializado":
-			return Categoria.industrializado;
-		case "alimento nao industrializado":
-			return Categoria.N_industrializado;
-		default:
-			return null;
-		}
-	}
-	
-	public Categoria getCategoriaEnum() {
-		return this.categoria;
-	}
-	
 	public abstract void AtualizarItem(String atributo, String novoValor);
-	
+
+	/**
+	 * Metodo asbtrato que sera implementado nas classes filhas para retornar a
+	 * representacao textual do item em uma lista.
+	 * 
+	 * @param quant
+	 *            Double que representa a quantidade do item na lista.
+	 * @return String que representa a representacao textual do item na lista.
+	 */
 	public abstract String getToStringEmLista(double quant);
 }

@@ -1,5 +1,7 @@
 package com.projeto.sistema;
 
+import java.time.LocalDate;
+
 import com.projeto.controllers.ControllerItem;
 
 import easyaccept.EasyAccept;
@@ -30,10 +32,10 @@ public class Facade {
 	 */
 	public static void main(String[] args) {
 		args = new String[] { "com.projeto.sistema.Facade", "acceptance_tests/use_case1.txt",
-				"acceptance_tests/use_case1_exception.txt", "acceptance_tests/use_case2_exception.txt",
-				"acceptance_tests/use_case2.txt", "acceptance_tests/use_case3_exception.txt",
-				"acceptance_tests/use_case3.txt", "acceptance_tests/use_case4_exception.txt",
-				"acceptance_tests/use_case4.txt" };
+				"acceptance_tests/use_case1_exception.txt", "acceptance_tests/use_case2.txt",
+				"acceptance_tests/use_case2_exception.txt", "acceptance_tests/use_case3.txt",
+				"acceptance_tests/use_case3_exception.txt", "acceptance_tests/use_case4.txt",
+				"acceptance_tests/use_case4_exception.txt" };
 
 		EasyAccept.main(args);
 	}
@@ -259,8 +261,8 @@ public class Facade {
 	 *            do tipo Double, responsavel por dar a nova quantidade do item_
 	 *            _que sera atualizado na lista de compras.
 	 */
-	public void atualizaCompraDeLista(String descritor, int id, double novaQuantidade) {
-		this.controllerItem.atualizaCompraDeLista(descritor, id, novaQuantidade);
+	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQuantidade) {
+		this.controllerItem.atualizaCompraDeLista(descritor, id, operacao, novaQuantidade);
 	}
 
 	/**
@@ -314,12 +316,33 @@ public class Facade {
 	public void deletaCompraDeLista(String descritor, int id) {
 		this.controllerItem.deletaCompraDeLista(descritor, id);
 	}
-	
+
+	/**
+	 * Metodo que retorna a representacao textual de um item em uma lista de compras
+	 * ordenado por datas
+	 * 
+	 * @param data String que representa a data(dd/mm/aaaa).
+	 * @param posicao Inteiro que representa a posicao do item.
+	 * @return
+	 */
 	public String getItemListaPorData(String data, int posicao) {
 		return this.controllerItem.getItemListaPorData(data, posicao);
 	}
-	
+
 	public String getItemListaPorItem(int id, int posicao) {
 		return this.controllerItem.getItemListaPorItem(id, posicao);
+	}
+
+	public String pesquisaListasDeComprasPorData(String data) {
+		return this.controllerItem.pesquisaListasDeComprasPorData(data);
+	}
+
+	public String pesquisaListasDeComprasPorItem(int id) {
+		return this.controllerItem.pesquisaListasDeComprasPorItem(id);
+	}
+
+	public String dataAtual() {
+		LocalDate l = LocalDate.now();
+		return l.getDayOfMonth() + "/0" + l.getMonth().getValue() + "/" + l.getYear();
 	}
 }

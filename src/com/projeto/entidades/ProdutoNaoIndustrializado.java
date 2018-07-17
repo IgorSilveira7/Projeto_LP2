@@ -6,9 +6,10 @@ import com.projeto.validadores.*;
  * Classe que representa um item com Produto nao industrializado que é filha da
  * classe Item. E possui peso do item(peso).
  * 
- * @author Jose Davi
  * @author Matheus Gusmao
+ * @author Igor Silveira
  * @author Rich Ramalho
+ * @author Jose Davi
  *
  */
 public class ProdutoNaoIndustrializado extends Item {
@@ -44,7 +45,32 @@ public class ProdutoNaoIndustrializado extends Item {
 	}
 
 	/**
-	 * Metodo sobrescrito da classe pai(Item). Que altera o peso do item.
+	 * Metodo que atualiza os atributos do item.
+	 * 
+	 * @param atributo
+	 *            String que representa o nome do atributo a ser alterado.
+	 * @param novoValor
+	 *            String que representa o novo valor.
+	 */
+	@Override
+	public void AtualizarItem(String atributo, String novoValor) {
+		switch (atributo.toLowerCase()) {
+		case "nome":
+			this.setNome(novoValor);
+			break;
+		case "categoria":
+			this.setCategoria(novoValor);
+			break;
+		case "kg":
+			this.setQuilos(Double.parseDouble(novoValor));
+			break;
+		default:
+			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
+		}
+	}
+
+	/**
+	 * Metodo que altera o peso do item.
 	 * 
 	 * @param novoPeso
 	 *            Double o novo peso do item.
@@ -67,40 +93,28 @@ public class ProdutoNaoIndustrializado extends Item {
 	}
 
 	/**
-	 * Metodo sobrescrito da classe pai(Item) que retorna a representacao textual do
-	 * item.
+	 * Metodo da classe pai(Item) que retorna a representacao textual do item.
+	 * 
+	 * @param quant
+	 *            Double que representa a quantidade dele na lista.
 	 * 
 	 * @return String contendo a quantidade em kg do item, seu nome e sua categoria.
 	 */
 	@Override
 	public String getToStringEmLista(double quant) {
-		return String.format("%.1f", quant) + " kg " + this.getNome() + ", " + this.getCategoria();
+		return ((int) quant) + " " + this.getNome() + ", " + this.getCategoria();
 	}
 
 	/**
 	 * Metodo de comparacao de dois itens, usando compareTo.
 	 * 
+	 * @param i
+	 *            Item que representa o item que será comparado com o que chama o
+	 *            metodo.
 	 * @return inteiro referente a o uso do compareTo.
 	 */
 	@Override
-	public int compareTo(Item o) {
-		return super.getNome().compareTo(o.getNome());
-	}
-
-	@Override
-	public void AtualizarItem(String atributo, String novoValor) {
-		switch (atributo.toLowerCase()) {
-		case "nome":
-			this.setNome(novoValor);
-			break;
-		case "categoria":
-			this.setCategoria(novoValor);
-			break;
-		case "kg":
-			this.setQuilos(Double.parseDouble(novoValor));
-			break;
-		default:
-			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
-		}
+	public int compareTo(Item i) {
+		return super.getNome().compareTo(i.getNome());
 	}
 }

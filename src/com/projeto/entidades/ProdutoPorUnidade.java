@@ -6,9 +6,10 @@ import com.projeto.validadores.*;
  * Classe que representa um item com Produto por unidade que é filha da classe
  * Item. E possui a quantidade que o item possui(unidade).
  * 
- * @author Jose Davi
  * @author Matheus Gusmao
+ * @author Igor Silveira
  * @author Rich Ramalho
+ * @author Jose Davi
  *
  */
 public class ProdutoPorUnidade extends Item {
@@ -44,7 +45,32 @@ public class ProdutoPorUnidade extends Item {
 	}
 
 	/**
-	 * Metodo sobrescrito da classe pai(Item) que ira alterar a unidade do item.
+	 * Metodo que atualiza os atributos do item.
+	 * 
+	 * @param atributo String que representa o nome do atributo a ser alterado.
+	 * @param novoValor String que representa o novo valor.
+	 */
+	@Override
+	public void AtualizarItem(String atributo, String novoValor) {
+		switch (atributo.toLowerCase()) {
+		case "nome":
+			this.setNome(novoValor);
+			break;
+		case "categoria":
+			this.setCategoria(novoValor);
+			break;
+		case "unidade":
+			this.setUnidade(Integer.parseInt(novoValor));
+			break;
+		default:
+			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
+		}
+	}
+	
+	/**
+	 * Metodo que ira alterar a unidade do item.
+	 * 
+	 * @param novaUnidade Inteiro que representa a nova unidade do item.
 	 */
 	public void setUnidade(int novaUnidade) {
 		ValidadorItem.validaSetUnidade(novaUnidade);
@@ -71,34 +97,18 @@ public class ProdutoPorUnidade extends Item {
 	 */
 	@Override
 	public String getToStringEmLista(double quant) {
-		return ((int) quant) + " " + this.getNome() + ", " + this.getCategoria();
+		return ((int)quant) + " " + this.getNome() + ", " + this.getCategoria();
 	}
-
+	
 	/**
 	 * Metodo sobrescrito da classe pai(Item) que retorna um inteiro referente a
 	 * comparacao.
 	 * 
-	 * @return inteiro referente a comparacao de dois itens pelo compareTo.
+	 * @param i Item que representa o item a ser comparado com o que chama esse metodo.
+	 * @return Inteiro referente a comparacao de dois itens pelo compareTo.
 	 */
 	@Override
-	public int compareTo(Item o) {
-		return super.getNome().compareTo(o.getNome());
-	}
-
-	@Override
-	public void AtualizarItem(String atributo, String novoValor) {
-		switch (atributo.toLowerCase()) {
-		case "nome":
-			this.setNome(novoValor);
-			break;
-		case "categoria":
-			this.setCategoria(novoValor);
-			break;
-		case "unidade":
-			this.setUnidade(Integer.parseInt(novoValor));
-			break;
-		default:
-			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
-		}
+	public int compareTo(Item i) {
+		return super.getNome().compareTo(i.getNome());
 	}
 }

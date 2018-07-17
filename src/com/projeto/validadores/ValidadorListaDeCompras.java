@@ -26,4 +26,17 @@ public class ValidadorListaDeCompras {
 		}
 		return true;
 	}
+	
+	public static boolean validaData(String data) {
+		if (data == null) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: data nao pode ser vazia ou nula.");
+		}
+		if (data.trim().isEmpty()) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: data nao pode ser vazia ou nula.");
+		}
+		if (!(data.split("/").length == 3)) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: data em formato invalido, tente dd/MM/yyyy");
+		}
+		return true;
+	}
 }

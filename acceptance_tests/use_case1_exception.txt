@@ -15,6 +15,9 @@ expectError "Erro no cadastro de item: unidade de medida nao pode ser vazia ou n
 expectError "Erro no cadastro de item: valor de unidade nao pode ser menor que zero." adicionaItemPorUnidade nome="Abacaxi" categoria="alimento nao industrializado" unidade=-4 localDeCompra="Supermercado Essencial" preco=3.49
 expectError "Erro no cadastro de item: local de compra nao pode ser vazio ou nulo." adicionaItemPorUnidade nome="Batata britanica" categoria="alimento nao industrializado" unidade=4 localDeCompra="" preco=2.49
 expectError "Erro no cadastro de item: preco de item invalido." adicionaItemPorUnidade nome="Tompero do Jacquin" categoria="alimento nao industrializado" unidade=4 localDeCompra="Supermercado Essencial" preco=-1.99
+expectError "Erro no cadastro de item: item ja cadastrado no sistema." adicionaItemPorQtd nome="Agua Sanitaria Viserion" categoria="limpeza" qnt=500 unidadeDeMedida="ml" localDeCompra="Supermercado Excepcional" preco=2.19
+expectError "Erro no cadastro de item: item ja cadastrado no sistema." adicionaItemPorQuilo nome="Peito de peru Saara" categoria="alimento industrializado" kg=1.0 localDeCompra="Mercadinho Bem Barato" preco=34.49
+expectError "Erro no cadastro de item: item ja cadastrado no sistema." adicionaItemPorUnidade nome="Batata Tentacoes" categoria="alimento industrializado" unidade=1 localDeCompra="Supermercado Excepcional" preco=3.79
 
 ### Listando itens pelo id ###
 

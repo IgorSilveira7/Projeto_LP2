@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.TreeMap;
-
 import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.ordenacao.OrdenaItensPorNome;
 import com.projeto.ordenacao.OrdenarPorCategoria;
@@ -103,11 +101,22 @@ public class ListaDeCompras {
 	 *            do tipo Double referente a nova quantidade daquele item, que_
 	 *            devera ser atualizado.
 	 */
-	public void atualizaCompraDeLista(Item item, double novaquantidade) {
+	public void atualizaCompraDeLista(Item item, String operacao, double novaquantidade) {
 		if (!this.qntdItens.containsKey(item)) {
 			throw new EntradaInvalidaException("Erro na atualizacao de compra: compra nao encontrada na lista.");
 		}
-		this.qntdItens.replace(item, novaquantidade);
+		double novoValor = 0;
+		if (operacao.equals("diminui")) {
+			novoValor = this.qntdItens.get(item) - novaquantidade;
+		} else if (operacao.equals("adiciona")) {
+			novoValor = this.qntdItens.get(item) + novaquantidade;
+		}
+		if (novoValor <= 0) {
+			this.qntdItens.remove(item);
+			this.itens.remove(item);
+		} else {
+			this.qntdItens.replace(item, novoValor);
+		}
 	}
 
 	/**
@@ -171,19 +180,23 @@ public class ListaDeCompras {
 	public String toString() {
 		return this.getData() + " - " + this.descritor;
 	}
-	
+
 	public String getDescritor() {
 		return this.descritor;
 	}
-	
+
 	public String getData() {
-		return data.getDayOfMonth() + "/0" + data.getMonthValue() + "/" + data.getYear();
-	}
-	
-	public String verificarItemEmLista(Item i) {
-		if (this.qntdItens.containsKey(i)) {
-			return this.toString();
+		if (data.getMonthValue() <= 9) {
+			return data.getDayOfMonth() + "/0" + data.getMonthValue() + "/" + data.getYear();
+		} else {
+			return data.getDayOfMonth() + "/" + data.getMonthValue() + "/" + data.getYear();
 		}
-		return "";
+	}
+
+	public boolean verificarItemEmLista(Item i) {
+		if (this.qntdItens.containsKey(i)) {
+			return true;
+		}
+		return false;
 	}
 }

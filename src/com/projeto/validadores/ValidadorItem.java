@@ -69,7 +69,7 @@ public class ValidadorItem {
 	 */
 	public static boolean validaItemProQuantJaExiste(Map<Integer, Item> itens, String nome, String categoria) {
 		if (itens.containsValue(new ProdutoQuantidadeFixa(5, nome, categoria, 2, "u.m", "Baratao", 2.58))) {
-			throw new ItemJaExisteException("Erro no cadastro do item: item ja existe.");
+			throw new ItemJaExisteException("Erro no cadastro de item: item ja cadastrado no sistema.");
 		}
 		return true;
 	}
@@ -89,7 +89,7 @@ public class ValidadorItem {
 	 */
 	public static boolean validaItemProUnidJaExiste(Map<Integer, Item> itens, String nome, String categoria) {
 		if (itens.containsValue(new ProdutoPorUnidade(5, nome, categoria, 1, "Baratao", 2.58))) {
-			throw new ItemJaExisteException("Erro no cadastro do item: item ja existe.");
+			throw new ItemJaExisteException("Erro no cadastro de item: item ja cadastrado no sistema.");
 		}
 		return true;
 	}
@@ -109,7 +109,7 @@ public class ValidadorItem {
 	 */
 	public static boolean validaItemProNaoIndusJaExiste(Map<Integer, Item> itens, String nome, String categoria) {
 		if (itens.containsValue(new ProdutoNaoIndustrializado(5, nome, categoria, 1, "Baratao", 2.58))) {
-			throw new ItemJaExisteException("Erro no cadastro do item: item ja existe.");
+			throw new ItemJaExisteException("Erro no cadastro de item: item ja cadastrado no sistema.");
 		}
 		return true;
 	}

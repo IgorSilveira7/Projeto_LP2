@@ -9,6 +9,7 @@ import com.projeto.validadores.ValidadorItem;
  * 
  * @author Rich Ramalho
  * @author Jose Davi
+ * @author Igor Silveira
  * @author Matheus Gusmao
  * 
  */
@@ -52,15 +53,31 @@ public class ProdutoQuantidadeFixa extends Item {
 	}
 
 	/**
-	 * Metodo sobrescrito da classe pai(Item) que retorna a representacao textual do
-	 * item.
+	 * Metodo que atualiza os atributos do item.
 	 * 
-	 * @return String representacao textual com mais detalhes sobre a especificacao
-	 *         do item.
+	 * @param atributo
+	 *            String que representa o nome do atributo a ser alterado.
+	 * @param novoValor
+	 *            String que representa o novo valor.
 	 */
 	@Override
-	public String toString() {
-		return super.toString() + " " + this.quantidade + " " + this.medida + ", Preco: " + this.toStringPrecos();
+	public void AtualizarItem(String atributo, String novoValor) {
+		switch (atributo.toLowerCase()) {
+		case "nome":
+			this.setNome(novoValor);
+			break;
+		case "categoria":
+			this.setCategoria(novoValor);
+			break;
+		case "quantidade":
+			this.setQuantidade(Integer.parseInt(novoValor));
+			break;
+		case "unidade de medida":
+			this.setMedida(novoValor);
+			break;
+		default:
+			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
+		}
 	}
 
 	/**
@@ -91,30 +108,22 @@ public class ProdutoQuantidadeFixa extends Item {
 	}
 
 	/**
+	 * Metodo sobrescrito da classe pai(Item) que retorna a representacao textual do
+	 * item.
+	 * 
+	 * @return String representacao textual com mais detalhes sobre a especificacao
+	 *         do item.
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + " " + this.quantidade + " " + this.medida + ", Preco: " + this.toStringPrecos();
+	}
+
+	/**
 	 * Metodo de comparacao de dois item, utilizando compareTO.
 	 */
 	@Override
 	public int compareTo(Item o) {
 		return super.getNome().compareTo(o.getNome());
-	}
-
-	@Override
-	public void AtualizarItem(String atributo, String novoValor) {
-		switch (atributo.toLowerCase()) {
-		case "nome":
-			this.setNome(novoValor);
-			break;
-		case "categoria":
-			this.setCategoria(novoValor);
-			break;
-		case "quantidade":
-			this.setQuantidade(Integer.parseInt(novoValor));
-			break;
-		case "unidade de medida":
-			this.setMedida(novoValor);
-			break;
-		default:
-			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
-		}
 	}
 }

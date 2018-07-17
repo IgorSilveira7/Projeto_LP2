@@ -10,7 +10,6 @@ import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.ordenacao.OrdenaItensPorNome;
 import com.projeto.ordenacao.OrdenarItensPorMenorPreco;
 import com.projeto.ordenacao.OrdenarListaDeComprasPorDescritor;
-import com.projeto.ordenacao.OrdenarPorCategoria;
 import com.projeto.validadores.ValidadorItem;
 import com.projeto.validadores.ValidadorListaDeCompras;
 
@@ -39,7 +38,9 @@ public class ControllerItem {
 	 * ordenacao.
 	 */
 	private List<Item> itensOrdenados;
-
+	/**
+	 * Atributo que representa as listas de compras cadastradas.
+	 */
 	private Map<String, ListaDeCompras> listasDeCompras;
 
 	/**
@@ -73,7 +74,7 @@ public class ControllerItem {
 			double preco) {
 		ValidadorItem.validaItem(nome, categoria, supermercado, preco);
 		ValidadorItem.validaProdutoQuantFixa(quantidade, medida);
-		// ValidadorItem.validaItemProQuantJaExiste(this.itens, nome, categoria);
+		ValidadorItem.validaItemProQuantJaExiste(this.itens, nome, categoria);
 		this.itens.put(this.id,
 				new ProdutoQuantidadeFixa(this.id, nome, categoria, quantidade, medida, supermercado, preco));
 		return this.id++;
@@ -97,7 +98,7 @@ public class ControllerItem {
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String supermercado, double preco) {
 		ValidadorItem.validaItem(nome, categoria, supermercado, preco);
 		ValidadorItem.validaUnidade(unidade);
-		// ValidadorItem.validaItemProUnidJaExiste(this.itens, nome, categoria);
+		ValidadorItem.validaItemProUnidJaExiste(this.itens, nome, categoria);
 		this.itens.put(this.id, new ProdutoPorUnidade(this.id, nome, categoria, unidade, supermercado, preco));
 		return this.id++;
 	}
@@ -120,7 +121,7 @@ public class ControllerItem {
 	public int adicionaItemPorQuilo(String nome, String categoria, double quilos, String supermercado, double preco) {
 		ValidadorItem.validaItem(nome, categoria, supermercado, preco);
 		ValidadorItem.validaPeso(quilos);
-		// ValidadorItem.validaItemProNaoIndusJaExiste(this.itens, nome, categoria);
+		ValidadorItem.validaItemProNaoIndusJaExiste(this.itens, nome, categoria);
 		this.itens.put(this.id, new ProdutoNaoIndustrializado(this.id, nome, categoria, quilos, supermercado, preco));
 		return this.id++;
 	}
@@ -373,9 +374,12 @@ public class ControllerItem {
 	 *            do tipo Double, referente a nova quantidade do item, atualizando
 	 *            assim a lista.
 	 */
-	public void atualizaCompraDeLista(String descritor, int id, double novaQuantidade) {
+	public void atualizaCompraDeLista(String descritor, int id, String operacao, double novaQuantidade) {
+		if (!(operacao.equals("diminui") || operacao.equals("adiciona"))) {
+			throw new EntradaInvalidaException("Erro na atualizacao de compra: operacao invalida para atualizacao.");
+		}
 		Item i = this.itens.get(id);
-		this.listasDeCompras.get(descritor).atualizaCompraDeLista(i, novaQuantidade);
+		this.listasDeCompras.get(descritor).atualizaCompraDeLista(i, operacao, novaQuantidade);
 	}
 
 	/**
@@ -386,7 +390,17 @@ public class ControllerItem {
 	 * @return a lista de compras pesquisada, da forma String.
 	 */
 	public String pesquisaListaDeCompras(String descritor) {
-		return this.listasDeCompras.get(descritor).toString();
+		if (descritor == null) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
+		}
+		if (descritor.trim().isEmpty()) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
+		}
+		if (!this.listasDeCompras.containsKey(descritor)) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: lista de compras nao existe.");
+		}
+
+		return this.listasDeCompras.get(descritor).getDescritor();
 	}
 
 	/**
@@ -447,15 +461,24 @@ public class ControllerItem {
 		Item i = this.itens.get(id);
 		this.listasDeCompras.get(descritor).deletaCompraDeLista(i);
 	}
-	
+
+	/**
+	 * Metodo que retorna o descritor de uma lista de compra criada em tal data em
+	 * uma determinada posicao da lista ordenada por ordem alfabetica.
+	 * 
+	 * @param data
+	 *            String que representa a data de criacao do item(dd/mm/aaaa).
+	 * @param posicao
+	 *            Inteiro que representa a posicao do item da lista de compra.
+	 * @return String que representa a representacao textual do item.
+	 */
 	public String getItemListaPorData(String data, int posicao) {
 		List<ListaDeCompras> ordenado = new ArrayList<>(this.listasDeCompras.values());
 		Collections.sort(ordenado, new OrdenarListaDeComprasPorDescritor());
-		System.out.println(ordenado.toString());
-		
+
 		int cont = 0;
 		for (ListaDeCompras listaDeCompras : ordenado) {
-			if (listaDeCompras.getData().equals(data)){
+			if (listaDeCompras.getData().equals(data)) {
 				if (cont == posicao) {
 					return listaDeCompras.getDescritor();
 				}
@@ -465,14 +488,69 @@ public class ControllerItem {
 		return "";
 	}
 
+	/**
+	 * Metodo que retorna uma representacao textual de uma lista de compra em uma
+	 * determinada posicao da lista ordenada por ordem alfabetica.
+	 * 
+	 * @param id
+	 *            Inteiro que representa a data de criacao do item(dd/mm/aaaa).
+	 * @param posicao
+	 *            Inteiro que representa a posicao do item da lista de compra.
+	 * @return String que representa a representacao textual do item.
+	 */
 	public String getItemListaPorItem(int id, int posicao) {
+		List<ListaDeCompras> lista = new ArrayList<>(listasDeCompras.values());
 		Item i = this.itens.get(id);
 		int cont = 0;
-		for (String key : listasDeCompras.keySet()) {
-			if (cont == posicao) {
-				return this.listasDeCompras.get(key).verificarItemEmLista(i);
+		for (ListaDeCompras listaDeCompras : lista) {
+			if (listaDeCompras.verificarItemEmLista(i)) {
+				if (cont == posicao) {
+					return listaDeCompras.toString();
+				}
+				cont++;
 			}
-			cont += 1;
+		}
+		return "";
+	}
+
+	/**
+	 * Metodo que faz a pesquisa nas listas de compras pela data.
+	 * 
+	 * @param data
+	 *            String que representa a data de criacao do item(dd/mm/aaaa).
+	 * @return String que representa a representacao textual da lista de compras.
+	 */
+	public String pesquisaListasDeComprasPorData(String data) {
+		ValidadorListaDeCompras.validaData(data);
+
+		List<ListaDeCompras> lista = new ArrayList<>(listasDeCompras.values());
+		for (ListaDeCompras listaDeCompras : lista) {
+			if (listaDeCompras.getData().equals(data)) {
+				return listaDeCompras.toString();
+			}
+		}
+		return "";
+	}
+
+	/**
+	 * Metodo que faz a pesquisa de lista de compras pelo item cadastrado na lista
+	 * de compras.
+	 * 
+	 * @param id
+	 *            Inteiro que representa o id do item cadastrado na lista de
+	 *            compras.
+	 * @return String que representa a representacao textual da lista de compra.
+	 */
+	public String pesquisaListasDeComprasPorItem(int id) {
+		if (!this.itens.containsKey(id)) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: compra nao encontrada na lista.");
+		}
+		Item i = this.itens.get(id);
+		List<ListaDeCompras> lista = new ArrayList<>(listasDeCompras.values());
+		for (ListaDeCompras listaDeCompras : lista) {
+			if (listaDeCompras.verificarItemEmLista(i)) {
+				return listaDeCompras.toString();
+			}
 		}
 		return "";
 	}
