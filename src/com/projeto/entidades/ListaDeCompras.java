@@ -1,6 +1,7 @@
 package com.projeto.entidades;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -207,11 +208,8 @@ public class ListaDeCompras {
 	 * @return String que representa a data no formato "dd/mm/aaaa".
 	 */
 	public String getData() {
-		if (data.getMonthValue() <= 9) {
-			return data.getDayOfMonth() + "/0" + data.getMonthValue() + "/" + data.getYear();
-		} else {
-			return data.getDayOfMonth() + "/" + data.getMonthValue() + "/" + data.getYear();
-		}
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return this.data.format(formato);
 	}
 
 	/**

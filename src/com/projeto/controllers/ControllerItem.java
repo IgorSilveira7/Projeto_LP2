@@ -1,18 +1,15 @@
 package com.projeto.controllers;
 
 import java.util.*;
+
 import com.projeto.entidades.Item;
 import com.projeto.entidades.ListaDeCompras;
 import com.projeto.entidades.ProdutoNaoIndustrializado;
 import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
-import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.ordenacao.OrdenaItensPorNome;
-import com.projeto.ordenacao.OrdenaListaDeComprasPorData;
 import com.projeto.ordenacao.OrdenarItensPorMenorPreco;
-import com.projeto.ordenacao.OrdenarListaDeComprasPorDescritor;
 import com.projeto.validadores.ValidadorItem;
-import com.projeto.validadores.ValidadorListaDeCompras;
 
 /**
  * Classe que controla os itens cadastrados no sistema. Cadastrada, exibe,
@@ -311,247 +308,24 @@ public class ControllerItem {
 	}
 
 	/**
-	 * Metodo responsavel por criar a lista de compras.
-	 * 
-	 * @param descritor
-	 *            do tipo String, referente a descricao da lista de compras.
-	 * @return o descritor referente a lista de compras criada.
-	 */
-	public String criaListaDeCompra(String descritor) {
-		ValidadorListaDeCompras.testeDescritor(descritor);
-		this.listasDeCompras.put(descritor, new ListaDeCompras(descritor));
-		return descritor;
-	}
-
-	/**
-	 * Metodo responsavel por adicionar compras a lista de compras criada.
-	 * 
-	 * @param descritor
-	 *            do tipo String, referente a descricao da lista de compras.
-	 * @param qntd
-	 *            do tipo Double, referente a quantidade do item.
-	 * @param id
-	 *            do tipo Inteiro, referente a identificacao do item.
-	 */
-	public void adicionaCompraALista(String descritor, double qntd, int id) {
-		if (!this.itens.containsKey(id)) {
-			throw new EntradaInvalidaException("Erro na compra de item: item nao existe no sistema.");
-		}
-		Item i = this.itens.get(id);
-		this.listasDeCompras.get(descritor).adicionaCompraALista(qntd, i);
-	}
-
-	/**
-	 * Metodo responsavel por pesquisar uma compra na lista de compras.
-	 * 
-	 * @param descritor
-	 *            do tipo String, referente a descricao da lista de compras.
-	 * @param id
-	 *            do tipo Inteiro, referente a identificacao do item.
-	 * @return String contendo a pesquisa do item em determinada lista de compras.
-	 */
-	public String pesquisaCompraEmLista(String descritor, int id) {
-		if (descritor == null) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
-		}
-		if (descritor.trim().isEmpty()) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
-		}
-		if (!this.itens.containsKey(id)) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: item id invalido.");
-		}
-		Item i = this.itens.get(id);
-		return this.listasDeCompras.get(descritor).pesquisaCompraEmLista(i);
-	}
-
-	/**
-	 * Metodo responsavel por atualizar a lista de compras.
-	 * 
-	 * @param descritor
-	 *            do tipo String, referente a descricao da lista de compras.
-	 * @param id
-	 *            do tipo Inteiro, referente a identificacao do item.
-	 * @param novaQuantidade
-	 *            do tipo Double, referente a nova quantidade do item, atualizando
-	 *            assim a lista.
-	 */
-	public void atualizaCompraDeLista(String descritor, int id, String operacao, double novaQuantidade) {
-		if (!(operacao.equals("diminui") || operacao.equals("adiciona"))) {
-			throw new EntradaInvalidaException("Erro na atualizacao de compra: operacao invalida para atualizacao.");
-		}
-		Item i = this.itens.get(id);
-		this.listasDeCompras.get(descritor).atualizaCompraDeLista(i, operacao, novaQuantidade);
-	}
-
-	/**
-	 * Metodo responsavel por pesquisar uma lista de compra especifica.
-	 * 
-	 * @param descritor
-	 *            do tipo String, referente a descricao da lista de compras.
-	 * @return a lista de compras pesquisada, da forma String.
-	 */
-	public String pesquisaListaDeCompras(String descritor) {
-		if (descritor == null) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
-		}
-		if (descritor.trim().isEmpty()) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
-		}
-		if (!this.listasDeCompras.containsKey(descritor)) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: lista de compras nao existe.");
-		}
-
-		return this.listasDeCompras.get(descritor).getDescritor();
-	}
-
-	/**
-	 * Metodo responsavel por finalizar uma lista de compras.
-	 * 
-	 * @param descritor
-	 *            do tipo String, responsavel pela descricao da lista de compras.
-	 * @param localDeCompra
-	 *            do tipo String, referente ao local de compra do item.
-	 * @param valorFinal
-	 *            do tipo Double, referente ao ultimo valor do item.
-	 */
-	public void finalizarListaDeCompras(String descritor, String localDeCompra, double valorFinal) {
-		if (descritor == null) {
-			throw new EntradaInvalidaException(
-					"Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
-		}
-		if (descritor.trim().isEmpty()) {
-			throw new EntradaInvalidaException(
-					"Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
-		}
-		ValidadorListaDeCompras.testeFinalizarCompra(localDeCompra, valorFinal);
-		this.listasDeCompras.get(descritor).finalizarListaDeCompras(localDeCompra, valorFinal);
-
-	}
-
-	/**
-	 * Metodo que retorna o item da lista.
-	 * 
-	 * @param descritor
-	 *            do tipo String, referente a decricao da lista de compras.
-	 * @param id
-	 *            do tipo inteiro, referente a identificacao do item.
-	 * @return a String contendo a lista de compras e o item.
-	 */
-	public String getItemLista(String descritor, int id) {
-		return this.listasDeCompras.get(descritor).getItemLista(id);
-	}
-
-	/**
-	 * Metodo que deleta uma lista de compras.
-	 * 
-	 * @param descritor
-	 *            do tipo String, responsavel por descrever a lista de compras.
-	 * @param id
-	 *            do tipo Inteiro, responsavel pela identificacao do item.
-	 */
-	public void deletaCompraDeLista(String descritor, int id) {
-		if (descritor == null) {
-			throw new EntradaInvalidaException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
-		}
-		if (descritor.trim().isEmpty()) {
-			throw new EntradaInvalidaException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
-		}
-		if (!this.itens.containsKey(id)) {
-			throw new EntradaInvalidaException("Erro na exclusao de compra: item nao existe no sistema.");
-		}
-		Item i = this.itens.get(id);
-		this.listasDeCompras.get(descritor).deletaCompraDeLista(i);
-	}
-
-	/**
-	 * Metodo que retorna o descritor de uma lista de compra criada em tal data em
-	 * uma determinada posicao da lista ordenada por ordem alfabetica.
-	 * 
-	 * @param data
-	 *            String que representa a data de criacao do item(dd/mm/aaaa).
-	 * @param posicao
-	 *            Inteiro que representa a posicao do item da lista de compra.
-	 * @return String que representa a representacao textual do item.
-	 */
-	public String getItemListaPorData(String data, int posicao) {
-		List<ListaDeCompras> ordenado = new ArrayList<>(this.listasDeCompras.values());
-		Collections.sort(ordenado, new OrdenarListaDeComprasPorDescritor());
-
-		int cont = 0;
-		for (ListaDeCompras listaDeCompras : ordenado) {
-			if (listaDeCompras.getData().equals(data)) {
-				if (cont == posicao) {
-					return listaDeCompras.getDescritor();
-				}
-				cont += 1;
-			}
-		}
-		return "";
-	}
-
-	/**
-	 * Metodo que retorna uma representacao textual de uma lista de compra em uma
-	 * determinada posicao da lista ordenada por ordem alfabetica e pela data.
+	 * Metodo que retorna o item com um determinado id.
 	 * 
 	 * @param id
-	 *            Inteiro que representa a data de criacao do item(dd/mm/aaaa).
-	 * @param posicao
-	 *            Inteiro que representa a posicao do item da lista de compra.
-	 * @return String que representa a representacao textual do item.
+	 *            Inteiro referente ao id de cadastro do item.
+	 * @return Item referente ao item.
 	 */
-	public String getItemListaPorItem(int id, int posicao) {
-		List<ListaDeCompras> lista = new ArrayList<>();
-		Item i = this.itens.get(id);
-		for (String key : this.listasDeCompras.keySet()) {
-			ListaDeCompras l = this.listasDeCompras.get(key);
-			if (l.verificarItemEmLista(i)) {
-				lista.add(l);
-			}
-		}
-		Collections.sort(lista, new OrdenaListaDeComprasPorData());
-		Collections.sort(lista, new OrdenarListaDeComprasPorDescritor());
-		return lista.get(posicao).toString();
+	public Item getItemPeloId(int id) {
+		return this.itens.get(id);
 	}
 
 	/**
-	 * Metodo que faz a pesquisa nas listas de compras pela data.
-	 * 
-	 * @param data
-	 *            String que representa a data de criacao do item(dd/mm/aaaa).
-	 * @return String que representa a representacao textual da lista de compras.
-	 */
-	public String pesquisaListasDeComprasPorData(String data) {
-		ValidadorListaDeCompras.validaData(data);
-
-		List<ListaDeCompras> lista = new ArrayList<>(listasDeCompras.values());
-		for (ListaDeCompras listaDeCompras : lista) {
-			if (listaDeCompras.getData().equals(data)) {
-				return listaDeCompras.toString();
-			}
-		}
-		return "";
-	}
-
-	/**
-	 * Metodo que faz a pesquisa de lista de compras pelo item cadastrado na lista
-	 * de compras.
+	 * Metodo que verifica se um item com um id esta cadastrado no sistema.
 	 * 
 	 * @param id
-	 *            Inteiro que representa o id do item cadastrado na lista de
-	 *            compras.
-	 * @return String que representa a representacao textual da lista de compra.
+	 *            Inteiro referente ao id do item.
+	 * @return True, caso o item com id esteja cadastrado, false, caso contrario.
 	 */
-	public String pesquisaListasDeComprasPorItem(int id) {
-		if (!this.itens.containsKey(id)) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: compra nao encontrada na lista.");
-		}
-		Item i = this.itens.get(id);
-		List<ListaDeCompras> lista = new ArrayList<>(listasDeCompras.values());
-		for (ListaDeCompras listaDeCompras : lista) {
-			if (listaDeCompras.verificarItemEmLista(i)) {
-				return listaDeCompras.toString();
-			}
-		}
-		return "";
+	public boolean itemExiste(int id) {
+		return this.itens.containsKey(id);
 	}
 }

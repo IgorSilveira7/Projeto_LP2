@@ -3,8 +3,10 @@ package testesdeunidades;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
 import org.junit.Before;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.projeto.entidades.Item;
 import com.projeto.entidades.ListaDeCompras;
@@ -15,11 +17,15 @@ import com.projeto.excecoes.EntradaInvalidaException;
 
 public class TesteListaDeCompras {
 
-	ListaDeCompras l;
-
+	private ListaDeCompras l;
+	private LocalDate data;
+	private DateTimeFormatter formato;
+	
 	@Before
 	public void Before() {
 		l = new ListaDeCompras("feira semanal");
+		this.data = LocalDate.now();
+		this.formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	}
 
 	@Test
@@ -160,7 +166,7 @@ public class TesteListaDeCompras {
 		l.adicionaCompraALista(5, i);
 		l.adicionaCompraALista(1, i2);
 
-		String compara = "17/07/2018 - feira semanal";
+		String compara = this.data.format(formato) + " - " + l.getDescritor();
 		assertEquals(l.toString(), compara);
 	}
 

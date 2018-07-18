@@ -1,10 +1,14 @@
 package com.projeto.sistema;
 
 import java.time.LocalDate;
-
-import com.projeto.controllers.ControllerItem;
+import java.time.format.DateTimeFormatter;
 
 import easyaccept.EasyAccept;
+
+import com.projeto.controllers.ControllerItem;
+import com.projeto.controllers.ControllerListaDeCompras;
+
+
 
 /**
  * Classe que ira se comunicar com os controllers(No caso apenas com um). E
@@ -19,9 +23,13 @@ import easyaccept.EasyAccept;
 public class Facade {
 
 	/**
-	 * Atributo que representa o controlador de item.
+	 * Atributo referente ao controlador de item.
 	 */
 	private ControllerItem controllerItem;
+	/**
+	 * Atributo referente ao controlador de lista de compras.
+	 */
+	private ControllerListaDeCompras controllerListaDeCompras;
 
 	/**
 	 * Metodo que ira verificar os testes de aceitacao.
@@ -45,25 +53,26 @@ public class Facade {
 	 */
 	public Facade() {
 		this.controllerItem = new ControllerItem();
+		this.controllerListaDeCompras = new ControllerListaDeCompras(controllerItem);
 	}
 
 	/**
 	 * Metodo que cadastra um item por quantidade fixa.
 	 * 
 	 * @param nome
-	 *            String Nome do item.
+	 *            String referente ao nome do item.
 	 * @param categoria
-	 *            String Categoria do item.
+	 *            String referente a categoria do item.
 	 * @param quantidade
-	 *            Inteiro Quantidade do item.
+	 *            Inteiro referente quantidade do item.
 	 * @param medida
-	 *            String unidade de medida do item.
+	 *            String referente a unidade de medida do item.
 	 * @param supermercado
-	 *            String Nome do supermercado.
+	 *            String referente ao nome do supermercado.
 	 * @param preco
-	 *            Double Preco do item.
+	 *            Double referente ao preco do item.
 	 * 
-	 * @return Inteiro Id do item para ser recuperado..
+	 * @return Inteiro referente ao id do item cadastrado.
 	 */
 	public int adicionaItemPorQtd(String nome, String categoria, int quantidade, String medida, String supermercado,
 			double preco) {
@@ -74,17 +83,17 @@ public class Facade {
 	 * Metodo que cadastra um item por unidade.
 	 * 
 	 * @param nome
-	 *            String Nome do item.
+	 *            String referente ao nome do item.
 	 * @param categoria
-	 *            String Categoria do item.
+	 *            String referente a categoria do item.
 	 * @param unidade
-	 *            Inteiro unidade do item.
+	 *            Inteiro referente a unidade do item.
 	 * @param supermercado
-	 *            String Nome do supermercado.
+	 *            String referente ao nome do supermercado.
 	 * @param preco
-	 *            Double Preco do item.
+	 *            Double referente ao preco do item.
 	 * 
-	 * @return Inteiro Id do item para ser recuperado..
+	 * @return Inteiro referente ao id do item cadastrado.
 	 */
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String supermercado, double preco) {
 		return this.controllerItem.adicionaItemPorUnidade(nome, categoria, unidade, supermercado, preco);
@@ -94,17 +103,17 @@ public class Facade {
 	 * Metodo que cadastra um item por peso.
 	 * 
 	 * @param nome
-	 *            String Nome do item.
+	 *            String referente ao nome do item.
 	 * @param categoria
-	 *            String Categoria do item.
+	 *            String referente a categoria do item.
 	 * @param quilos
-	 *            Double Peso do item.
+	 *            Double referente ao peso do item.
 	 * @param supermercado
-	 *            String Nome do supermercado.
+	 *            String referente ao nome do supermercado.
 	 * @param preco
-	 *            Double Preco do item.
+	 *            Double referente ao preco do item.
 	 * 
-	 * @return Inteiro Id do item para ser recuperado..
+	 * @return Inteiro referente ao id do item cadastrado.
 	 */
 	public int adicionaItemPorQuilo(String nome, String categoria, double quilos, String supermercado, double preco) {
 		return this.controllerItem.adicionaItemPorQuilo(nome, categoria, quilos, supermercado, preco);
@@ -114,9 +123,9 @@ public class Facade {
 	 * Metodo que exibe a representacao textual de um item.
 	 * 
 	 * @param id
-	 *            Inteiro que eh o id do item cadastrado.
+	 *            Inteiro referente ao id do item cadastrado.
 	 * 
-	 * @return String a representacao textual de um item.
+	 * @return String referente a representacao textual de um item.
 	 */
 	public String exibeItem(int id) {
 		return this.controllerItem.exibeItem(id);
@@ -126,11 +135,11 @@ public class Facade {
 	 * Metodo que atualiza um item cadastro no sistema.
 	 * 
 	 * @param id
-	 *            Inteiro que representa o id do item.
+	 *            Inteiro referente ao id do item.
 	 * @param atributo
-	 *            String que representa o nome do atributo a ser alterado.
+	 *            String referente ao nome do atributo a ser alterado.
 	 * @param novoValor
-	 *            String que representa o novo valor.
+	 *            String referente ao novo valor.
 	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
 		this.controllerItem.atualizaItem(id, atributo, novoValor);
@@ -140,11 +149,11 @@ public class Facade {
 	 * Metodo que adiciona um preco em um item ja cadastrado.
 	 * 
 	 * @param id
-	 *            Inteiro que representa o id do item.
+	 *            Inteiro referente ao id do item.
 	 * @param supermercado
-	 *            String que representa o nome do supermercado.
+	 *            String referente ao nome do supermercado.
 	 * @param preco
-	 *            Double que representa o preco do item no supermercado.
+	 *            Double referente ao preco do item no supermercado.
 	 */
 	public void adicionaPrecoItem(int id, String supermercado, double preco) {
 		this.controllerItem.adicionaPrecoItem(id, supermercado, preco);
@@ -154,7 +163,7 @@ public class Facade {
 	 * Metodo que deleta um item ja cadastrado do sistema.
 	 * 
 	 * @param id
-	 *            Inteiro que representa o id do item.
+	 *            Inteiro referente ao id do item.
 	 */
 	public void deletaItem(int id) {
 		this.controllerItem.deletaItem(id);
@@ -165,7 +174,7 @@ public class Facade {
 	 * ordem alfabetica.
 	 * 
 	 * @param id
-	 *            Inteiro que representa o id do item a ser buscado.
+	 *            Inteiro referente ao id do item a ser buscado.
 	 * @return String a representacao textual do item.
 	 */
 	public String getItem(int id) {
@@ -177,10 +186,10 @@ public class Facade {
 	 * ordem alfabetica de uma dada categoria.
 	 * 
 	 * @param categoria
-	 *            String que representa a categoria a ser buscada.
+	 *            String referente a categoria a ser buscada.
 	 * @param id
-	 *            Inteiro que representa o id do item.
-	 * @return String a representacao textual do item.
+	 *            Inteiro referente ao id do item.
+	 * @return String referente a representacao textual do item.
 	 */
 	public String getItemPorCategoria(String categoria, int id) {
 		return this.controllerItem.getItemPorCategoria(categoria, id);
@@ -191,8 +200,8 @@ public class Facade {
 	 * de menor preco.
 	 * 
 	 * @param id
-	 *            Inteiro que representa o id do item a ser buscado.
-	 * @return String a representacao textual do item.
+	 *            Inteiro referente ao id do item a ser buscado.
+	 * @return String referente a representacao textual do item.
 	 */
 	public String getItemPorMenorPreco(int id) {
 		return this.controllerItem.getItemPorMenorPreco(id);
@@ -203,10 +212,10 @@ public class Facade {
 	 * ordem alfabetica a partir de uma pesquisa.
 	 * 
 	 * @param strPesquisada
-	 *            String que representa o nome a ser buscada.
+	 *            String referente ao nome a ser buscada.
 	 * @param id
-	 *            Inteiro que representa o id do item.
-	 * @return String a representacao textual do item.
+	 *            Inteiro referente ao id do item.
+	 * @return String referente a representacao textual do item.
 	 */
 	public String getItemPorPesquisa(String strPesquisada, int id) {
 		return this.controllerItem.getItemPorPesquisa(strPesquisada, id);
@@ -216,133 +225,159 @@ public class Facade {
 	 * Metodo que retorna a descricao da lista de compras recem criada.
 	 * 
 	 * @param descritor
-	 *            do tipo String, que descreve a lista de compras.
-	 * @return a criacao de uma lista de compras.
+	 *            String referente a descricao da lista de compras.
+	 * @return String referente a descricao de uma lista de compras.
 	 */
 	public String adicionaListaDeCompras(String descritor) {
-		return this.controllerItem.criaListaDeCompra(descritor);
+		return this.controllerListaDeCompras.criaListaDeCompra(descritor);
 	}
 
 	/**
 	 * Metodo sem retorno que adiciona uma compra a lista de compras.
 	 * 
-	 * @param descritor
-	 *            do tipo String, que descreve uma lista de compras.
+	 * @param escritor
+	 *            String referente a descricao da lista de compras.
 	 * @param qntd
-	 *            do tipo Double, que e referente a quantidade de itens.
+	 *            Double referente a quantidade de itens.
 	 * @param id
-	 *            do tipo Inteiro, referente a identificacao do item.
+	 *           Inteiro referente a identificacao do item.
 	 */
 	public void adicionaCompraALista(String descritor, double qntd, int id) {
-		this.controllerItem.adicionaCompraALista(descritor, qntd, id);
+		this.controllerListaDeCompras.adicionaCompraALista(descritor, qntd, id);
 	}
 
 	/**
 	 * Metodo responsavel por pesquisar uma determinada compra na lista de compras.
 	 * 
 	 * @param descritor
-	 *            do tipo String, referente a descricao da lista de compras.
+	 *            String referente a descricao da lista de compras.
 	 * @param id
-	 *            do tipo inteiro, referente a identificacao do item.
-	 * @return uma String contendo a pesquisa feita na lista.
+	 *            inteiro referente a identificacao do item.
+	 * @return String referente a pesquisa feita na lista de compras.
 	 */
 	public String pesquisaCompraEmLista(String descritor, int id) {
-		return this.controllerItem.pesquisaCompraEmLista(descritor, id);
+		return this.controllerListaDeCompras.pesquisaCompraEmLista(descritor, id);
 	}
 
 	/**
 	 * Metodo que atualiza uma compra na lista de compras.
 	 * 
 	 * @param descritor
-	 *            do tipo String, responsavel por descrever uma lista de compras.
+	 *            String referente a descricao de lista de compras.
 	 * @param id
-	 *            do tipo Inteiro, responsavel pela identificacao de um item.
+	 *            Inteiro referente a identificacao de um item.
 	 * @param novaQuantidade
-	 *            do tipo Double, responsavel por dar a nova quantidade do item_
-	 *            _que sera atualizado na lista de compras.
+	 *            Double referente a nova quantidade do item
+	 *            que sera adicionado ou diminuida na lista de compras.
 	 */
 	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQuantidade) {
-		this.controllerItem.atualizaCompraDeLista(descritor, id, operacao, novaQuantidade);
+		this.controllerListaDeCompras.atualizaCompraDeLista(descritor, id, operacao, novaQuantidade);
 	}
 
 	/**
 	 * Metodo que permite a pesquisa de uma lista de compras.
 	 * 
 	 * @param descritor
-	 *            do tipo String, que descreve uma lista de compras.
-	 * @return a String contendo a pesquisa referente a lista de compras.
+	 *            String referente a descricao uma lista de compras.
+	 * @return String referente a pesquisa referente a lista de compras.
 	 */
 	public String pesquisaListaDeCompras(String descritor) {
-		return this.controllerItem.pesquisaListaDeCompras(descritor);
+		return this.controllerListaDeCompras.pesquisaListaDeCompras(descritor);
 	}
 
 	/**
 	 * Metodo que tem funcao finalizar uma lista de compras.
 	 * 
 	 * @param descritor
-	 *            do tipo String, referente a descricao de uma lista de compras.
+	 *            String referente a descricao de uma lista de compras.
 	 * @param localDeCompra
-	 *            do tipo String, referente ao local da compra.
+	 *            String referente ao local da compra.
 	 * @param valorFinal
-	 *            do tipo Double, referente ao ultimo valor do item a ser comprado.
+	 *            Double referente ao valor do custo total da lista.
 	 */
 	public void finalizarListaDeCompras(String descritor, String localDeCompra, double valorFinal) {
-		this.controllerItem.finalizarListaDeCompras(descritor, localDeCompra, valorFinal);
+		this.controllerListaDeCompras.finalizarListaDeCompras(descritor, localDeCompra, valorFinal);
 	}
 
 	/**
 	 * Metodo que retorna o item na lista.
 	 * 
 	 * @param descritor
-	 *            do tipo String, referente a descricao da lista de compras.
+	 *            String referente a descricao da lista de compras.
 	 * @param id
-	 *            do tipo Inteiro, referente a identificacao do item.
-	 * @return uma String contendo a representacao textual do item em determinada
+	 *            Inteiro referente a identificacao do item.
+	 * @return String referente a representacao textual do item em determinada
 	 *         lista de compras.
 	 */
 	public String getItemLista(String descritor, int id) {
-		return this.controllerItem.getItemLista(descritor, id);
+		return this.controllerListaDeCompras.getItemLista(descritor, id);
 	}
 
 	/**
 	 * Metodo referente a delecao de uma compra na lista de compras.
 	 * 
 	 * @param descritor
-	 *            do tipo String, referente a descricao de uma lista de compras.
+	 *            String referente a descricao de uma lista de compras.
 	 * @param id
-	 *            do tipo Inteiro, referente a identificacao do item na lista de
+	 *            Inteiro referente a identificacao do item na lista de
 	 *            compras.
 	 */
 	public void deletaCompraDeLista(String descritor, int id) {
-		this.controllerItem.deletaCompraDeLista(descritor, id);
+		this.controllerListaDeCompras.deletaCompraDeLista(descritor, id);
 	}
 
 	/**
 	 * Metodo que retorna a representacao textual de um item em uma lista de compras
 	 * ordenado por datas
 	 * 
-	 * @param data String que representa a data(dd/mm/aaaa).
-	 * @param posicao Inteiro que representa a posicao do item.
-	 * @return
+	 * @param data String referente a data(dd/mm/aaaa).
+	 * @param posicao Inteiro referente a posicao do item.
+	 * @return String referente a descricao da lista de compra.
 	 */
 	public String getItemListaPorData(String data, int posicao) {
-		return this.controllerItem.getItemListaPorData(data, posicao);
+		return this.controllerListaDeCompras.getItemListaPorData(data, posicao);
 	}
 
+	/**
+	 * Metodo que retorna a representacao textual de um item em uma lista de compras
+	 * ordenado por datas.
+	 * 
+	 * @param id Inteiro referente ao id do item a ser procurado.
+	 * @param posicao Inteiro referente a posicao da lista de compras.
+	 * @return String referente a representacao textual da lista de compra.
+	 */
 	public String getItemListaPorItem(int id, int posicao) {
-		return this.controllerItem.getItemListaPorItem(id, posicao);
+		return this.controllerListaDeCompras.getItemListaPorItem(id, posicao);
 	}
 
+	/**
+	 * Metodo que pesquisa uma lista de compra pela data.
+	 * 
+	 * @param data String referente a data de cadastrado da lista de compras("dd/mm/aaaa").
+	 * @return String referente a representacao textual da lista de compra.
+	 */
 	public String pesquisaListasDeComprasPorData(String data) {
-		return this.controllerItem.pesquisaListasDeComprasPorData(data);
+		return this.controllerListaDeCompras.pesquisaListasDeComprasPorData(data);
 	}
 
+	/**
+	 * Metodo que pesquisa uma lista de compra pelo id do item.
+	 * 
+	 * @param id Inteiro referente ao id de cadastrado do item.
+	 * @return String referente a representacao textual da lista de compra.
+	 */
 	public String pesquisaListasDeComprasPorItem(int id) {
-		return this.controllerItem.pesquisaListasDeComprasPorItem(id);
+		return this.controllerListaDeCompras.pesquisaListasDeComprasPorItem(id);
 	}
 
+	/**
+	 * Metodo que retorna a data atual do sistema.
+	 * 
+	 * @return String referente a data do sistema("dd/mm/aaaa").
+	 */
 	public String dataAtual() {
 		LocalDate l = LocalDate.now();
-		return l.getDayOfMonth() + "/0" + l.getMonth().getValue() + "/" + l.getYear();
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return l.format(formato);
 	}
 }

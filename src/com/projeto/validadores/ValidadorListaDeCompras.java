@@ -1,6 +1,11 @@
 package com.projeto.validadores;
 
+import java.util.List;
+import java.util.Map;
+
+import com.projeto.entidades.Item;
 import com.projeto.excecoes.EntradaInvalidaException;
+import com.projeto.excecoes.ItemNaoExisteException;
 
 public class ValidadorListaDeCompras {
 	
@@ -23,6 +28,20 @@ public class ValidadorListaDeCompras {
 		}
 		if (localCompra.trim().isEmpty()) {
 			throw new EntradaInvalidaException("Erro na finalizacao de lista de compras: local nao pode ser vazio ou nulo.");
+		}
+		return true;
+	}
+	
+	public static boolean validaAdicionaItemNaListaDeCompra(Map<Integer, Item> itens, int id) {
+		if (!itens.containsKey(id)) {
+			throw new EntradaInvalidaException("Erro na compra de item: item nao existe no sistema.");
+		}
+		return true;
+	}
+	
+	public static boolean validaPesquisaCompraEmLista(Map<Integer, Item> itens, int id) {
+		if (!itens.containsKey(id)) {
+			throw new ItemNaoExisteException("Erro na pesquisa de compra: item id invalido.");
 		}
 		return true;
 	}
