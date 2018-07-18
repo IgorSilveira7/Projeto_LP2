@@ -9,7 +9,7 @@ import com.projeto.excecoes.ItemNaoExisteException;
 
 public class ValidadorListaDeCompras {
 	
-	public static boolean testeDescritor(String descritor) {
+	public static boolean validaDescritor(String descritor) {
 		if (descritor == null) {
 			throw new EntradaInvalidaException("Erro na criacao de lista de compras: descritor nao pode ser vazio ou nulo.");
 		}

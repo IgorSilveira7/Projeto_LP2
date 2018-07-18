@@ -9,6 +9,8 @@ import java.util.Map;
 import com.projeto.entidades.ListaDeCompras;
 import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.excecoes.ItemNaoExisteException;
+import com.projeto.excecoes.ListaDeCompraNaoExisteException;
+import com.projeto.excecoes.OperacaoInvalidaException;
 import com.projeto.ordenacao.OrdenaListaDeComprasPorData;
 import com.projeto.ordenacao.OrdenarListaDeComprasPorDescritor;
 import com.projeto.validadores.ValidadorListaDeCompras;
@@ -53,7 +55,7 @@ public class ControllerListaDeCompras {
 	 * @return String referente ao descritor referente a lista de compras criada.
 	 */
 	public String criaListaDeCompra(String descritor) {
-		ValidadorListaDeCompras.testeDescritor(descritor);
+		ValidadorListaDeCompras.validaDescritor(descritor);
 		this.listasDeCompras.put(descritor, new ListaDeCompras(descritor));
 		return descritor;
 	}
@@ -112,7 +114,7 @@ public class ControllerListaDeCompras {
 			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
 		}
 		if (!this.listasDeCompras.containsKey(descritor)) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: lista de compras nao existe.");
+			throw new ListaDeCompraNaoExisteException("Erro na pesquisa de compra: lista de compras nao existe.");
 		}
 		return this.listasDeCompras.get(descritor).getDescritor();
 	}
@@ -132,7 +134,7 @@ public class ControllerListaDeCompras {
 	 */
 	public void atualizaCompraDeLista(String descritor, int id, String operacao, double novaQuantidade) {
 		if (!(operacao.equals("diminui") || operacao.equals("adiciona"))) {
-			throw new EntradaInvalidaException("Erro na atualizacao de compra: operacao invalida para atualizacao.");
+			throw new OperacaoInvalidaException("Erro na atualizacao de compra: operacao invalida para atualizacao.");
 		}
 		this.listasDeCompras.get(descritor).atualizaCompraDeLista(this.controllerItem.getItemPeloId(id), operacao,
 				novaQuantidade);

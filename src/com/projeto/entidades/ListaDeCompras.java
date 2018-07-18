@@ -58,7 +58,7 @@ public class ListaDeCompras {
 	 *            compras.
 	 */
 	public ListaDeCompras(String descritor) {
-		if (ValidadorListaDeCompras.testeDescritor(descritor)) {
+		if (ValidadorListaDeCompras.validaDescritor(descritor)) {
 			this.descritor = descritor;
 			this.itens = new ArrayList<>();
 			this.qntdItens = new TreeMap<>();
@@ -151,7 +151,7 @@ public class ListaDeCompras {
 	 *         compras.
 	 */
 	public String getItemLista(int id) {
-		if (this.itens.size() <= id) {
+		if (id < 0 || this.itens.size() <= id) {
 			return "";
 		}
 		this.ordenarPorNomeCategoria();
