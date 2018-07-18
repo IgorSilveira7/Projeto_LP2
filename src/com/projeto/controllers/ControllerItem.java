@@ -8,6 +8,7 @@ import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
 import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.ordenacao.OrdenaItensPorNome;
+import com.projeto.ordenacao.OrdenaListaDeComprasPorData;
 import com.projeto.ordenacao.OrdenarItensPorMenorPreco;
 import com.projeto.ordenacao.OrdenarListaDeComprasPorDescritor;
 import com.projeto.validadores.ValidadorItem;
@@ -490,7 +491,7 @@ public class ControllerItem {
 
 	/**
 	 * Metodo que retorna uma representacao textual de uma lista de compra em uma
-	 * determinada posicao da lista ordenada por ordem alfabetica.
+	 * determinada posicao da lista ordenada por ordem alfabetica e pela data.
 	 * 
 	 * @param id
 	 *            Inteiro que representa a data de criacao do item(dd/mm/aaaa).
@@ -499,18 +500,17 @@ public class ControllerItem {
 	 * @return String que representa a representacao textual do item.
 	 */
 	public String getItemListaPorItem(int id, int posicao) {
-		List<ListaDeCompras> lista = new ArrayList<>(listasDeCompras.values());
+		List<ListaDeCompras> lista = new ArrayList<>();
 		Item i = this.itens.get(id);
-		int cont = 0;
-		for (ListaDeCompras listaDeCompras : lista) {
-			if (listaDeCompras.verificarItemEmLista(i)) {
-				if (cont == posicao) {
-					return listaDeCompras.toString();
-				}
-				cont++;
+		for (String key : this.listasDeCompras.keySet()) {
+			ListaDeCompras l = this.listasDeCompras.get(key);
+			if (l.verificarItemEmLista(i)) {
+				lista.add(l);
 			}
 		}
-		return "";
+		Collections.sort(lista, new OrdenaListaDeComprasPorData());
+		Collections.sort(lista, new OrdenarListaDeComprasPorDescritor());
+		return lista.get(posicao).toString();
 	}
 
 	/**

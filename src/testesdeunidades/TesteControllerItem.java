@@ -285,8 +285,8 @@ public class TesteControllerItem {
 		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
 		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
 		this.c.adicionaCompraALista("feira", 2, 1);
-		this.c.atualizaCompraDeLista("feira", 1, 4);
-		assertEquals("4 Pao, alimento industrializado, 5 u.m", this.c.pesquisaCompraEmLista("feira", 1));
+		this.c.atualizaCompraDeLista("feira", 1, "adiciona", 4);
+		assertEquals("6 Pao, alimento industrializado, 5 u.m", this.c.pesquisaCompraEmLista("feira", 1));
 	}
 	
 	@Test
@@ -324,7 +324,7 @@ public class TesteControllerItem {
 		this.c.adicionaItemPorQuilo("Arroz", "alimento industrializado", 5, "Baratao", 2.10);
 		this.c.adicionaCompraALista("feira", 3, 1);
 		this.c.adicionaCompraALista("feira", 3, 2);
-		assertEquals("3,0 kg Arroz, alimento industrializado", this.c.getItemLista("feira", 0));
+		assertEquals("3 Arroz, alimento industrializado", this.c.getItemLista("feira", 0));
 	}
 	
 	@Test
