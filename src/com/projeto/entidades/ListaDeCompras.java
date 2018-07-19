@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.ordenacao.OrdenaItensPorNome;
@@ -21,14 +22,8 @@ import com.projeto.validadores.ValidadorListaDeCompras;
  *
  */
 public class ListaDeCompras {
-	/**
-	 * Atributo do tipo Lista.
-	 */
-	private List<Item> itens;
-	/**
-	 * Atributo do timpo TreeMap, passando Item e valores Double.
-	 */
-	private TreeMap<Item, Double> qntdItens;
+	
+	private Map<Item, Compra> listaDeCompras;
 	/**
 	 * Atributo do tipo String referente a descricao de uma lista de compras.
 	 */
@@ -60,8 +55,7 @@ public class ListaDeCompras {
 	public ListaDeCompras(String descritor) {
 		if (ValidadorListaDeCompras.validaDescritor(descritor)) {
 			this.descritor = descritor;
-			this.itens = new ArrayList<>();
-			this.qntdItens = new TreeMap<>();
+			this.listaDeCompras = new TreeMap<>();
 			this.data = LocalDate.now();
 			this.finalizado = false;
 		}
@@ -77,11 +71,10 @@ public class ListaDeCompras {
 	 * @return Inteiro que representa o tamanho da lista itens, apos adicionar a o
 	 *         item comprado.
 	 */
-	public int adicionaCompraALista(double qntd, Item item) {
-		this.qntdItens.put(item, qntd);
-		this.itens.add(item);
+	public int adicionaCompraALista(int qntd, Item item) {
+		this.listaDeCompras.put(item, new Compra(item, qntd));
 
-		return this.itens.size();
+		return this.listaDeCompras.size();
 	}
 
 	/**
@@ -94,10 +87,10 @@ public class ListaDeCompras {
 	 *         pesquisado.
 	 */
 	public String pesquisaCompraEmLista(Item item) {
-		if (!this.itens.contains(item)) {
+		if (!this.listaDeCompras.containsKey(item)) {
 			throw new EntradaInvalidaException("Erro na pesquisa de compra: compra nao encontrada na lista.");
 		}
-		return item.getToStringEmLista(this.qntdItens.get(item));
+		return listaDeCompras.get(item).toString();
 	}
 
 	/**
@@ -109,21 +102,20 @@ public class ListaDeCompras {
 	 *            Double referente a nova quantidade daquele item, que_ devera ser
 	 *            atualizado.
 	 */
-	public void atualizaCompraDeLista(Item item, String operacao, double novaquantidade) {
-		if (!this.qntdItens.containsKey(item)) {
+	public void atualizaCompraDeLista(Item item, String operacao, int novaquantidade) {
+		if (!this.listaDeCompras.containsKey(item)) {
 			throw new EntradaInvalidaException("Erro na atualizacao de compra: compra nao encontrada na lista.");
 		}
-		double novoValor = 0;
+		int novoValor = 0;
 		if (operacao.equals("diminui")) {
-			novoValor = this.qntdItens.get(item) - novaquantidade;
+			this.listaDeCompras.get(item).diminuiQntdItem(novaquantidade);
 		} else if (operacao.equals("adiciona")) {
-			novoValor = this.qntdItens.get(item) + novaquantidade;
+			this.listaDeCompras.get(item).aumentaQntdItem(novaquantidade);
 		}
+		novoValor = this.listaDeCompras.get(item).getQntd();
+		
 		if (novoValor <= 0) {
-			this.qntdItens.remove(item);
-			this.itens.remove(item);
-		} else {
-			this.qntdItens.replace(item, novoValor);
+			this.listaDeCompras.remove(item);
 		}
 	}
 
@@ -151,13 +143,14 @@ public class ListaDeCompras {
 	 *         compras.
 	 */
 	public String getItemLista(int id) {
-		if (id < 0 || this.itens.size() <= id) {
+		if (id < 0 || this.listaDeCompras.size() <= id) {
 			return "";
 		}
-		this.ordenarPorNomeCategoria();
-		Item i = this.itens.get(id);
-		double quant = this.qntdItens.get(i);
-		return i.getToStringEmLista(quant);
+		List<Item> itensOrdenados = new ArrayList<>(this.listaDeCompras.keySet());
+		Collections.sort(itensOrdenados, new OrdenaItensPorNome());
+		Collections.sort(itensOrdenados, new OrdenarPorCategoria());
+		Item i = itensOrdenados.get(id);
+		return this.listaDeCompras.get(i).toString();
 	}
 
 	/**
@@ -167,11 +160,11 @@ public class ListaDeCompras {
 	 *            Item referente ao item a ser removido da lista.
 	 */
 	public void deletaCompraDeLista(Item item) {
-		if (!this.itens.contains(item)) {
+		if (!this.listaDeCompras.containsKey(item)) {
 			throw new EntradaInvalidaException("Erro na exclusao de compra: compra nao encontrada na lista.");
 		}
-		this.itens.remove(item);
-		this.qntdItens.remove(item);
+		this.listaDeCompras.remove(item);
+		this.listaDeCompras.remove(item);
 	}
 
 	/**
@@ -222,18 +215,9 @@ public class ListaDeCompras {
 	 * @return Boolean True se o item estiver na lista, ou false caso nao esteja.
 	 */
 	public boolean verificarItemEmLista(Item item) {
-		if (this.qntdItens.containsKey(item)) {
+		if (this.listaDeCompras.containsKey(item)) {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * Metodo responsavel por ordenar os itens pelo nome de suas categorias. Metodo
-	 * sem retorno.
-	 */
-	private void ordenarPorNomeCategoria() {
-		Collections.sort(this.itens, new OrdenaItensPorNome());
-		Collections.sort(this.itens, new OrdenarPorCategoria());
 	}
 }

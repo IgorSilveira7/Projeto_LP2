@@ -96,7 +96,7 @@ public class ProdutoPorUnidade extends Item {
 	 * @return String contendo a quantidade, nome e categoria de um item.
 	 */
 	@Override
-	public String getToStringEmLista(double quant) {
+	public String exibirEmLista(double quant) {
 		return ((int)quant) + " " + this.getNome() + ", " + this.getCategoria();
 	}
 	

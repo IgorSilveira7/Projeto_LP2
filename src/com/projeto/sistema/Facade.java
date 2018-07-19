@@ -242,7 +242,7 @@ public class Facade {
 	 * @param id
 	 *           Inteiro referente a identificacao do item.
 	 */
-	public void adicionaCompraALista(String descritor, double qntd, int id) {
+	public void adicionaCompraALista(String descritor, int qntd, int id) {
 		this.controllerListaDeCompras.adicionaCompraALista(descritor, qntd, id);
 	}
 

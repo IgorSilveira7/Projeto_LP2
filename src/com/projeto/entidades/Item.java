@@ -253,5 +253,5 @@ public abstract class Item implements Comparable<Item> {
 	 *            Double que representa a quantidade do item na lista.
 	 * @return String que representa a representacao textual do item na lista.
 	 */
-	public abstract String getToStringEmLista(double quant);
+	public abstract String exibirEmLista(double quant);
 }

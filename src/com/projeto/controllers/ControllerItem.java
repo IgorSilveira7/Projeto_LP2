@@ -36,10 +36,7 @@ public class ControllerItem {
 	 * ordenacao.
 	 */
 	private List<Item> itensOrdenados;
-	/**
-	 * Atributo que representa as listas de compras cadastradas.
-	 */
-	private Map<String, ListaDeCompras> listasDeCompras;
+
 
 	/**
 	 * Construtor.
@@ -48,7 +45,6 @@ public class ControllerItem {
 		this.itens = new TreeMap<>();
 		this.id = 1;
 		this.itensOrdenados = new ArrayList<>();
-		this.listasDeCompras = new TreeMap<>();
 	}
 
 	/**

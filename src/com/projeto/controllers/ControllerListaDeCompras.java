@@ -70,7 +70,7 @@ public class ControllerListaDeCompras {
 	 * @param id
 	 *            Inteiro referente a identificacao do item.
 	 */
-	public void adicionaCompraALista(String descritor, double qntd, int id) {
+	public void adicionaCompraALista(String descritor, int qntd, int id) {
 		if (!this.controllerItem.itemExiste(id)) {
 			throw new ItemNaoExisteException("Erro na compra de item: item nao existe no sistema.");
 		}
@@ -132,7 +132,7 @@ public class ControllerListaDeCompras {
 	 *            Double referente a nova quantidade do item, atualizando assim a
 	 *            lista.
 	 */
-	public void atualizaCompraDeLista(String descritor, int id, String operacao, double novaQuantidade) {
+	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQuantidade) {
 		if (!(operacao.equals("diminui") || operacao.equals("adiciona"))) {
 			throw new OperacaoInvalidaException("Erro na atualizacao de compra: operacao invalida para atualizacao.");
 		}
