@@ -208,6 +208,7 @@ public class ControllerListaDeCompras {
 	 * @return String referente a representacao textual do item.
 	 */
 	public String getItemListaPorData(String data, int posicao) {
+		ValidadorListaDeCompras.validaData(data);
 		List<ListaDeCompras> ordenado = new ArrayList<>(this.listasDeCompras.values());
 		Collections.sort(ordenado, new OrdenarListaDeComprasPorDescritor());
 

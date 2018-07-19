@@ -222,9 +222,36 @@ public class TesteControllerListaDeCompras {
 		assertEquals("almoco", this.cListaDeCompras.getItemListaPorData(this.data.format(formato), 0));
 	}
 	
-	// Terminar testes.
+	@Test(expected=EntradaInvalidaException.class)
+	public void testeGetItemListaPorDataVazia() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.criaListaDeCompra("cafe");
+		this.cListaDeCompras.getItemListaPorData("  ", 0);
+	}
 	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testeGetItemListaPorDataNula() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.criaListaDeCompra("cafe");
+		this.cListaDeCompras.getItemListaPorData(null, 0);
+	}
 	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testeGetItemListaPorDataIdInvalido() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.criaListaDeCompra("cafe");
+		this.cListaDeCompras.getItemListaPorData("  ", 3);
+	}
 	
-	
+	@Test
+	public void testeGetItemListaPorItem() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 1);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 2);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 3);
+		assertEquals("almoco", this.cListaDeCompras.getItemListaPorData(this.data.format(formato), 0));
+	}
 }
