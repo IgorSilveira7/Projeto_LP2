@@ -102,7 +102,7 @@ public class ProdutoQuantidadeFixa extends Item {
 	 * informacoes_ _sobre a quantidade, nome, categoria e medida de um item.
 	 */
 	@Override
-	public String exibirEmLista(double quant) {
+	public String exibirEmLista(int quant) {
 		return ((int) quant) + " " + this.getNome() + ", " + this.getCategoria() + ", " + this.quantidade + " "
 				+ this.medida;
 	}

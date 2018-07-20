@@ -12,6 +12,7 @@ import com.projeto.excecoes.ItemJaExisteException;
 /**
  * Classe referente a validar um item.
  * 
+ * @author Igor Silveira
  * @author Jose Davi
  * @author Matheus Gusmao
  * @author Rich Ramalho

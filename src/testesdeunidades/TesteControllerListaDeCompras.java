@@ -254,4 +254,53 @@ public class TesteControllerListaDeCompras {
 		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 3);
 		assertEquals("almoco", this.cListaDeCompras.getItemListaPorData(this.data.format(formato), 0));
 	}
+	
+	@Test
+	public void testePesquisaListasDeComprasPorItem() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 1);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 2);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 3);
+		assertEquals(this.data.format(this.formato) + " - almoco", this.cListaDeCompras.pesquisaListasDeComprasPorItem(1));
+	}
+	
+	@Test(expected=ItemNaoExisteException.class)
+	public void testePesquisaListasDeComprasPorItemIdNaoExiste() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.criaListaDeCompra("lanche da tarde");
+		assertEquals(this.data.format(this.formato) + " - almoco", this.cListaDeCompras.pesquisaListasDeComprasPorItem(0));
+	}
+	
+	@Test
+	public void testePesquisaListasDeComprasPorData() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.criaListaDeCompra("lanche da tarde");
+		assertEquals(this.data.format(this.formato) + " - almoco", this.cListaDeCompras.pesquisaListasDeComprasPorData(this.data.format(this.formato)));
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testePesquisaListasDeComprasPorDataNula() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.criaListaDeCompra("lanche da tarde");
+		this.cListaDeCompras.pesquisaListasDeComprasPorData(null);
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testePesquisaListasDeComprasPorDataVazia() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.criaListaDeCompra("lanche da tarde");
+		this.cListaDeCompras.pesquisaListasDeComprasPorData("  ");
+	}
+	
+	@Test(expected=EntradaInvalidaException.class)
+	public void testePesquisaListasDeComprasPorDataErro() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.criaListaDeCompra("lanche da tarde");
+		this.cListaDeCompras.pesquisaListasDeComprasPorData("10/2018");
+	}
 }

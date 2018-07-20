@@ -101,7 +101,7 @@ public class ProdutoNaoIndustrializado extends Item {
 	 * @return String contendo a quantidade em kg do item, seu nome e sua categoria.
 	 */
 	@Override
-	public String exibirEmLista(double quant) {
+	public String exibirEmLista(int quant) {
 		return ((int) quant) + " " + this.getNome() + ", " + this.getCategoria();
 	}
 
