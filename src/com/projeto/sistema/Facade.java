@@ -384,4 +384,8 @@ public class Facade {
 	public String criaListaStrategy1() {
 		return this.controllerListaDeCompras.criaListaEstrategy1();
 	}
+	
+	public String criaListaStrategy2(int id) {
+		return this.controllerListaDeCompras.criaListaEstrategy2(id);
+	}
 }

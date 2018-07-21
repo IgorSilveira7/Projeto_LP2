@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.projeto.entidades.Item;
 import com.projeto.entidades.ListaDeCompras;
 import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.excecoes.ItemNaoExisteException;
@@ -297,12 +298,24 @@ public class ControllerListaDeCompras {
 				ListaDeCompras l = new ListaDeCompras("Lista automatica 1 " + this.listasDeCompras.get(key).getData());
 				this.listasDeCompras.get(key).copiaLista(l);
 				this.listasDeCompras.put(l.getDescritor(), l);
-				return "Lista automatica 1 " + this.listasDeCompras.get(key).getData() ;
+				return "Lista automatica 1 " + this.listasDeCompras.get(l).getData() ;
 			}
 					
 		}
 		return "espaco da excecao";
 	}
 	
-	
+	public String criaListaEstrategy2(int id) {
+		Item item = this.controllerItem.getItemPeloId(id);
+		String keyFinal = "";
+		for (String key : this.listasDeCompras.keySet()) {
+			if (this.listasDeCompras.get(key).verificarItemEmLista(item)) {
+				keyFinal = key;
+			}
+		}
+		ListaDeCompras l = new ListaDeCompras("Lista automatica 2 " + this.listasDeCompras.get(keyFinal).getData());
+		this.listasDeCompras.get(keyFinal).copiaLista(l);
+		this.listasDeCompras.put(l.getDescritor(), l);
+		return "Lista automatica 2 " + this.listasDeCompras.get(l).getData() ;
+	}	
 }
