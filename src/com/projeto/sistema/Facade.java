@@ -380,4 +380,8 @@ public class Facade {
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		return l.format(formato);
 	}
+	
+	public String criaListaStrategy1() {
+		return this.controllerListaDeCompras.criaListaEstrategy1();
+	}
 }

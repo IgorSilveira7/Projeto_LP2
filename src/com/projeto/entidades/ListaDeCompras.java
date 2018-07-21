@@ -220,4 +220,11 @@ public class ListaDeCompras {
 		}
 		return false;
 	}
+	
+	public void copiaLista(ListaDeCompras lista) {
+		for (Item i : this.listaDeCompras.keySet()) {
+			lista.adicionaCompraALista(this.listaDeCompras.get(i).getQntd(), i);
+		}
+		
+	}
 }

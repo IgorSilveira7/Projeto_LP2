@@ -2,9 +2,9 @@ package com.projeto.controllers;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.projeto.entidades.ListaDeCompras;
 import com.projeto.excecoes.EntradaInvalidaException;
@@ -43,7 +43,7 @@ public class ControllerListaDeCompras {
 	 *            ControllerItem referente ao controlador de itens.
 	 */
 	public ControllerListaDeCompras(ControllerItem controller) {
-		this.listasDeCompras = new HashMap<>();
+		this.listasDeCompras = new TreeMap<>();
 		this.controllerItem = controller;
 	}
 
@@ -286,4 +286,23 @@ public class ControllerListaDeCompras {
 		}
 		return "";
 	}
+	
+	public String criaListaEstrategy1() {
+		int indice = 0;
+		
+		for (String key: this.listasDeCompras.keySet()) {
+			indice += 1;
+			
+			if (indice == this.listasDeCompras.size()) {
+				ListaDeCompras l = new ListaDeCompras("Lista automatica 1 " + this.listasDeCompras.get(key).getData());
+				this.listasDeCompras.get(key).copiaLista(l);
+				this.listasDeCompras.put(l.getDescritor(), l);
+				return "Lista automatica 1 " + this.listasDeCompras.get(key).getData() ;
+			}
+					
+		}
+		return "espaco da excecao";
+	}
+	
+	
 }
