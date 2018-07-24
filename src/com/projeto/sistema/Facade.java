@@ -43,7 +43,7 @@ public class Facade {
 				"acceptance_tests/use_case1_exception.txt", "acceptance_tests/use_case2.txt",
 				"acceptance_tests/use_case2_exception.txt", "acceptance_tests/use_case3.txt",
 				"acceptance_tests/use_case3_exception.txt", "acceptance_tests/use_case4.txt",
-				"acceptance_tests/use_case4_exception.txt" };
+				"acceptance_tests/use_case4_exception.txt", "acceptance_tests/use_case5.txt"};
 
 		EasyAccept.main(args);
 	}
@@ -381,11 +381,11 @@ public class Facade {
 		return l.format(formato);
 	}
 	
-	public String criaListaStrategy1() {
-		return this.controllerListaDeCompras.criaListaEstrategy1();
+	public String geraAutomaticaUltimaLista() {
+		return this.controllerListaDeCompras.geraAutomaticaUltimaLista();
 	}
 	
-	public String criaListaStrategy2(int id) {
-		return this.controllerListaDeCompras.criaListaEstrategy2(id);
+	public String geraAutomaticaItem(String nomeItem) {
+		return this.controllerListaDeCompras.geraAutomaticaItem(nomeItem);
 	}
 }

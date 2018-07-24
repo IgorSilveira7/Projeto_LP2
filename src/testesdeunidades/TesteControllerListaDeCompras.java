@@ -303,4 +303,23 @@ public class TesteControllerListaDeCompras {
 		this.cListaDeCompras.criaListaDeCompra("lanche da tarde");
 		this.cListaDeCompras.pesquisaListasDeComprasPorData("10/2018");
 	}
+	
+	@Test
+	public void testeO() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.adicionaCompraALista("janta", 5, 1);
+		this.cListaDeCompras.adicionaCompraALista("janta", 13, 2);
+		String a = this.cListaDeCompras.geraAutomaticaUltimaLista();
+		assertEquals("Lista automatica 1 24/07/2018", this.cListaDeCompras.getItemLista(a, 1));
+	}
+	
+	@Test
+	public void testeX() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.adicionaCompraALista("almoco", 1, 1);
+		//String a = this.cListaDeCompras.geraAutomaticaItem(1);
+		//assertEquals("Lista automatica 2 24/07/2018", this.cListaDeCompras.getItemLista(a, 0));
+	}
 }

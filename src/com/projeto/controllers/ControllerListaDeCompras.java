@@ -2,9 +2,12 @@ package com.projeto.controllers;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 import com.projeto.entidades.Item;
 import com.projeto.entidades.ListaDeCompras;
@@ -44,7 +47,8 @@ public class ControllerListaDeCompras {
 	 *            ControllerItem referente ao controlador de itens.
 	 */
 	public ControllerListaDeCompras(ControllerItem controller) {
-		this.listasDeCompras = new TreeMap<>();
+		this.listasDeCompras = new LinkedHashMap<>();
+		//this.l = new ArrayList<>();
 		this.controllerItem = controller;
 	}
 
@@ -77,7 +81,7 @@ public class ControllerListaDeCompras {
 		}
 		this.listasDeCompras.get(descritor).adicionaCompraALista(qntd, this.controllerItem.getItemPeloId(id));
 	}
-
+	
 	/**
 	 * Metodo responsavel por pesquisar uma compra na lista de compras.
 	 * 
@@ -288,25 +292,25 @@ public class ControllerListaDeCompras {
 		return "";
 	}
 	
-	public String criaListaEstrategy1() {
-		int indice = 0;
-		
-		for (String key: this.listasDeCompras.keySet()) {
-			indice += 1;
-			
+	public String geraAutomaticaUltimaLista() {
+		int indice = 1;
+		Collections.synchronizedMap(this.listasDeCompras);
+		for (ListaDeCompras key : this.listasDeCompras.values()) {
 			if (indice == this.listasDeCompras.size()) {
-				ListaDeCompras l = new ListaDeCompras("Lista automatica 1 " + this.listasDeCompras.get(key).getData());
-				this.listasDeCompras.get(key).copiaLista(l);
+				ListaDeCompras l = new ListaDeCompras("Lista automatica 1 " + key.getData());
+				key.copiaLista(l);
 				this.listasDeCompras.put(l.getDescritor(), l);
-				return "Lista automatica 1 " + this.listasDeCompras.get(l).getData() ;
+				return "Lista automatica 1 " + l.getData();
 			}
-					
+			indice++;
 		}
 		return "espaco da excecao";
 	}
 	
-	public String criaListaEstrategy2(int id) {
-		Item item = this.controllerItem.getItemPeloId(id);
+	public String geraAutomaticaItem(String nomeItem) {
+		Item item = this.controllerItem.getItemPeloNome(nomeItem);
+		
+		Collections.synchronizedMap(this.listasDeCompras);
 		String keyFinal = "";
 		for (String key : this.listasDeCompras.keySet()) {
 			if (this.listasDeCompras.get(key).verificarItemEmLista(item)) {
@@ -316,6 +320,7 @@ public class ControllerListaDeCompras {
 		ListaDeCompras l = new ListaDeCompras("Lista automatica 2 " + this.listasDeCompras.get(keyFinal).getData());
 		this.listasDeCompras.get(keyFinal).copiaLista(l);
 		this.listasDeCompras.put(l.getDescritor(), l);
-		return "Lista automatica 2 " + this.listasDeCompras.get(l).getData() ;
-	}	
+		return "Lista automatica 2 " + l.getData();
+	}
+
 }

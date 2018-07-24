@@ -324,4 +324,13 @@ public class ControllerItem {
 	public boolean itemExiste(int id) {
 		return this.itens.containsKey(id);
 	}
+
+	public Item getItemPeloNome(String nomeItem) {
+		for (Item item : this.itensOrdenados) {
+			if (item.getNome().equalsIgnoreCase(nomeItem)) {
+				return item;
+			}
+		}
+		return null;
+	}
 }
