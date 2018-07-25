@@ -3,9 +3,12 @@ package com.projeto.controllers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
@@ -48,7 +51,6 @@ public class ControllerListaDeCompras {
 	 */
 	public ControllerListaDeCompras(ControllerItem controller) {
 		this.listasDeCompras = new LinkedHashMap<>();
-		//this.l = new ArrayList<>();
 		this.controllerItem = controller;
 	}
 
@@ -294,12 +296,11 @@ public class ControllerListaDeCompras {
 	
 	public String geraAutomaticaUltimaLista() {
 		int indice = 1;
-		Collections.synchronizedMap(this.listasDeCompras);
+		
 		for (ListaDeCompras key : this.listasDeCompras.values()) {
 			if (indice == this.listasDeCompras.size()) {
 				ListaDeCompras l = new ListaDeCompras("Lista automatica 1 " + key.getData());
-				key.copiaLista(l);
-				this.listasDeCompras.put(l.getDescritor(), l);
+				this.copiaLista(key, l);
 				return "Lista automatica 1 " + l.getData();
 			}
 			indice++;
@@ -310,7 +311,6 @@ public class ControllerListaDeCompras {
 	public String geraAutomaticaItem(String nomeItem) {
 		Item item = this.controllerItem.getItemPeloNome(nomeItem);
 		
-		Collections.synchronizedMap(this.listasDeCompras);
 		String keyFinal = "";
 		for (String key : this.listasDeCompras.keySet()) {
 			if (this.listasDeCompras.get(key).verificarItemEmLista(item)) {
@@ -318,9 +318,12 @@ public class ControllerListaDeCompras {
 			}
 		}
 		ListaDeCompras l = new ListaDeCompras("Lista automatica 2 " + this.listasDeCompras.get(keyFinal).getData());
-		this.listasDeCompras.get(keyFinal).copiaLista(l);
-		this.listasDeCompras.put(l.getDescritor(), l);
+		this.copiaLista(this.listasDeCompras.get(keyFinal), l);
 		return "Lista automatica 2 " + l.getData();
 	}
-
+	
+	private void copiaLista(ListaDeCompras lista, ListaDeCompras novaLista) {
+		lista.copiaLista(novaLista);
+		this.listasDeCompras.put(novaLista.getDescritor(), novaLista);
+	}
 }

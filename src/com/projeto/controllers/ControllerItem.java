@@ -326,11 +326,12 @@ public class ControllerItem {
 	}
 
 	public Item getItemPeloNome(String nomeItem) {
-		for (Item item : this.itensOrdenados) {
+		this.ordenarPorNome();
+		for (Item item : this.itens.values()) {
 			if (item.getNome().equalsIgnoreCase(nomeItem)) {
 				return item;
 			}
 		}
 		return null;
-	}
+	}	
 }
