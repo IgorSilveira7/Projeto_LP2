@@ -73,7 +73,6 @@ public class ListaDeCompras {
 	 */
 	public int adicionaCompraALista(int qntd, Item item) {
 		this.listaDeCompras.put(item, new Compra(item, qntd));
-
 		return this.listaDeCompras.size();
 	}
 
@@ -226,4 +225,10 @@ public class ListaDeCompras {
 			lista.adicionaCompraALista(this.listaDeCompras.get(i).getQntd(), i);
 		}
 	}
+
+	public Map<Item, Compra> getCompras() {
+		return this.listaDeCompras;
+	}
+	
+	
 }

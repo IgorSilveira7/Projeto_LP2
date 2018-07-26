@@ -332,6 +332,10 @@ public class ControllerItem {
 				return item;
 			}
 		}
-		return null;
-	}	
+		throw new IllegalArgumentException("Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");
+	}
+	
+	public Collection<Item> getItens(){
+		return this.itens.values();
+	}
 }

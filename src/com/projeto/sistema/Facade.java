@@ -388,4 +388,8 @@ public class Facade {
 	public String geraAutomaticaItem(String nomeItem) {
 		return this.controllerListaDeCompras.geraAutomaticaItem(nomeItem);
 	}
+	
+	public String geraAutomaticaItensMaisPresentes() {
+		return this.controllerListaDeCompras.geraAutomaticaItensMaisPresentes();
+	}
 }

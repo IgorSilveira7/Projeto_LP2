@@ -1,5 +1,7 @@
 package com.projeto.controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
+import com.projeto.entidades.Compra;
 import com.projeto.entidades.Item;
 import com.projeto.entidades.ListaDeCompras;
 import com.projeto.excecoes.EntradaInvalidaException;
@@ -317,9 +320,43 @@ public class ControllerListaDeCompras {
 				keyFinal = key;
 			}
 		}
+		if ("".equals(keyFinal)) {
+			throw new IllegalArgumentException("Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");
+		}
 		ListaDeCompras l = new ListaDeCompras("Lista automatica 2 " + this.listasDeCompras.get(keyFinal).getData());
 		this.copiaLista(this.listasDeCompras.get(keyFinal), l);
 		return "Lista automatica 2 " + l.getData();
+	}
+	
+	public String geraAutomaticaItensMaisPresentes() {
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String data = LocalDate.now().format(formato);
+		int cont = 0;
+		String descritor = "Lista automatica 3 " + data;
+		ListaDeCompras lista = new ListaDeCompras(descritor);
+		for (Item i : this.controllerItem.getItens()) {
+			if (this.verificaItemDeLista(i) > 0) {
+				lista.adicionaCompraALista(this.verificaItemDeLista(i), i);
+			}
+		}
+		this.listasDeCompras.put(descritor, lista);
+		return descritor;
+	}
+	
+	private int verificaItemDeLista(Item i) {
+		int contAparece = 0;
+		int contQuant = 0;
+		for (ListaDeCompras l : this.listasDeCompras.values()) {
+			if(l.getCompras().containsKey(i)) {
+				contQuant += l.getCompras().get(i).getQntd();
+				contAparece++;
+			}
+		}
+		if (contAparece >= this.listasDeCompras.size() / 2) {
+			return (int) Math.floor(contQuant / contAparece);
+		} else {
+			return -1;
+		}
 	}
 	
 	private void copiaLista(ListaDeCompras lista, ListaDeCompras novaLista) {
