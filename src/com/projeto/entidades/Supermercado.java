@@ -12,10 +12,10 @@ import com.projeto.ordenacao.OrdenarComprasPorNomeECategoria;
  * categoria(em dois niveis) e calcula quanto o usuario iria gastar com tais
  * itens comprando nesse supermercado.
  * 
+ * @author Igor Silveira
  * @author Rich Ramalho
  * @author Jose Davi
- * @author Matheus Gusmao
- * @author Igor Silveira
+ * @author Matheus Gusmao 
  *
  */
 public class Supermercado {

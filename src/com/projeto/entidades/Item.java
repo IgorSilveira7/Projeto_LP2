@@ -32,7 +32,7 @@ public abstract class Item implements Comparable<Item> {
 	/**
 	 * Atributo que representa o mapa de precos desse item.
 	 */
-	protected Map<String, Double> mapaPrecos;
+	private Map<String, Double> mapaPrecos;
 
 	/**
 	 * Construtor.

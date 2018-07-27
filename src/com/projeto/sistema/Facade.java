@@ -418,6 +418,22 @@ public class Facade {
 		return this.controllerListaDeCompras.geraAutomaticaItensMaisPresentes();
 	}
 	
+	/**
+	 * Metodo responsavel por sugerir o melhor estabelecimento para realizar a
+	 * compra de uma determinada lista de compra.
+	 * 
+	 * @param descritorLista
+	 *            String referente ao descritor da lista que desejar saber qual o
+	 *            melhor lugar para realizar a compra.
+	 * @param posicaoEstabelecimento
+	 *            Inteiro que representa qual estabelimento desejo visualizar(Por
+	 *            ordem crescente dos precos)
+	 * @param posicaoLista
+	 *            Inteiro que representa a posicao do item q desejo visualizar do
+	 *            meu estabelecimento.
+	 * @return String referente a representacao textual do meu estabelecimento ou
+	 *         itens.
+	 */
 	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista) {
 		return this.controllerListaDeCompras.sugereMelhorEstabelecimento(descritorLista, posicaoEstabelecimento, posicaoLista);
 	}

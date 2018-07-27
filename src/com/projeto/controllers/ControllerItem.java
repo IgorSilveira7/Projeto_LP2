@@ -3,7 +3,6 @@ package com.projeto.controllers;
 import java.util.*;
 
 import com.projeto.entidades.Item;
-import com.projeto.entidades.ListaDeCompras;
 import com.projeto.entidades.ProdutoNaoIndustrializado;
 import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
@@ -16,9 +15,9 @@ import com.projeto.validadores.ValidadorItem;
  * atualiza e deletar itens.
  * 
  * @author Igor Silveira
- * @author Jose Davi
- * @author Matheus Gusmao
  * @author Rich Ramalho
+ * @author Matheus Gusmao
+ * @author Jose Davi
  *
  */
 public class ControllerItem {
@@ -197,6 +196,15 @@ public class ControllerItem {
 	}
 
 	/**
+	 * Metodo que retorna uma colecao de itens.
+	 * 
+	 * @return Coletion<Item> referente ao itens cadastrados no sistema.
+	 */
+	public Collection<Item> getItens(){
+		return this.itens.values();
+	}
+	
+	/**
 	 * Metodo que retorna uma String.
 	 * 
 	 * @param id
@@ -325,6 +333,11 @@ public class ControllerItem {
 		return this.itens.containsKey(id);
 	}
 
+	/**
+	 * Metodo que retorna o item que tem o nome recebido no parametro.
+	 * @param nomeItem String referente ao nome do item a ser procurado.
+	 * @return Item referente ao item com o nome desejado.
+	 */
 	public Item getItemPeloNome(String nomeItem) {
 		this.ordenarPorNome();
 		for (Item item : this.itens.values()) {
@@ -333,9 +346,5 @@ public class ControllerItem {
 			}
 		}
 		throw new IllegalArgumentException("Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");
-	}
-	
-	public Collection<Item> getItens(){
-		return this.itens.values();
 	}
 }

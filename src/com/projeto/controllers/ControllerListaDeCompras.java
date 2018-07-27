@@ -22,8 +22,8 @@ import com.projeto.ordenacao.OrdenarSupermercadoPeloValor;
 import com.projeto.validadores.ValidadorListaDeCompras;
 
 /**
- * Classe que controla as listas de compras cadastradas no sistema. Cadastrada, exibe,
- * atualiza e deletar listas de compras.
+ * Classe que controla as listas de compras cadastradas no sistema. Cadastrada,
+ * exibe, atualiza e deletar listas de compras.
  * 
  * @author Rich Ramalho
  * @author Jose Davi
@@ -82,7 +82,7 @@ public class ControllerListaDeCompras {
 		}
 		this.listasDeCompras.get(descritor).adicionaCompraALista(qntd, this.controllerItem.getItemPeloId(id));
 	}
-	
+
 	/**
 	 * Metodo responsavel por pesquisar uma compra na lista de compras.
 	 * 
@@ -292,7 +292,7 @@ public class ControllerListaDeCompras {
 		}
 		return "";
 	}
-	
+
 	/**
 	 * Metodo que gera uma lista de compra automatico com os itens da ultima lista
 	 * cadastrada no sistema.
@@ -301,7 +301,7 @@ public class ControllerListaDeCompras {
 	 */
 	public String geraAutomaticaUltimaLista() {
 		int indice = 1;
-		
+
 		for (ListaDeCompras key : this.listasDeCompras.values()) {
 			if (indice == this.listasDeCompras.size()) {
 				ListaDeCompras l = new ListaDeCompras("Lista automatica 1 " + key.getData());
@@ -312,7 +312,7 @@ public class ControllerListaDeCompras {
 		}
 		return "espaco da excecao";
 	}
-	
+
 	/**
 	 * Metodo que gera uma lista de compra automatica copiando os itens da ultima
 	 * lista que possui o item desejado.
@@ -323,7 +323,7 @@ public class ControllerListaDeCompras {
 	 */
 	public String geraAutomaticaItem(String nomeItem) {
 		Item item = this.controllerItem.getItemPeloNome(nomeItem);
-		
+
 		String keyFinal = "";
 		for (String key : this.listasDeCompras.keySet()) {
 			if (this.listasDeCompras.get(key).verificarItemEmLista(item)) {
@@ -331,13 +331,14 @@ public class ControllerListaDeCompras {
 			}
 		}
 		if ("".equals(keyFinal)) {
-			throw new IllegalArgumentException("Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");
+			throw new IllegalArgumentException(
+					"Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");
 		}
 		ListaDeCompras l = new ListaDeCompras("Lista automatica 2 " + this.dataAtual());
 		this.copiaLista(this.listasDeCompras.get(keyFinal), l);
 		return "Lista automatica 2 " + l.getData();
 	}
-	
+
 	/**
 	 * Metodo que gera uma lista de compra automatica copiando os itens que se
 	 * repetem em mais da metade das listas de compras cadastradas.
@@ -345,7 +346,6 @@ public class ControllerListaDeCompras {
 	 * @return String referente ao descritor da lista automatica.
 	 */
 	public String geraAutomaticaItensMaisPresentes() {
-		int cont = 0;
 		String descritor = "Lista automatica 3 " + this.dataAtual();
 		ListaDeCompras lista = new ListaDeCompras(descritor);
 		for (Item i : this.controllerItem.getItens()) {
@@ -356,8 +356,24 @@ public class ControllerListaDeCompras {
 		this.listasDeCompras.put(descritor, lista);
 		return descritor;
 	}
-	
-	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista) { 
+
+	/**
+	 * Metodo responsavel por sugerir o melhor estabelecimento para realizar a
+	 * compra de uma determinada lista de compra.
+	 * 
+	 * @param descritorLista
+	 *            String referente ao descritor da lista que desejar saber qual o
+	 *            melhor lugar para realizar a compra.
+	 * @param posicaoEstabelecimento
+	 *            Inteiro que representa qual estabelimento desejo visualizar(Por
+	 *            ordem crescente dos precos)
+	 * @param posicaoLista
+	 *            Inteiro que representa a posicao do item q desejo visualizar do
+	 *            meu estabelecimento.
+	 * @return String referente a representacao textual do meu estabelecimento ou
+	 *         itens.
+	 */
+	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista) {
 		Map<String, Supermercado> supermercados = new LinkedHashMap<>();
 		this.criarSupermercados(supermercados, descritorLista);
 		List<Supermercado> s = new ArrayList<>(supermercados.values());
@@ -369,6 +385,15 @@ public class ControllerListaDeCompras {
 		}
 	}
 
+	/**
+	 * Metodo privado que cria uma colecao de todos os supermercados.
+	 * 
+	 * @param supermercados
+	 *            Map<String, Supermercado> String: referente ao nome do
+	 *            supermercado, Supermercado: referente ao supermercado criado.
+	 * @param descritorLista
+	 *            String referente ao descritor da lista de compra a ser analisada.
+	 */
 	private void criarSupermercados(Map<String, Supermercado> supermercados, String descritorLista) {
 		ListaDeCompras l = this.listasDeCompras.get(descritorLista);
 		for (Compra c : l.getCompras().values()) {
@@ -381,12 +406,22 @@ public class ControllerListaDeCompras {
 		}
 	}
 
-	private int verificaItemDeLista(Item i) {
+	/**
+	 * Metodo privado que verifica se um item esta em uma lista e se sua aparicao eh
+	 * mais que na metade das listas de compras e a sua media de quantidade nas
+	 * listas que o item aparece.
+	 * 
+	 * @param item
+	 *            Item referente ao item a ser analisado.
+	 * @return Inteiro referente a quantidade media das aparicao do item nas listas
+	 *         de compras.
+	 */
+	private int verificaItemDeLista(Item item) {
 		int contAparece = 0;
 		int contQuant = 0;
 		for (ListaDeCompras l : this.listasDeCompras.values()) {
-			if(l.getCompras().containsKey(i)) {
-				contQuant += l.getCompras().get(i).getQntd();
+			if (l.getCompras().containsKey(item)) {
+				contQuant += l.getCompras().get(item).getQntd();
 				contAparece++;
 			}
 		}
@@ -396,12 +431,26 @@ public class ControllerListaDeCompras {
 			return -1;
 		}
 	}
-	
+
+	/**
+	 * Metodo privado que copia os itens de uma lista para a outra.
+	 * 
+	 * @param lista
+	 *            ListaDeCompras referente a lista que tem os itens que deveram ser
+	 *            copiados.
+	 * @param novaLista
+	 *            ListaDeCompras referente a lista que recebera esses itens.
+	 */
 	private void copiaLista(ListaDeCompras lista, ListaDeCompras novaLista) {
 		lista.copiaLista(novaLista);
 		this.listasDeCompras.put(novaLista.getDescritor(), novaLista);
 	}
-	
+
+	/**
+	 * Metodo que retorna a representacao textual da data("dd/MM/yyyy").
+	 * 
+	 * @return String referente a representacao textual da data("dd/MM/yyyy").
+	 */
 	private String dataAtual() {
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String data = LocalDate.now().format(formato);

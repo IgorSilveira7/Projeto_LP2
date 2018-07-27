@@ -4,6 +4,14 @@ import java.util.Comparator;
 
 import com.projeto.entidades.ListaDeCompras;
 
+/**
+ * Classe responsavel por comparar duas listas de compras pela data.
+ * 
+ * @author Igor Silveira
+ * @author Jose Davi
+ * @author Matheus Gusmao
+ * @author Rich Ramalho
+ */
 public class OrdenaListaDeComprasPorData implements Comparator<ListaDeCompras> {
 
 	@Override

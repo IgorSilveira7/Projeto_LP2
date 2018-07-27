@@ -175,6 +175,14 @@ public class ListaDeCompras {
 	public String toString() {
 		return this.getData() + " - " + this.descritor;
 	}
+	
+	/**
+	 * Metodo que retorna uma colecao das compras desta lista de compras.
+	 * @return Map<Item, Compra> Item: referente ao item, Compra: referente a compra.
+	 */
+	public Map<Item, Compra> getCompras() {
+		return this.listaDeCompras;
+	}
 
 	/**
 	 * Metodo que retorna se a lista de compra foi finalizada ou nao.
@@ -220,15 +228,13 @@ public class ListaDeCompras {
 		return false;
 	}
 	
+	/**
+	 * Metodo que copia os itens desta lista para a recebida como parametro.
+	 * @param lista ListaDeCompras referente a lista de compras que recebera os itens dessa lista.
+	 */
 	public void copiaLista(ListaDeCompras lista) {
 		for (Item i : this.listaDeCompras.keySet()) {
 			lista.adicionaCompraALista(this.listaDeCompras.get(i).getQntd(), i);
 		}
 	}
-
-	public Map<Item, Compra> getCompras() {
-		return this.listaDeCompras;
-	}
-	
-	
 }
