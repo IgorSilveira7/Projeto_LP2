@@ -233,6 +233,16 @@ public abstract class Item implements Comparable<Item> {
 			return false;
 		return true;
 	}
+	
+	/**
+	 * Metodo que retorna o mapa de precos do item.
+	 * 
+	 * @return Map<String, Double> String : Nome do supermercado, Double: Preco do
+	 *         item no supermercado.
+	 */
+	public Map<String, Double> getMapaPrecos() {
+		return this.mapaPrecos;
+	}
 
 	/**
 	 * Metodo abstrato que sera implementado nas classes filhas para atualizar seus

@@ -8,8 +8,6 @@ import easyaccept.EasyAccept;
 import com.projeto.controllers.ControllerItem;
 import com.projeto.controllers.ControllerListaDeCompras;
 
-
-
 /**
  * Classe que ira se comunicar com os controllers(No caso apenas com um). E
  * assim facilitando as implementações com a interface.
@@ -43,7 +41,8 @@ public class Facade {
 				"acceptance_tests/use_case1_exception.txt", "acceptance_tests/use_case2.txt",
 				"acceptance_tests/use_case2_exception.txt", "acceptance_tests/use_case3.txt",
 				"acceptance_tests/use_case3_exception.txt", "acceptance_tests/use_case4.txt",
-				"acceptance_tests/use_case4_exception.txt", "acceptance_tests/use_case5.txt"};
+				"acceptance_tests/use_case4_exception.txt", "acceptance_tests/use_case5.txt",
+				"acceptance_tests/use_case6_exception.txt", "acceptance_tests/use_case6.txt" };
 
 		EasyAccept.main(args);
 	}
@@ -240,7 +239,7 @@ public class Facade {
 	 * @param qntd
 	 *            Double referente a quantidade de itens.
 	 * @param id
-	 *           Inteiro referente a identificacao do item.
+	 *            Inteiro referente a identificacao do item.
 	 */
 	public void adicionaCompraALista(String descritor, int qntd, int id) {
 		this.controllerListaDeCompras.adicionaCompraALista(descritor, qntd, id);
@@ -267,8 +266,8 @@ public class Facade {
 	 * @param id
 	 *            Inteiro referente a identificacao de um item.
 	 * @param novaQuantidade
-	 *            Double referente a nova quantidade do item
-	 *            que sera adicionado ou diminuida na lista de compras.
+	 *            Double referente a nova quantidade do item que sera adicionado ou
+	 *            diminuida na lista de compras.
 	 */
 	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQuantidade) {
 		this.controllerListaDeCompras.atualizaCompraDeLista(descritor, id, operacao, novaQuantidade);
@@ -306,8 +305,8 @@ public class Facade {
 	 *            String referente a descricao da lista de compras.
 	 * @param id
 	 *            Inteiro referente a identificacao do item.
-	 * @return String referente a representacao textual do item em determinada
-	 *         lista de compras.
+	 * @return String referente a representacao textual do item em determinada lista
+	 *         de compras.
 	 */
 	public String getItemLista(String descritor, int id) {
 		return this.controllerListaDeCompras.getItemLista(descritor, id);
@@ -319,8 +318,7 @@ public class Facade {
 	 * @param descritor
 	 *            String referente a descricao de uma lista de compras.
 	 * @param id
-	 *            Inteiro referente a identificacao do item na lista de
-	 *            compras.
+	 *            Inteiro referente a identificacao do item na lista de compras.
 	 */
 	public void deletaCompraDeLista(String descritor, int id) {
 		this.controllerListaDeCompras.deletaCompraDeLista(descritor, id);
@@ -330,8 +328,10 @@ public class Facade {
 	 * Metodo que retorna a representacao textual de um item em uma lista de compras
 	 * ordenado por datas
 	 * 
-	 * @param data String referente a data(dd/mm/aaaa).
-	 * @param posicao Inteiro referente a posicao do item.
+	 * @param data
+	 *            String referente a data(dd/mm/aaaa).
+	 * @param posicao
+	 *            Inteiro referente a posicao do item.
 	 * @return String referente a descricao da lista de compra.
 	 */
 	public String getItemListaPorData(String data, int posicao) {
@@ -342,8 +342,10 @@ public class Facade {
 	 * Metodo que retorna a representacao textual de um item em uma lista de compras
 	 * ordenado por datas.
 	 * 
-	 * @param id Inteiro referente ao id do item a ser procurado.
-	 * @param posicao Inteiro referente a posicao da lista de compras.
+	 * @param id
+	 *            Inteiro referente ao id do item a ser procurado.
+	 * @param posicao
+	 *            Inteiro referente a posicao da lista de compras.
 	 * @return String referente a representacao textual da lista de compra.
 	 */
 	public String getItemListaPorItem(int id, int posicao) {
@@ -353,7 +355,9 @@ public class Facade {
 	/**
 	 * Metodo que pesquisa uma lista de compra pela data.
 	 * 
-	 * @param data String referente a data de cadastrado da lista de compras("dd/mm/aaaa").
+	 * @param data
+	 *            String referente a data de cadastrado da lista de
+	 *            compras("dd/mm/aaaa").
 	 * @return String referente a representacao textual da lista de compra.
 	 */
 	public String pesquisaListasDeComprasPorData(String data) {
@@ -363,7 +367,8 @@ public class Facade {
 	/**
 	 * Metodo que pesquisa uma lista de compra pelo id do item.
 	 * 
-	 * @param id Inteiro referente ao id de cadastrado do item.
+	 * @param id
+	 *            Inteiro referente ao id de cadastrado do item.
 	 * @return String referente a representacao textual da lista de compra.
 	 */
 	public String pesquisaListasDeComprasPorItem(int id) {
@@ -380,16 +385,40 @@ public class Facade {
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		return l.format(formato);
 	}
-	
+
+	/**
+	 * Metodo que gera uma lista de compra automatico com os itens da ultima lista
+	 * cadastrada no sistema.
+	 * 
+	 * @return String referente ao descritor da lista automatica.
+	 */
 	public String geraAutomaticaUltimaLista() {
 		return this.controllerListaDeCompras.geraAutomaticaUltimaLista();
 	}
-	
+
+	/**
+	 * Metodo que gera uma lista de compra automatica copiando os itens da ultima
+	 * lista que possui o item desejado.
+	 * 
+	 * @param nomeItem
+	 *            String que representa o nome do item cadastrado.
+	 * @return String referente ao descritor da lista automatica.
+	 */
 	public String geraAutomaticaItem(String nomeItem) {
 		return this.controllerListaDeCompras.geraAutomaticaItem(nomeItem);
 	}
-	
+
+	/**
+	 * Metodo que gera uma lista de compra automatica copiando os itens que se
+	 * repetem em mais da metade das listas de compras cadastradas.
+	 * 
+	 * @return String referente ao descritor da lista automatica.
+	 */
 	public String geraAutomaticaItensMaisPresentes() {
 		return this.controllerListaDeCompras.geraAutomaticaItensMaisPresentes();
+	}
+	
+	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista) {
+		return this.controllerListaDeCompras.sugereMelhorEstabelecimento(descritorLista, posicaoEstabelecimento, posicaoLista);
 	}
 }

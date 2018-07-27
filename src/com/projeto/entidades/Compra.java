@@ -10,7 +10,6 @@ public class Compra {
 		this.qntd = qntd;
 	}
 	
-	
 	public int getQntd() {
 		return this.qntd;
 	}
@@ -31,8 +30,4 @@ public class Compra {
 	public String toString() {
 		return this.item.exibirEmLista(this.qntd);
 	}
-	
-	
-	
-
 }

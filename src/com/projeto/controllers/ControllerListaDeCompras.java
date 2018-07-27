@@ -4,25 +4,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.concurrent.ConcurrentSkipListMap;
 
 import com.projeto.entidades.Compra;
 import com.projeto.entidades.Item;
 import com.projeto.entidades.ListaDeCompras;
+import com.projeto.entidades.Supermercado;
 import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.excecoes.ItemNaoExisteException;
 import com.projeto.excecoes.ListaDeCompraNaoExisteException;
 import com.projeto.excecoes.OperacaoInvalidaException;
 import com.projeto.ordenacao.OrdenaListaDeComprasPorData;
 import com.projeto.ordenacao.OrdenarListaDeComprasPorDescritor;
+import com.projeto.ordenacao.OrdenarSupermercadoPeloValor;
 import com.projeto.validadores.ValidadorListaDeCompras;
 
 /**
@@ -297,6 +293,12 @@ public class ControllerListaDeCompras {
 		return "";
 	}
 	
+	/**
+	 * Metodo que gera uma lista de compra automatico com os itens da ultima lista
+	 * cadastrada no sistema.
+	 * 
+	 * @return String referente ao descritor da lista automatica.
+	 */
 	public String geraAutomaticaUltimaLista() {
 		int indice = 1;
 		
@@ -304,13 +306,21 @@ public class ControllerListaDeCompras {
 			if (indice == this.listasDeCompras.size()) {
 				ListaDeCompras l = new ListaDeCompras("Lista automatica 1 " + key.getData());
 				this.copiaLista(key, l);
-				return "Lista automatica 1 " + l.getData();
+				return "Lista automatica 1 " + this.dataAtual();
 			}
 			indice++;
 		}
 		return "espaco da excecao";
 	}
 	
+	/**
+	 * Metodo que gera uma lista de compra automatica copiando os itens da ultima
+	 * lista que possui o item desejado.
+	 * 
+	 * @param nomeItem
+	 *            String que representa o nome do item cadastrado.
+	 * @return String referente ao descritor da lista automatica.
+	 */
 	public String geraAutomaticaItem(String nomeItem) {
 		Item item = this.controllerItem.getItemPeloNome(nomeItem);
 		
@@ -323,16 +333,20 @@ public class ControllerListaDeCompras {
 		if ("".equals(keyFinal)) {
 			throw new IllegalArgumentException("Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");
 		}
-		ListaDeCompras l = new ListaDeCompras("Lista automatica 2 " + this.listasDeCompras.get(keyFinal).getData());
+		ListaDeCompras l = new ListaDeCompras("Lista automatica 2 " + this.dataAtual());
 		this.copiaLista(this.listasDeCompras.get(keyFinal), l);
 		return "Lista automatica 2 " + l.getData();
 	}
 	
+	/**
+	 * Metodo que gera uma lista de compra automatica copiando os itens que se
+	 * repetem em mais da metade das listas de compras cadastradas.
+	 * 
+	 * @return String referente ao descritor da lista automatica.
+	 */
 	public String geraAutomaticaItensMaisPresentes() {
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String data = LocalDate.now().format(formato);
 		int cont = 0;
-		String descritor = "Lista automatica 3 " + data;
+		String descritor = "Lista automatica 3 " + this.dataAtual();
 		ListaDeCompras lista = new ListaDeCompras(descritor);
 		for (Item i : this.controllerItem.getItens()) {
 			if (this.verificaItemDeLista(i) > 0) {
@@ -343,6 +357,30 @@ public class ControllerListaDeCompras {
 		return descritor;
 	}
 	
+	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista) { 
+		Map<String, Supermercado> supermercados = new LinkedHashMap<>();
+		this.criarSupermercados(supermercados, descritorLista);
+		List<Supermercado> s = new ArrayList<>(supermercados.values());
+		Collections.sort(s, new OrdenarSupermercadoPeloValor());
+		if (posicaoLista == 0) {
+			return s.get(posicaoEstabelecimento).toString();
+		} else {
+			return s.get(posicaoEstabelecimento).getItem(posicaoLista);
+		}
+	}
+
+	private void criarSupermercados(Map<String, Supermercado> supermercados, String descritorLista) {
+		ListaDeCompras l = this.listasDeCompras.get(descritorLista);
+		for (Compra c : l.getCompras().values()) {
+			for (String nomeSupermercado : c.getItem().getMapaPrecos().keySet()) {
+				if (!supermercados.containsKey(nomeSupermercado)) {
+					supermercados.put(nomeSupermercado, new Supermercado(nomeSupermercado));
+				}
+				supermercados.get(nomeSupermercado).addItem(c);
+			}
+		}
+	}
+
 	private int verificaItemDeLista(Item i) {
 		int contAparece = 0;
 		int contQuant = 0;
@@ -362,5 +400,11 @@ public class ControllerListaDeCompras {
 	private void copiaLista(ListaDeCompras lista, ListaDeCompras novaLista) {
 		lista.copiaLista(novaLista);
 		this.listasDeCompras.put(novaLista.getDescritor(), novaLista);
+	}
+	
+	private String dataAtual() {
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String data = LocalDate.now().format(formato);
+		return data;
 	}
 }
