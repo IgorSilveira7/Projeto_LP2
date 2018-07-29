@@ -379,6 +379,9 @@ public class ControllerListaDeCompras {
 				supermercados.get(nomeSupermercado).addItem(c);
 			}
 		}
+		if (supermercados.size() == 0) {
+			throw new IllegalArgumentException("Faltam dados para informar sobre preços em locais de compras.");
+		}
 	}
 
 	/**
