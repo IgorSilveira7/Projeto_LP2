@@ -102,6 +102,7 @@ public class ListaDeCompras {
 	 *            atualizado.
 	 */
 	public void atualizaCompraDeLista(Item item, String operacao, int novaquantidade) {
+		ValidadorListaDeCompras.validaOperacao(operacao);
 		if (!this.listaDeCompras.containsKey(item)) {
 			throw new EntradaInvalidaException("Erro na atualizacao de compra: compra nao encontrada na lista.");
 		}
@@ -127,7 +128,7 @@ public class ListaDeCompras {
 	 *            Double referente ao valor final da lista em questao.
 	 */
 	public void finalizarListaDeCompras(String localDeCompra, double valorFinal) {
-		ValidadorListaDeCompras.testeFinalizarCompra(localDeCompra, valorFinal);
+		ValidadorListaDeCompras.testeFinalizarCompra(localDeCompra, valorFinal, this.descritor);
 		this.localDeCompra = localDeCompra;
 		this.valorTotal = valorFinal;
 		this.finalizado = true;

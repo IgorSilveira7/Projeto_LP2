@@ -61,7 +61,7 @@ public class ControllerListaDeCompras {
 	 * @return String referente ao descritor referente a lista de compras criada.
 	 */
 	public String criaListaDeCompra(String descritor) {
-		ValidadorListaDeCompras.validaDescritor(descritor);
+		ValidadorListaDeCompras.validaConstrutor(descritor);
 		this.listasDeCompras.put(descritor, new ListaDeCompras(descritor));
 		return descritor;
 	}
@@ -93,12 +93,7 @@ public class ControllerListaDeCompras {
 	 * @return String referente a pesquisa do item em determinada lista de compras.
 	 */
 	public String pesquisaCompraEmLista(String descritor, int id) {
-		if (descritor == null) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
-		}
-		if (descritor.trim().isEmpty()) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
-		}
+		ValidadorListaDeCompras.validaDescritor(descritor);
 		if (!this.controllerItem.itemExiste(id)) {
 			throw new ItemNaoExisteException("Erro na pesquisa de compra: item id invalido.");
 		}
@@ -113,12 +108,7 @@ public class ControllerListaDeCompras {
 	 * @return String referente a lista de compras pesquisada.
 	 */
 	public String pesquisaListaDeCompras(String descritor) {
-		if (descritor == null) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
-		}
-		if (descritor.trim().isEmpty()) {
-			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
-		}
+		ValidadorListaDeCompras.validaDescritor(descritor);
 		if (!this.listasDeCompras.containsKey(descritor)) {
 			throw new ListaDeCompraNaoExisteException("Erro na pesquisa de compra: lista de compras nao existe.");
 		}
@@ -139,9 +129,7 @@ public class ControllerListaDeCompras {
 	 *            lista.
 	 */
 	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQuantidade) {
-		if (!(operacao.equals("diminui") || operacao.equals("adiciona"))) {
-			throw new OperacaoInvalidaException("Erro na atualizacao de compra: operacao invalida para atualizacao.");
-		}
+		ValidadorListaDeCompras.validaOperacao(operacao);
 		this.listasDeCompras.get(descritor).atualizaCompraDeLista(this.controllerItem.getItemPeloId(id), operacao,
 				novaQuantidade);
 	}
@@ -157,15 +145,7 @@ public class ControllerListaDeCompras {
 	 *            Double referente ao ultimo valor do item.
 	 */
 	public void finalizarListaDeCompras(String descritor, String localDeCompra, double valorFinal) {
-		if (descritor == null) {
-			throw new EntradaInvalidaException(
-					"Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
-		}
-		if (descritor.trim().isEmpty()) {
-			throw new EntradaInvalidaException(
-					"Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
-		}
-		ValidadorListaDeCompras.testeFinalizarCompra(localDeCompra, valorFinal);
+		ValidadorListaDeCompras.testeFinalizarCompra(localDeCompra, valorFinal, descritor);
 		this.listasDeCompras.get(descritor).finalizarListaDeCompras(localDeCompra, valorFinal);
 	}
 
@@ -178,12 +158,7 @@ public class ControllerListaDeCompras {
 	 *            Inteiro referente a identificacao do item.
 	 */
 	public void deletaCompraDeLista(String descritor, int id) {
-		if (descritor == null) {
-			throw new EntradaInvalidaException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
-		}
-		if (descritor.trim().isEmpty()) {
-			throw new EntradaInvalidaException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
-		}
+		ValidadorListaDeCompras.validaDeletarLista(descritor);
 		if (!this.controllerItem.itemExiste(id)) {
 			throw new ItemNaoExisteException("Erro na exclusao de compra: item nao existe no sistema.");
 		}
@@ -310,7 +285,7 @@ public class ControllerListaDeCompras {
 			}
 			indice++;
 		}
-		return "espaco da excecao";
+		return "";
 	}
 
 	/**

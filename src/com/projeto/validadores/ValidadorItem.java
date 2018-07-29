@@ -300,4 +300,22 @@ public class ValidadorItem {
 		}
 		return true;
 	}
+	
+	public static boolean validaAtributoNovoValor(String atributo, String novoValor) {
+		if (atributo.trim().equals("")) {
+			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao pode ser vazio ou nulo.");
+		}
+		if (novoValor.trim().equals("")) {
+			throw new IllegalArgumentException(
+					"Erro na atualizacao de item: novo valor de atributo nao pode ser vazio ou nulo.");
+		}
+		return true;
+	}
+	
+	public static boolean validaId(int id) {
+		if (id <= 0) {
+			throw new IllegalArgumentException("Erro no cadastro de preco: id de item invalido.");
+		}
+		return true;
+	}
 }

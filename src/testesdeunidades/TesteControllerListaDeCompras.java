@@ -277,7 +277,7 @@ public class TesteControllerListaDeCompras {
 		this.cListaDeCompras.criaListaDeCompra("almoco");
 		this.cListaDeCompras.criaListaDeCompra("janta");
 		this.cListaDeCompras.criaListaDeCompra("lanche da tarde");
-		assertEquals(this.data.format(this.formato) + " - almoco", this.cListaDeCompras.pesquisaListasDeComprasPorData(this.data.format(this.formato)));
+		assertEquals(this.data.format(this.formato) + " - feira", this.cListaDeCompras.pesquisaListasDeComprasPorData(this.data.format(this.formato)));
 	}
 	
 	@Test(expected=EntradaInvalidaException.class)
@@ -305,21 +305,43 @@ public class TesteControllerListaDeCompras {
 	}
 	
 	@Test
-	public void testeO() {
+	public void testeGeraAutomaticaListaEstrategia1() {
 		this.cListaDeCompras.criaListaDeCompra("almoco");
 		this.cListaDeCompras.criaListaDeCompra("janta");
 		this.cListaDeCompras.adicionaCompraALista("janta", 5, 1);
 		this.cListaDeCompras.adicionaCompraALista("janta", 13, 2);
 		String a = this.cListaDeCompras.geraAutomaticaUltimaLista();
-		assertEquals("Lista automatica 1 24/07/2018", this.cListaDeCompras.getItemLista(a, 1));
+		assertEquals("5 Pao, alimento industrializado, 5 u.m", this.cListaDeCompras.getItemLista(a, 1));
 	}
 	
 	@Test
-	public void testeX() {
+	public void testeGeraAutomaticaListaEstrategia2() {
 		this.cListaDeCompras.criaListaDeCompra("almoco");
 		this.cListaDeCompras.criaListaDeCompra("janta");
 		this.cListaDeCompras.adicionaCompraALista("almoco", 1, 1);
-		//String a = this.cListaDeCompras.geraAutomaticaItem(1);
-		//assertEquals("Lista automatica 2 24/07/2018", this.cListaDeCompras.getItemLista(a, 0));
+		this.cListaDeCompras.adicionaCompraALista("almoco", 4, 2);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 3);
+		String a = this.cListaDeCompras.geraAutomaticaItem("Pao");
+		assertEquals("2 Arroz, alimento industrializado", this.cListaDeCompras.getItemLista(a, 0));
+	}
+	
+	@Test
+	public void testeGeraAutomaticaListaEstrategia3() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.criaListaDeCompra("janta");
+		this.cListaDeCompras.adicionaCompraALista("almoco", 1, 1);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 4, 2);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 3);
+		String a = this.cListaDeCompras.geraAutomaticaItensMaisPresentes();
+		assertEquals("2 Arroz, alimento industrializado", this.cListaDeCompras.getItemLista(a, 0));
+	}
+	
+	@Test
+	public void testeSugereMelhorEstabelecimento() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.adicionaCompraALista("almoco", 1, 1);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 4, 2);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 3);
+		assertEquals("Alfredo +: R$ 2,58", this.cListaDeCompras.sugereMelhorEstabelecimento("almoco", 0, 0));
 	}
 }

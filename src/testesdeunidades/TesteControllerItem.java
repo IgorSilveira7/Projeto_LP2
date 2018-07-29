@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import com.projeto.controllers.ControllerItem;
 import com.projeto.excecoes.EntradaInvalidaException;
-import com.projeto.excecoes.ItemJaExisteException;
 
 public class TesteControllerItem {
 	

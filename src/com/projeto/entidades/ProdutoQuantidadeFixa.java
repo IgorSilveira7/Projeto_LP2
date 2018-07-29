@@ -63,20 +63,20 @@ public class ProdutoQuantidadeFixa extends Item {
 	@Override
 	public void AtualizarItem(String atributo, String novoValor) {
 		switch (atributo.toLowerCase()) {
-		case "nome":
-			this.setNome(novoValor);
-			break;
-		case "categoria":
-			this.setCategoria(novoValor);
-			break;
-		case "quantidade":
-			this.setQuantidade(Integer.parseInt(novoValor));
-			break;
-		case "unidade de medida":
-			this.setMedida(novoValor);
-			break;
-		default:
-			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
+			case "nome":
+				this.setNome(novoValor);
+				break;
+			case "categoria":
+				this.setCategoria(novoValor);
+				break;
+			case "quantidade":
+				this.setQuantidade(Integer.parseInt(novoValor));
+				break;
+			case "unidade de medida":
+				this.setMedida(novoValor);
+				break;
+			default:
+				throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
 		}
 	}
 
@@ -103,7 +103,7 @@ public class ProdutoQuantidadeFixa extends Item {
 	 */
 	@Override
 	public String exibirEmLista(int quant) {
-		return ((int) quant) + " " + this.getNome() + ", " + this.getCategoria() + ", " + this.quantidade + " "
+		return quant + " " + this.getNome() + ", " + this.getCategoria() + ", " + this.quantidade + " "
 				+ this.medida;
 	}
 

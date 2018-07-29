@@ -147,13 +147,7 @@ public class ControllerItem {
 	 *            String novo valor.
 	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
-		if (atributo.trim().equals("")) {
-			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao pode ser vazio ou nulo.");
-		}
-		if (novoValor.trim().equals("")) {
-			throw new IllegalArgumentException(
-					"Erro na atualizacao de item: novo valor de atributo nao pode ser vazio ou nulo.");
-		}
+		ValidadorItem.validaAtributoNovoValor(atributo, novoValor);
 		if (!this.itens.containsKey(id)) {
 			throw new IllegalArgumentException("Erro na atualizacao de item: item nao existe.");
 		}
@@ -172,9 +166,7 @@ public class ControllerItem {
 	 */
 	public void adicionaPrecoItem(int id, String supermercado, double preco) {
 		ValidadorItem.validaAdicionarPrecoItem(supermercado, preco);
-		if (id <= 0) {
-			throw new IllegalArgumentException("Erro no cadastro de preco: id de item invalido.");
-		}
+		ValidadorItem.validaId(id);
 		if (!this.itens.containsKey(id)) {
 			throw new IllegalArgumentException("Erro no cadastro de preco: item nao existe.");
 		}

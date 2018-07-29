@@ -6,10 +6,11 @@ import java.util.Map;
 import com.projeto.entidades.Item;
 import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.excecoes.ItemNaoExisteException;
+import com.projeto.excecoes.OperacaoInvalidaException;
 
 public class ValidadorListaDeCompras {
 	
-	public static boolean validaDescritor(String descritor) {
+	public static boolean validaConstrutor(String descritor) {
 		if (descritor == null) {
 			throw new EntradaInvalidaException("Erro na criacao de lista de compras: descritor nao pode ser vazio ou nulo.");
 		}
@@ -19,7 +20,15 @@ public class ValidadorListaDeCompras {
 		return true;
 	}
 	
-	public static boolean testeFinalizarCompra(String localCompra, double valor) {
+	public static boolean testeFinalizarCompra(String localCompra, double valor, String descritor) {
+		if (descritor == null) {
+			throw new EntradaInvalidaException(
+					"Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
+		}
+		if (descritor.trim().isEmpty()) {
+			throw new EntradaInvalidaException(
+					"Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
+		}
 		if (valor <= 0) {
 			throw new EntradaInvalidaException("Erro na finalizacao de lista de compras: valor final da lista invalido.");
 		}
@@ -28,6 +37,16 @@ public class ValidadorListaDeCompras {
 		}
 		if (localCompra.trim().isEmpty()) {
 			throw new EntradaInvalidaException("Erro na finalizacao de lista de compras: local nao pode ser vazio ou nulo.");
+		}
+		return true;
+	}
+	
+	public static boolean validaDeletarLista(String descritor) {
+		if (descritor == null) {
+			throw new EntradaInvalidaException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
+		}
+		if (descritor.trim().isEmpty()) {
+			throw new EntradaInvalidaException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
 		}
 		return true;
 	}
@@ -58,4 +77,22 @@ public class ValidadorListaDeCompras {
 		}
 		return true;
 	}
+	
+	public static boolean validaDescritor(String descritor) {
+		if (descritor == null) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
+		}
+		if (descritor.trim().isEmpty()) {
+			throw new EntradaInvalidaException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
+		}
+		return true;
+	}
+	
+	public static boolean validaOperacao(String operacao) {
+		if (!(operacao.equals("diminui") || operacao.equals("adiciona"))) {
+			throw new OperacaoInvalidaException("Erro na atualizacao de compra: operacao invalida para atualizacao.");
+		}
+		return true;
+	}
+	
 }
