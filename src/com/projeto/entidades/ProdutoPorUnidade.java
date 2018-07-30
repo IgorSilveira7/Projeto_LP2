@@ -14,6 +14,7 @@ import com.projeto.validadores.*;
  */
 public class ProdutoPorUnidade extends Item {
 
+	private static final long serialVersionUID = 5027405910211941875L;
 	/**
 	 * Atributo que representa o total de unidades que este item possui.
 	 */

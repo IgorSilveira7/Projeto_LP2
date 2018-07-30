@@ -1,5 +1,11 @@
 package com.projeto.controllers;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,10 +18,9 @@ import com.projeto.entidades.Compra;
 import com.projeto.entidades.Item;
 import com.projeto.entidades.ListaDeCompras;
 import com.projeto.entidades.Supermercado;
-import com.projeto.excecoes.EntradaInvalidaException;
+import com.projeto.excecoes.ArquivoNaoExiste;
 import com.projeto.excecoes.ItemNaoExisteException;
 import com.projeto.excecoes.ListaDeCompraNaoExisteException;
-import com.projeto.excecoes.OperacaoInvalidaException;
 import com.projeto.ordenacao.OrdenaListaDeComprasPorData;
 import com.projeto.ordenacao.OrdenarListaDeComprasPorDescritor;
 import com.projeto.ordenacao.OrdenarSupermercadoPeloValor;
@@ -433,5 +438,38 @@ public class ControllerListaDeCompras {
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String data = LocalDate.now().format(formato);
 		return data;
+	}
+
+	/**
+	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
+	 */
+	public void salvarDados() {
+		ObjectOutputStream os;
+		try {
+			os = new ObjectOutputStream(new FileOutputStream("listas.txt"));
+			os.writeObject(this.listasDeCompras);
+		} catch (FileNotFoundException e) {
+			throw new ArquivoNaoExiste("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Alguma coisa deu errado...");
+		}
+	}
+	
+	/**
+	 * Metodo responsavel por realizar o carregamento dos dados.
+	 */
+	public void carregarDados() {
+		ObjectInputStream os;
+		try {
+			os = new ObjectInputStream(new FileInputStream("listas.txt"));
+			this.listasDeCompras = (Map<String, ListaDeCompras>) os.readObject();
+		} catch (FileNotFoundException e) {
+			throw new ArquivoNaoExiste("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorre...");
+		} catch (ClassNotFoundException e) {
+			throw new ArquivoNaoExiste("Alguma coisa no sistema mudou");
+		}
+		
 	}
 }

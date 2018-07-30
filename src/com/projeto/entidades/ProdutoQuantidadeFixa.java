@@ -15,6 +15,7 @@ import com.projeto.validadores.ValidadorItem;
  */
 public class ProdutoQuantidadeFixa extends Item {
 
+	private static final long serialVersionUID = -4780434247548458953L;
 	/**
 	 * Atributo que representa a quantidade de itens.
 	 */

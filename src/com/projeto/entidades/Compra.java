@@ -1,5 +1,7 @@
 package com.projeto.entidades;
 
+import java.io.Serializable;
+
 /**
  * Classe que representa uma compra no sistema. Cada compra possui um item e a
  * quantidade dele a ser comprada.
@@ -10,8 +12,9 @@ package com.projeto.entidades;
  * @author Jose Davi
  * 
  */
-public class Compra {
+public class Compra implements Serializable{
 
+	private static final long serialVersionUID = 6147362482159025197L;
 	/**
 	 * Atributo referente ao item.
 	 */

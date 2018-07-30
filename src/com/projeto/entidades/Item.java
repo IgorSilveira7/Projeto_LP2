@@ -1,5 +1,6 @@
 package com.projeto.entidades;
 
+import java.io.Serializable;
 import java.util.*;
 
 import com.projeto.enums.Categoria;
@@ -15,7 +16,7 @@ import com.projeto.validadores.ValidadorItem;
  * @author Jose Davi
  * 
  */
-public abstract class Item implements Comparable<Item> {
+public abstract class Item implements Comparable<Item>, Serializable {
 
 	/**
 	 * Atributo que representa o id do item.

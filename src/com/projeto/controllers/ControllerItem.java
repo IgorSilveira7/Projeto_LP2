@@ -1,11 +1,19 @@
 package com.projeto.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 import com.projeto.entidades.Item;
 import com.projeto.entidades.ProdutoNaoIndustrializado;
 import com.projeto.entidades.ProdutoPorUnidade;
 import com.projeto.entidades.ProdutoQuantidadeFixa;
+import com.projeto.excecoes.ArquivoNaoExiste;
 import com.projeto.ordenacao.OrdenaItensPorNome;
 import com.projeto.ordenacao.OrdenarItensPorMenorPreco;
 import com.projeto.validadores.ValidadorItem;
@@ -338,5 +346,41 @@ public class ControllerItem {
 			}
 		}
 		throw new IllegalArgumentException("Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");
+	}
+
+	/**
+	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
+	 */
+	public void salvarDados()  {
+		ObjectOutputStream os;
+		try {
+			os = new ObjectOutputStream(new FileOutputStream("item.txt"));
+			os.writeObject(this.itens);
+			os.writeObject(this.itensOrdenados);
+			os.writeObject(this.id);
+		} catch (FileNotFoundException e) {
+			throw new ArquivoNaoExiste("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorreu...");
+		}
+	}
+	
+	/**
+	 * Metodo responsavel por realizar o carregamento dos dados.
+	 */
+	public void carregarDados() {
+		ObjectInputStream os;
+		try {
+			os = new ObjectInputStream(new FileInputStream("item.txt"));
+			this.itens = (Map<Integer, Item>) os.readObject();
+			this.itensOrdenados = (List<Item>) os.readObject();
+			this.id = (int) os.readObject();
+		} catch (FileNotFoundException e) {
+			throw new ArquivoNaoExiste("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorre...");
+		} catch (ClassNotFoundException e) {
+			throw new ArquivoNaoExiste("Alguma coisa no sistema mudou");
+		}
 	}
 }

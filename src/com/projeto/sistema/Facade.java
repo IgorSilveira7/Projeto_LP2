@@ -1,5 +1,7 @@
 package com.projeto.sistema;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -42,7 +44,8 @@ public class Facade {
 				"acceptance_tests/use_case2_exception.txt", "acceptance_tests/use_case3.txt",
 				"acceptance_tests/use_case3_exception.txt", "acceptance_tests/use_case4.txt",
 				"acceptance_tests/use_case4_exception.txt", "acceptance_tests/use_case5.txt",
-				"acceptance_tests/use_case6_exception.txt", "acceptance_tests/use_case6.txt" };
+				"acceptance_tests/use_case6_exception.txt", "acceptance_tests/use_case6.txt",
+				"acceptance_tests/use_case7.txt" };
 
 		EasyAccept.main(args);
 	}
@@ -417,7 +420,7 @@ public class Facade {
 	public String geraAutomaticaItensMaisPresentes() {
 		return this.controllerListaDeCompras.geraAutomaticaItensMaisPresentes();
 	}
-	
+
 	/**
 	 * Metodo responsavel por sugerir o melhor estabelecimento para realizar a
 	 * compra de uma determinada lista de compra.
@@ -435,6 +438,24 @@ public class Facade {
 	 *         itens.
 	 */
 	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista) {
-		return this.controllerListaDeCompras.sugereMelhorEstabelecimento(descritorLista, posicaoEstabelecimento, posicaoLista);
+		return this.controllerListaDeCompras.sugereMelhorEstabelecimento(descritorLista, posicaoEstabelecimento,
+				posicaoLista);
 	}
+
+	/**
+	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
+	 */
+	public void fechaSistema() {
+		this.controllerItem.salvarDados();
+		this.controllerListaDeCompras.salvarDados();
+	}
+
+	/**
+	 * Metodo responsavel por realizar o carregamento dos dados.
+	 */
+	public void iniciaSistema() {
+		this.controllerItem.carregarDados();
+		this.controllerListaDeCompras.carregarDados();
+	}
+
 }

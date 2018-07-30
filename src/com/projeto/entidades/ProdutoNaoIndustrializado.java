@@ -13,7 +13,8 @@ import com.projeto.validadores.*;
  *
  */
 public class ProdutoNaoIndustrializado extends Item {
-
+	
+	private static final long serialVersionUID = 6843334566557084350L;
 	/**
 	 * Atributo que representa o peso do item.
 	 */

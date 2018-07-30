@@ -1,5 +1,6 @@
 package com.projeto.entidades;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import com.projeto.validadores.ValidadorListaDeCompras;
  * @author Rich Ramalho
  *
  */
-public class ListaDeCompras {
+public class ListaDeCompras implements Serializable{
 	
 	private Map<Item, Compra> listaDeCompras;
 	/**
