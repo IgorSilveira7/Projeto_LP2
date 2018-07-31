@@ -1,10 +1,7 @@
 package com.projeto.sistema;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import easyaccept.EasyAccept;
 
 import com.projeto.controllers.ControllerItem;
@@ -56,6 +53,22 @@ public class Facade {
 	public Facade() {
 		this.controllerItem = new ControllerItem();
 		this.controllerListaDeCompras = new ControllerListaDeCompras(controllerItem);
+	}
+	
+	/**
+	 * Metodo responsavel por realizar o carregamento dos dados.
+	 */
+	public void iniciaSistema() {
+		this.controllerItem.carregarDados();
+		this.controllerListaDeCompras.carregarDados();
+	}
+	
+	/**
+	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
+	 */
+	public void fechaSistema() {
+		this.controllerItem.salvarDados();
+		this.controllerListaDeCompras.salvarDados();
 	}
 
 	/**
@@ -441,21 +454,4 @@ public class Facade {
 		return this.controllerListaDeCompras.sugereMelhorEstabelecimento(descritorLista, posicaoEstabelecimento,
 				posicaoLista);
 	}
-
-	/**
-	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
-	 */
-	public void fechaSistema() {
-		this.controllerItem.salvarDados();
-		this.controllerListaDeCompras.salvarDados();
-	}
-
-	/**
-	 * Metodo responsavel por realizar o carregamento dos dados.
-	 */
-	public void iniciaSistema() {
-		this.controllerItem.carregarDados();
-		this.controllerListaDeCompras.carregarDados();
-	}
-
 }

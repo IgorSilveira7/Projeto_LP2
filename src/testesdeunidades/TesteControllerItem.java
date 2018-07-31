@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.projeto.controllers.ControllerItem;
 import com.projeto.excecoes.EntradaInvalidaException;
+import com.projeto.excecoes.ItemJaExisteException;
 
 public class TesteControllerItem {
 	
@@ -238,5 +239,25 @@ public class TesteControllerItem {
 		this.c.adicionaItemPorUnidade("Arroz bom", "alimento nao industrializado", 2, "Alfredo plus", 2.4);
 		String res = "3. Arroz bom, alimento nao industrializado, Preco: <Alfredo plus, R$ 2,40;>";
 		assertEquals(res, this.c.getItemPorPesquisa("arroz", 0));
+	}
+	
+	@Test
+	public void testSalvarDados() {
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
+		this.c.adicionaItemPorQuilo("Arroz gostoso", "alimento industrializado", 5, "Baratao", 2.10);
+		this.c.adicionaItemPorUnidade("Arroz bom", "alimento nao industrializado", 2, "Alfredo plus", 2.4);
+		this.c.salvarDados();
+	}
+	
+	@Test
+	public void testCarregarDados() {
+		this.c.carregarDados();
+		assertEquals("1. Pao, alimento industrializado, 5 u.m, Preco: <Alfredo +, R$ 2,58;>", this.c.exibeItem(1));
+	}
+	
+	@Test(expected=ItemJaExisteException.class)
+	public void testCarregarDadosItemJaExiste() {
+		this.c.carregarDados();
+		this.c.adicionaItemPorQtd("Pao", "alimento industrializado", 5, "u.m", "Alfredo +", 2.58);
 	}
 }

@@ -344,4 +344,19 @@ public class TesteControllerListaDeCompras {
 		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 3);
 		assertEquals("Alfredo +: R$ 2,58", this.cListaDeCompras.sugereMelhorEstabelecimento("almoco", 0, 0));
 	}
+	
+	@Test
+	public void testeSalvarDados() {
+		this.cListaDeCompras.criaListaDeCompra("almoco");
+		this.cListaDeCompras.adicionaCompraALista("almoco", 1, 1);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 4, 2);
+		this.cListaDeCompras.adicionaCompraALista("almoco", 2, 3);
+		this.cListaDeCompras.salvarDados();
+	}
+	
+	@Test
+	public void testeCarregarDados() {
+		this.cListaDeCompras.carregarDados();
+		assertEquals("2 Arroz, alimento industrializado", this.cListaDeCompras.getItemLista("almoco", 0));
+	}
 }

@@ -24,6 +24,8 @@ import com.projeto.validadores.ValidadorListaDeCompras;
  */
 public class ListaDeCompras implements Serializable{
 	
+	private static final long serialVersionUID = -2414139878369344656L;
+	
 	private Map<Item, Compra> listaDeCompras;
 	/**
 	 * Atributo do tipo String referente a descricao de uma lista de compras.

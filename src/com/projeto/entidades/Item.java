@@ -18,6 +18,8 @@ import com.projeto.validadores.ValidadorItem;
  */
 public abstract class Item implements Comparable<Item>, Serializable {
 
+	private static final long serialVersionUID = 2640232208293967898L;
+	
 	/**
 	 * Atributo que representa o id do item.
 	 */

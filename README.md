@@ -34,3 +34,4 @@ Conceitos utilizados.
 - [X] Testes de aceitação case 5.
 - [X] Testes de aceitação case 6.
 - [X] Testes de aceitação case 6 - Exception.
+- [X] Testes de aceitação case 7.
