@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import com.projeto.excecoes.EntradaInvalidaException;
 import com.projeto.ordenacao.OrdenaItensPorNome;
-import com.projeto.ordenacao.OrdenarPorCategoria;
+import com.projeto.ordenacao.OrdenarItensPorCategoria;
 import com.projeto.validadores.ValidadorListaDeCompras;
 
 /**
@@ -22,10 +22,10 @@ import com.projeto.validadores.ValidadorListaDeCompras;
  * @author Rich Ramalho
  *
  */
-public class ListaDeCompras implements Serializable{
-	
+public class ListaDeCompras implements Serializable {
+
 	private static final long serialVersionUID = -2414139878369344656L;
-	
+
 	private Map<Item, Compra> listaDeCompras;
 	/**
 	 * Atributo do tipo String referente a descricao de uma lista de compras.
@@ -100,6 +100,8 @@ public class ListaDeCompras implements Serializable{
 	 * 
 	 * @param item
 	 *            Item referente ao item que devera ser atualizado na lista.
+	 * @param operacao
+	 *            String referente ao tipo de operacao a ser realizada.
 	 * @param novaquantidade
 	 *            Double referente a nova quantidade daquele item, que_ devera ser
 	 *            atualizado.
@@ -109,15 +111,9 @@ public class ListaDeCompras implements Serializable{
 		if (!this.listaDeCompras.containsKey(item)) {
 			throw new EntradaInvalidaException("Erro na atualizacao de compra: compra nao encontrada na lista.");
 		}
-		int novoValor = 0;
-		if (operacao.equals("diminui")) {
-			this.listaDeCompras.get(item).diminuiQntdItem(novaquantidade);
-		} else if (operacao.equals("adiciona")) {
-			this.listaDeCompras.get(item).aumentaQntdItem(novaquantidade);
-		}
-		novoValor = this.listaDeCompras.get(item).getQntd();
-		
-		if (novoValor <= 0) {
+		this.listaDeCompras.get(item).atualizaQuantItem(operacao, novaquantidade);
+
+		if (this.listaDeCompras.get(item).getQntd() <= 0) {
 			this.listaDeCompras.remove(item);
 		}
 	}
@@ -138,25 +134,6 @@ public class ListaDeCompras implements Serializable{
 	}
 
 	/**
-	 * Metodo responsavel por emitir a representacao textual do item na lista.
-	 * 
-	 * @param id
-	 *            Inteiro referente a identificacao do item.
-	 * @return String que é a representacao textual do item em determinada lista de
-	 *         compras.
-	 */
-	public String getItemLista(int id) {
-		if (id < 0 || this.listaDeCompras.size() <= id) {
-			return "";
-		}
-		List<Item> itensOrdenados = new ArrayList<>(this.listaDeCompras.keySet());
-		Collections.sort(itensOrdenados, new OrdenaItensPorNome());
-		Collections.sort(itensOrdenados, new OrdenarPorCategoria());
-		Item i = itensOrdenados.get(id);
-		return this.listaDeCompras.get(i).toString();
-	}
-
-	/**
 	 * Metodo que deleta uma compra de uma lista de compras.
 	 * 
 	 * @param item
@@ -167,22 +144,13 @@ public class ListaDeCompras implements Serializable{
 			throw new EntradaInvalidaException("Erro na exclusao de compra: compra nao encontrada na lista.");
 		}
 		this.listaDeCompras.remove(item);
-		this.listaDeCompras.remove(item);
 	}
 
 	/**
-	 * Metodo que retorna a descricao textual de uma lista de compras.
-	 * 
-	 * @return String que representa a representacao textual da lista de compra.
-	 */
-	@Override
-	public String toString() {
-		return this.getData() + " - " + this.descritor;
-	}
-	
-	/**
 	 * Metodo que retorna uma colecao das compras desta lista de compras.
-	 * @return Map<Item, Compra> Item: referente ao item, Compra: referente a compra.
+	 * 
+	 * @return Map Item, Compra Item: referente ao item, Compra: referente a
+	 *         compra.
 	 */
 	public Map<Item, Compra> getCompras() {
 		return this.listaDeCompras;
@@ -217,6 +185,35 @@ public class ListaDeCompras implements Serializable{
 	}
 
 	/**
+	 * Metodo responsavel por emitir a representacao textual do item na lista.
+	 * 
+	 * @param id
+	 *            Inteiro referente a identificacao do item.
+	 * @return String que é a representacao textual do item em determinada lista de
+	 *         compras.
+	 */
+	public String getItemLista(int id) {
+		if (id < 0 || this.listaDeCompras.size() <= id) {
+			return "";
+		}
+		List<Item> itensOrdenados = new ArrayList<>(this.listaDeCompras.keySet());
+		Collections.sort(itensOrdenados, new OrdenaItensPorNome());
+		Collections.sort(itensOrdenados, new OrdenarItensPorCategoria());
+		Item i = itensOrdenados.get(id);
+		return this.listaDeCompras.get(i).toString();
+	}
+
+	/**
+	 * Metodo que retorna a descricao textual de uma lista de compras.
+	 * 
+	 * @return String que representa a representacao textual da lista de compra.
+	 */
+	@Override
+	public String toString() {
+		return this.getData() + " - " + this.descritor;
+	}
+
+	/**
 	 * Metodo que retorna se um determinado item esta cadastrado na minha lista de
 	 * compra.
 	 * 
@@ -231,10 +228,13 @@ public class ListaDeCompras implements Serializable{
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Metodo que copia os itens desta lista para a recebida como parametro.
-	 * @param lista ListaDeCompras referente a lista de compras que recebera os itens dessa lista.
+	 * 
+	 * @param lista
+	 *            ListaDeCompras referente a lista de compras que recebera os itens
+	 *            dessa lista.
 	 */
 	public void copiaLista(ListaDeCompras lista) {
 		for (Item i : this.listaDeCompras.keySet()) {

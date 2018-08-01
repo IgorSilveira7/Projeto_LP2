@@ -64,26 +64,29 @@ public class ProdutoQuantidadeFixa extends Item {
 	@Override
 	public void AtualizarItem(String atributo, String novoValor) {
 		switch (atributo.toLowerCase()) {
-			case "nome":
-				this.setNome(novoValor);
-				break;
-			case "categoria":
-				this.setCategoria(novoValor);
-				break;
-			case "quantidade":
-				this.setQuantidade(Integer.parseInt(novoValor));
-				break;
-			case "unidade de medida":
-				this.setMedida(novoValor);
-				break;
-			default:
-				throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
+		case "nome":
+			this.setNome(novoValor);
+			break;
+		case "categoria":
+			this.setCategoria(novoValor);
+			break;
+		case "quantidade":
+			this.setQuantidade(Integer.parseInt(novoValor));
+			break;
+		case "unidade de medida":
+			this.setMedida(novoValor);
+			break;
+		default:
+			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
 		}
 	}
 
 	/**
 	 * Metodo sobrescrito da classe pai(Item) que ira alterar a unidade de medida do
 	 * item.
+	 * 
+	 * @param novaMedida
+	 *            String que representa a nova medida.
 	 */
 	public void setMedida(String novaMedida) {
 		ValidadorItem.validaSetMedida(novaMedida);
@@ -92,6 +95,9 @@ public class ProdutoQuantidadeFixa extends Item {
 
 	/**
 	 * Metodo sobrescrito da classe pai(Item) que ira alterar a quantidade do item.
+	 * 
+	 * @param novoValor
+	 *            Inteiro que representa o novo valor.
 	 */
 	public void setQuantidade(int novoValor) {
 		ValidadorItem.validaSetQuantidade(novoValor);
@@ -104,8 +110,7 @@ public class ProdutoQuantidadeFixa extends Item {
 	 */
 	@Override
 	public String exibirEmLista(int quant) {
-		return quant + " " + this.getNome() + ", " + this.getCategoria() + ", " + this.quantidade + " "
-				+ this.medida;
+		return quant + " " + this.getNome() + ", " + this.getCategoria() + ", " + this.quantidade + " " + this.medida;
 	}
 
 	/**

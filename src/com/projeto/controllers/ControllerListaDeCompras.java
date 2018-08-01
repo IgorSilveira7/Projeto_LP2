@@ -366,6 +366,39 @@ public class ControllerListaDeCompras {
 	}
 
 	/**
+	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
+	 */
+	public void salvarDados() {
+		ObjectOutputStream os;
+		try {
+			os = new ObjectOutputStream(new FileOutputStream("listas.txt"));
+			os.writeObject(this.listasDeCompras);
+		} catch (FileNotFoundException e) {
+			throw new ArquivoNaoExiste("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Alguma coisa deu errado...");
+		}
+	}
+	
+	/**
+	 * Metodo responsavel por realizar o carregamento dos dados.
+	 */
+	@SuppressWarnings("unchecked")
+	public void carregarDados() {
+		ObjectInputStream os;
+		try {
+			os = new ObjectInputStream(new FileInputStream("listas.txt"));
+			this.listasDeCompras = (Map<String, ListaDeCompras>) os.readObject();
+		} catch (FileNotFoundException e) {
+			throw new ArquivoNaoExiste("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorre...");
+		} catch (ClassNotFoundException e) {
+			throw new ArquivoNaoExiste("Alguma coisa no sistema mudou");
+		}	
+	}
+	
+	/**
 	 * Metodo privado que cria uma colecao de todos os supermercados.
 	 * 
 	 * @param supermercados
@@ -438,38 +471,5 @@ public class ControllerListaDeCompras {
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String data = LocalDate.now().format(formato);
 		return data;
-	}
-
-	/**
-	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
-	 */
-	public void salvarDados() {
-		ObjectOutputStream os;
-		try {
-			os = new ObjectOutputStream(new FileOutputStream("listas.txt"));
-			os.writeObject(this.listasDeCompras);
-		} catch (FileNotFoundException e) {
-			throw new ArquivoNaoExiste("Arquivo nao existe no sistema.");
-		} catch (IOException e) {
-			System.out.println("Alguma coisa deu errado...");
-		}
-	}
-	
-	/**
-	 * Metodo responsavel por realizar o carregamento dos dados.
-	 */
-	public void carregarDados() {
-		ObjectInputStream os;
-		try {
-			os = new ObjectInputStream(new FileInputStream("listas.txt"));
-			this.listasDeCompras = (Map<String, ListaDeCompras>) os.readObject();
-		} catch (FileNotFoundException e) {
-			throw new ArquivoNaoExiste("Arquivo nao existe no sistema.");
-		} catch (IOException e) {
-			System.out.println("Algum erro ocorre...");
-		} catch (ClassNotFoundException e) {
-			throw new ArquivoNaoExiste("Alguma coisa no sistema mudou");
-		}
-		
 	}
 }

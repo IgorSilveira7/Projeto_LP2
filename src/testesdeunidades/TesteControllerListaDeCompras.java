@@ -357,6 +357,6 @@ public class TesteControllerListaDeCompras {
 	@Test
 	public void testeCarregarDados() {
 		this.cListaDeCompras.carregarDados();
-		assertEquals("2 Arroz, alimento industrializado", this.cListaDeCompras.getItemLista("almoco", 0));
+		assertEquals("4 Biscoite, alimento industrializado", this.cListaDeCompras.getItemLista("almoco", 1));
 	}
 }

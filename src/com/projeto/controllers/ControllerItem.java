@@ -1,6 +1,5 @@
 package com.projeto.controllers;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -198,7 +197,7 @@ public class ControllerItem {
 	/**
 	 * Metodo que retorna uma colecao de itens.
 	 * 
-	 * @return Coletion<Item> referente ao itens cadastrados no sistema.
+	 * @return Coletion de Item referente ao itens cadastrados no sistema.
 	 */
 	public Collection<Item> getItens(){
 		return this.itens.values();
@@ -296,22 +295,6 @@ public class ControllerItem {
 	}
 
 	/**
-	 * Metodo responsavel por ordenar os itens atraves do nome.
-	 */
-	private void ordenarPorNome() {
-		this.itensOrdenados = new ArrayList<>(this.itens.values());
-		Collections.sort(this.itensOrdenados, new OrdenaItensPorNome());
-	}
-
-	/**
-	 * Metodo responsavel por ordenar os itens atraves do preco.
-	 */
-	private void ordenarPorMenorPreco() {
-		this.itensOrdenados = new ArrayList<>(this.itens.values());
-		Collections.sort(itensOrdenados, new OrdenarItensPorMenorPreco());
-	}
-
-	/**
 	 * Metodo que retorna o item com um determinado id.
 	 * 
 	 * @param id
@@ -368,6 +351,7 @@ public class ControllerItem {
 	/**
 	 * Metodo responsavel por realizar o carregamento dos dados.
 	 */
+	@SuppressWarnings("unchecked")
 	public void carregarDados() {
 		ObjectInputStream os;
 		try {
@@ -382,5 +366,21 @@ public class ControllerItem {
 		} catch (ClassNotFoundException e) {
 			throw new ArquivoNaoExiste("Alguma coisa no sistema mudou");
 		}
+	}
+	
+	/**
+	 * Metodo responsavel por ordenar os itens atraves do nome.
+	 */
+	private void ordenarPorNome() {
+		this.itensOrdenados = new ArrayList<>(this.itens.values());
+		Collections.sort(this.itensOrdenados, new OrdenaItensPorNome());
+	}
+
+	/**
+	 * Metodo responsavel por ordenar os itens atraves do preco.
+	 */
+	private void ordenarPorMenorPreco() {
+		this.itensOrdenados = new ArrayList<>(this.itens.values());
+		Collections.sort(itensOrdenados, new OrdenarItensPorMenorPreco());
 	}
 }

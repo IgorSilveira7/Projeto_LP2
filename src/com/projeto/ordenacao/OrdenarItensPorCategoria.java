@@ -10,7 +10,7 @@ import com.projeto.entidades.Item;
  * @author Matheus Gusmao
  * @author Rich Ramalho
  */
-public class OrdenarPorCategoria implements Comparator<Item> {
+public class OrdenarItensPorCategoria implements Comparator<Item> {
 
 	@Override
 	public int compare(Item i1, Item i2) {

@@ -64,6 +64,14 @@ public class Compra implements Serializable{
 	public void aumentaQntdItem(int valorAdicionado) {
 		this.qntd += valorAdicionado;
 	}
+	
+	public void atualizaQuantItem(String operacao, int valor) {
+		if (operacao.equals("diminui")) {
+			this.qntd -= valor;
+		} else if (operacao.equals("adiciona")) {
+			this.qntd += valor;
+		}
+	}
 
 	/**
 	 * Metodo que diminui a quantidade do item.

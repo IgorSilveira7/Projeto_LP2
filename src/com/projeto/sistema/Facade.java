@@ -54,7 +54,7 @@ public class Facade {
 		this.controllerItem = new ControllerItem();
 		this.controllerListaDeCompras = new ControllerListaDeCompras(controllerItem);
 	}
-	
+
 	/**
 	 * Metodo responsavel por realizar o carregamento dos dados.
 	 */
@@ -62,7 +62,7 @@ public class Facade {
 		this.controllerItem.carregarDados();
 		this.controllerListaDeCompras.carregarDados();
 	}
-	
+
 	/**
 	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
 	 */
@@ -250,7 +250,7 @@ public class Facade {
 	/**
 	 * Metodo sem retorno que adiciona uma compra a lista de compras.
 	 * 
-	 * @param escritor
+	 * @param descritor
 	 *            String referente a descricao da lista de compras.
 	 * @param qntd
 	 *            Double referente a quantidade de itens.
@@ -281,6 +281,8 @@ public class Facade {
 	 *            String referente a descricao de lista de compras.
 	 * @param id
 	 *            Inteiro referente a identificacao de um item.
+	 * @param operacao
+	 *            String que representa a operacao a ser realizada.
 	 * @param novaQuantidade
 	 *            Double referente a nova quantidade do item que sera adicionado ou
 	 *            diminuida na lista de compras.

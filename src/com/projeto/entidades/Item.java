@@ -61,6 +61,27 @@ public abstract class Item implements Comparable<Item>, Serializable {
 			this.mapaPrecos.put(supermercado, preco);
 		}
 	}
+	
+	/**
+	 * Metodo abstrato que sera implementado nas classes filhas para atualizar seus
+	 * atributos.
+	 * 
+	 * @param atributo
+	 *            String que representa o atributo a ser modificado.
+	 * @param novoValor
+	 *            String que representa o novo valor do atributo.
+	 */
+	public abstract void AtualizarItem(String atributo, String novoValor);
+
+	/**
+	 * Metodo asbtrato que sera implementado nas classes filhas para retornar a
+	 * representacao textual do item em uma lista.
+	 * 
+	 * @param quant
+	 *            Double que representa a quantidade do item na lista.
+	 * @return String que representa a representacao textual do item na lista.
+	 */
+	public abstract String exibirEmLista(int quant);
 
 	/**
 	 * Metodo responsavel por adicionar um novo supermercado e um novo preco ao
@@ -103,28 +124,41 @@ public abstract class Item implements Comparable<Item>, Serializable {
 	public Categoria getCategoriaEnum() {
 		return this.categoria;
 	}
-
+	
 	/**
-	 * Metodo privado que dado um tipo de produto relaciona-o com uma categoria e a
-	 * retorna.
+	 * Metodo que retorna a representacao textual de de um tipo de produto.
 	 * 
-	 * @param categoria
-	 *            String que representa a categoria do item.
-	 * @return A categoria do item(Enum).
+	 * @return uma String que contem a categoria do item.
 	 */
-	private Categoria escolheCategoria(String categoria) {
-		switch (categoria.toLowerCase()) {
-		case "higiene pessoal":
-			return Categoria.higiene;
-		case "limpeza":
-			return Categoria.limpeza;
-		case "alimento industrializado":
-			return Categoria.industrializado;
-		case "alimento nao industrializado":
-			return Categoria.N_industrializado;
-		default:
-			return null;
+	public String getCategoria() {
+		if (this.categoria.equals(Categoria.higiene)) {
+			return "higiene pessoal";
+		} else if (this.categoria.equals(Categoria.limpeza)) {
+			return "limpeza";
+		} else if (this.categoria.equals(Categoria.industrializado)) {
+			return "alimento industrializado";
+		} else {
+			return "alimento nao industrializado";
 		}
+	}
+	
+	/**
+	 * Metodo que retona o nome do item.
+	 * 
+	 * @return nome do item.
+	 */
+	public String getNome() {
+		return this.nome;
+	}
+	
+	/**
+	 * Metodo que retorna o mapa de precos do item.
+	 * 
+	 * @return Map String, Double String : Nome do supermercado, Double: Preco do
+	 *         item no supermercado.
+	 */
+	public Map<String, Double> getMapaPrecos() {
+		return this.mapaPrecos;
 	}
 
 	/**
@@ -140,15 +174,6 @@ public abstract class Item implements Comparable<Item>, Serializable {
 	}
 
 	/**
-	 * Metodo que retona o nome do item.
-	 * 
-	 * @return nome do item.
-	 */
-	public String getNome() {
-		return this.nome;
-	}
-
-	/**
 	 * Metodo que altera o tipo da categoria.
 	 * 
 	 * @param novaCategoria
@@ -157,23 +182,6 @@ public abstract class Item implements Comparable<Item>, Serializable {
 	public void setCategoria(String novaCategoria) {
 		if (ValidadorItem.validaSetCategoria(novaCategoria)) {
 			this.categoria = escolheCategoria(novaCategoria);
-		}
-	}
-
-	/**
-	 * Metodo que retorna a representacao textual de de um tipo de produto.
-	 * 
-	 * @return uma String que contem a categoria do item.
-	 */
-	public String getCategoria() {
-		if (this.categoria.equals(Categoria.higiene)) {
-			return "higiene pessoal";
-		} else if (this.categoria.equals(Categoria.limpeza)) {
-			return "limpeza";
-		} else if (this.categoria.equals(Categoria.industrializado)) {
-			return "alimento industrializado";
-		} else {
-			return "alimento nao industrializado";
 		}
 	}
 
@@ -238,33 +246,25 @@ public abstract class Item implements Comparable<Item>, Serializable {
 	}
 	
 	/**
-	 * Metodo que retorna o mapa de precos do item.
+	 * Metodo privado que dado um tipo de produto relaciona-o com uma categoria e a
+	 * retorna.
 	 * 
-	 * @return Map<String, Double> String : Nome do supermercado, Double: Preco do
-	 *         item no supermercado.
+	 * @param categoria
+	 *            String que representa a categoria do item.
+	 * @return A categoria do item(Enum).
 	 */
-	public Map<String, Double> getMapaPrecos() {
-		return this.mapaPrecos;
+	private Categoria escolheCategoria(String categoria) {
+		switch (categoria.toLowerCase()) {
+		case "higiene pessoal":
+			return Categoria.higiene;
+		case "limpeza":
+			return Categoria.limpeza;
+		case "alimento industrializado":
+			return Categoria.industrializado;
+		case "alimento nao industrializado":
+			return Categoria.N_industrializado;
+		default:
+			return null;
+		}
 	}
-
-	/**
-	 * Metodo abstrato que sera implementado nas classes filhas para atualizar seus
-	 * atributos.
-	 * 
-	 * @param atributo
-	 *            String que representa o atributo a ser modificado.
-	 * @param novoValor
-	 *            String que representa o novo valor do atributo.
-	 */
-	public abstract void AtualizarItem(String atributo, String novoValor);
-
-	/**
-	 * Metodo asbtrato que sera implementado nas classes filhas para retornar a
-	 * representacao textual do item em uma lista.
-	 * 
-	 * @param quant
-	 *            Double que representa a quantidade do item na lista.
-	 * @return String que representa a representacao textual do item na lista.
-	 */
-	public abstract String exibirEmLista(int quant);
 }
