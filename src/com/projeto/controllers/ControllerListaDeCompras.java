@@ -383,7 +383,7 @@ public class ControllerListaDeCompras {
 	/**
 	 * Metodo responsavel por realizar o carregamento dos dados.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "resource" })
 	public void carregarDados() {
 		ObjectInputStream os;
 		try {

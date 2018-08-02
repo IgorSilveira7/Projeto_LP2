@@ -339,7 +339,6 @@ public class ControllerItem {
 		try {
 			os = new ObjectOutputStream(new FileOutputStream("item.txt"));
 			os.writeObject(this.itens);
-			os.writeObject(this.itensOrdenados);
 			os.writeObject(this.id);
 		} catch (FileNotFoundException e) {
 			throw new ArquivoNaoExiste("Arquivo nao existe no sistema.");
@@ -351,13 +350,12 @@ public class ControllerItem {
 	/**
 	 * Metodo responsavel por realizar o carregamento dos dados.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "resource" })
 	public void carregarDados() {
 		ObjectInputStream os;
 		try {
 			os = new ObjectInputStream(new FileInputStream("item.txt"));
 			this.itens = (Map<Integer, Item>) os.readObject();
-			this.itensOrdenados = (List<Item>) os.readObject();
 			this.id = (int) os.readObject();
 		} catch (FileNotFoundException e) {
 			throw new ArquivoNaoExiste("Arquivo nao existe no sistema.");
