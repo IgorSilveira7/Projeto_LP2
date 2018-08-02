@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.projeto.controllers.ControllerItem" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/controllers/ControllerItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="363" y="138"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.projeto.controllers.ControllerListaDeCompras" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/controllers/ControllerListaDeCompras.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="914" y="147"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.projeto.entidades.Item" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/entidades/Item.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="369" y="693"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.projeto.entidades.ProdutoNaoIndustrializado" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/entidades/ProdutoNaoIndustrializado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="44" y="1091"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.projeto.entidades.ProdutoPorUnidade" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/entidades/ProdutoPorUnidade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="367" y="1090"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.projeto.entidades.ProdutoQuantidadeFixa" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/entidades/ProdutoQuantidadeFixa.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="695" y="1107"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.projeto.entidades.ListaDeCompras" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/entidades/ListaDeCompras.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1298" y="438"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.projeto.entidades.Supermercado" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/entidades/Supermercado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="964" y="518"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.projeto.entidades.Compra" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/entidades/Compra.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="968" y="816"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="10" language="java" name="com.projeto.enums.Categoria" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/enums/Categoria.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="94" y="694"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="11" language="java" name="com.projeto.excecoes.ArquivoNaoExiste" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/excecoes/ArquivoNaoExiste.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="355" y="-834"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.projeto.excecoes.EntradaInvalidaException" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/excecoes/EntradaInvalidaException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-672" y="-836"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.projeto.excecoes.ItemJaExisteException" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/excecoes/ItemJaExisteException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-482" y="-834"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.projeto.excecoes.ItemNaoExisteException" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/excecoes/ItemNaoExisteException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-293" y="-834"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.projeto.excecoes.ListaDeCompraNaoExisteException" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/excecoes/ListaDeCompraNaoExisteException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="146" y="-835"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.projeto.excecoes.OperacaoInvalidaException" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/excecoes/OperacaoInvalidaException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-84" y="-835"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.projeto.ordenacao.OrdenaItensPorNome" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/ordenacao/OrdenaItensPorNome.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="867" y="-839"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.projeto.ordenacao.OrdenaListaDeComprasPorData" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/ordenacao/OrdenaListaDeComprasPorData.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1752" y="-843"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.projeto.ordenacao.OrdenarComprasPorNomeECategoria" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/ordenacao/OrdenarComprasPorNomeECategoria.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2011" y="-844"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.projeto.ordenacao.OrdenarItensPorCategoria" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/ordenacao/OrdenarItensPorCategoria.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1045" y="-840"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.projeto.ordenacao.OrdenarItensPorMenorPreco" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/ordenacao/OrdenarItensPorMenorPreco.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1246" y="-842"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.projeto.ordenacao.OrdenarListaDeComprasPorDescritor" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/ordenacao/OrdenarListaDeComprasPorDescritor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1484" y="-842"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.projeto.ordenacao.OrdenarSupermercadoPeloValor" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/ordenacao/OrdenarSupermercadoPeloValor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2260" y="-845"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.projeto.sistema.Facade" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/sistema/Facade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="610" y="-570"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="com.projeto.validadores.ValidadorItem" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/validadores/ValidadorItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-484" y="-440"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="com.projeto.validadores.ValidadorListaDeCompras" project="LISTA_PRA_MIM" 
+    file="/LISTA_PRA_MIM/src/com/projeto/validadores/ValidadorListaDeCompras.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-76" y="-524"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="27">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="28" name="itensOrdenados">        
+        <position height="18" width="85" x="254" y="-32"/>      
+      </attribute>      
+      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="31" name="listasDeCompras"/>      
+      <multiplicity id="32" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="33">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="34" name="itens">        
+        <position height="18" width="31" x="351" y="-30"/>      
+      </attribute>      
+      <multiplicity id="35" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="37" name="categoria"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="39">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="40">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="41" name="controllerItem"/>      
+      <multiplicity id="42" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="44" name="controllerItem"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="47" name="controllerListaDeCompras"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="50">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="51" name="listaDeCompras"/>      
+      <multiplicity id="52" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="53">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="54">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="55" name="itens"/>      
+      <multiplicity id="56" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="58" name="item"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
