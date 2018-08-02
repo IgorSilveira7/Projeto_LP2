@@ -2,7 +2,7 @@
 #### Projeto final da disciplina de laboratório de LP2
 Lista pra mim é um aplicativo que gerencia o cadastrado, atualização, deletações e exibição de itens compraveis.
 
-LINK PARA O DIAGRAMA: https://go.gliffy.com/go/share/sowxjyxggtu2uvppob94
+LINK PARA O DIAGRAMA: https://drive.google.com/file/d/1nEb6keHoAH5x4pthC9IGggCncBpPKWAk/view
 ------------
 
 ## Equipe:
@@ -13,11 +13,12 @@ LINK PARA O DIAGRAMA: https://go.gliffy.com/go/share/sowxjyxggtu2uvppob94
 
 3 - Matheus Gusmao
 
-4 - Rich Elton Carvalho Ramalho.
+4 - Rich Elton
 
 Conceitos utilizados.
 ---------------
 
+- [X] Tudo visto em sala de aula durante a discipina
 - [X] Trabalhando em Equipe
 
 ---------------
