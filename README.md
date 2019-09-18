@@ -4,7 +4,6 @@
 Lista pra mim é um aplicativo que gerencia o cadastrado, atualização, deletações e exibição de itens compraveis.
 
 #### [DIAGRAMA DE CLASSES](https://drive.google.com/file/d/1nEb6keHoAH5x4pthC9IGggCncBpPKWAk/view)
-------------
 
 ## Equipe:
 
