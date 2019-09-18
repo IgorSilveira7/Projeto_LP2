@@ -7,7 +7,7 @@ Lista pra mim é um aplicativo que gerencia o cadastrado, atualização, deleta�
 ------------
 
 ## Equipe:
-------------
+
 1 - Igor Silveira
 
 2 - Jose Davi
@@ -17,12 +17,10 @@ Lista pra mim é um aplicativo que gerencia o cadastrado, atualização, deleta�
 4 - Rich Elton
 
 ## Conceitos utilizados.
----------------
 
 - [X] Tudo visto em sala de aula durante a discipina
 - [X] Trabalho em Equipe
 
----------------
 ## Sistema de listas de compras(Lista pra mim)
 
 - [X] Testes de aceitação case 1.
