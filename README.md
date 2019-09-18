@@ -20,7 +20,7 @@ Lista pra mim é um aplicativo que gerencia o cadastrado, atualização, deleta�
 ---------------
 
 - [X] Tudo visto em sala de aula durante a discipina
-- [X] Trabalhando em Equipe
+- [X] Trabalho em Equipe
 
 ---------------
 ## Sistema de listas de compras(Lista pra mim)
@@ -37,3 +37,4 @@ Lista pra mim é um aplicativo que gerencia o cadastrado, atualização, deleta�
 - [X] Testes de aceitação case 6.
 - [X] Testes de aceitação case 6 - Exception.
 - [X] Testes de aceitação case 7.
+- [X] Testes de aceitação case 7 - Exception.
